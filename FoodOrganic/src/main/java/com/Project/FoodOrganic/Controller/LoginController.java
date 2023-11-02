@@ -29,7 +29,6 @@ public class LoginController {
 	public String signup(ModelMap model) {
 		User user = new User();
 		model.addAttribute("User", user);
-
 		return "signup";
 	}
 

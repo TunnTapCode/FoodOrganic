@@ -1,6 +1,7 @@
 package com.Project.FoodOrganic.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,13 @@ public class ProductService {
 	public List<Product> getAllProduct(){
 		return (List<Product>) repo.findAll();
 	}
+	public List<Product> getAllProductByCategoryId( Long CategoryId){
+		return repo.findAllByCategory_id(CategoryId);
+	}
+	public Optional<Product> getProductById(Long id) {
+		return  repo.findById(id);
+		
+	}
+	
 
 }

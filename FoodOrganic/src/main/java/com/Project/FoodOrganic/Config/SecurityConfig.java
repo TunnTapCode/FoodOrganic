@@ -22,13 +22,13 @@ public class SecurityConfig {
 	 @Bean
 	 BCryptPasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
-	    }
+	 }
 	
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()).
-		authorizeHttpRequests(auth -> auth.requestMatchers("/static/**","/signup","/dangky").permitAll()
+		authorizeHttpRequests(auth -> auth.requestMatchers("/signup","/dangky").permitAll()
 				.anyRequest().authenticated())
 				.formLogin(login -> login.loginPage("/login").usernameParameter("username").passwordParameter("password").loginProcessingUrl("/check")
 						.defaultSuccessUrl("/home",true)

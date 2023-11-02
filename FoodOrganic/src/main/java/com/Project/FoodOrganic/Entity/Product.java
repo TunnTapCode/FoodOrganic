@@ -89,6 +89,13 @@ public class Product {
 	public Product() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "Product [product_id=" + product_id + ", name=" + name + ", description=" + description + ", price="
+				+ price + ", quantity=" + quantity + ", image=" + image + ", category=" + category + "]";
+	}
+	
+	
 	
 	
 	
