@@ -1,8 +1,11 @@
 package com.Project.FoodOrganic.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,24 +36,35 @@ public class LoginController {
 	}
 
 	@PostMapping("/dangky")
-	public String dangky(@ModelAttribute User user) {
+	public String dangky(@ModelAttribute User user,Model model) {
 		if (service.findByUsername(user.getUsername()) == null) {
-			BCryptPasswordEncoder passEncode = new BCryptPasswordEncoder();
-			user.setPassword(passEncode.encode(user.getPassword()));
+			List<User> u = service.findByEmail(user.getEmail()) ;	
+			if(u.size() == 0) {
+				BCryptPasswordEncoder passEncode = new BCryptPasswordEncoder();
+				user.setPassword(passEncode.encode(user.getPassword()));
 
-			Role userRole = rolerepo.findByName("USER");
-			if (userRole == null) {
-				userRole = new Role();
-				userRole.setName("USER");
+				Role userRole = rolerepo.findByName("USER");
+				if (userRole == null) {
+					userRole = new Role();
+					userRole.setName("USER");
+				}
+				user.setRole(userRole);
+				service.save(user);
+				return "redirect:/signup";
+			}else {
+				User User = new User();
+				model.addAttribute("User" ,User) ;
+				model.addAttribute("msg","Email đã tồn tại") ;
+				return "signup";
 			}
-			user.setRole(userRole);
-			service.save(user);
-			
-			return "redirect:/signup";
 
 		}else {
-			return "login";
+			User User = new User();
+			model.addAttribute("User" ,User) ;
+			model.addAttribute("msg","Username đã tồn tại") ;
+			return "signup";
 		}
+		
 		
 	}
 

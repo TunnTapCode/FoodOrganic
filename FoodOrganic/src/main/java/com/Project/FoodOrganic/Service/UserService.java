@@ -1,5 +1,7 @@
 package com.Project.FoodOrganic.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userrepo ;
 
-	
-//	@Autowired
-//	PasswordEncoder passwordEncoder ;
+
 	
 	public User findByUsername(String Username) {
 		return userrepo.findByUsername(Username);
 	}
+	public List<User> findByEmail(String enail) {
+		return userrepo.findByEmail(enail);
+	}
+	
 	
 	public void save (User user) {
 		userrepo.save(user) ;
