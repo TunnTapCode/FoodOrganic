@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
+
 
 import com.Project.FoodOrganic.Entity.Product;
 import com.Project.FoodOrganic.Repository.ProductRepo;
@@ -23,6 +25,13 @@ public class ProductService {
 	public Optional<Product> getProductById(Long id) {
 		return  repo.findById(id);
 		
+	}
+	public List<Product> findTop7ByCategoryOrderByProduct_id(Long id ){
+		return repo.findTop7NewestProducts( id);
+	}
+	
+	public Product findProductById(Long id) {
+		return repo.findProductByProduct_id(id);
 	}
 	
 

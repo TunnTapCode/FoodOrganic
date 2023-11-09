@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Giỏ Hàng</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link th:href="@{/static/css1/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/static/css1/font-awesome.min.css}" rel="stylesheet">
+	<link th:href="@{/static/css1/prettyPhoto.css}" rel="stylesheet">
+	<link th:href="@{/static/css1/price-range.css}" rel="stylesheet">
+	<link th:href="@{/static/css1/animate.css}" rel="stylesheet">
+	<link th:href="@{/static/css1/main.css}" rel="stylesheet">
+	<link th:href="@{/static/css1/responsive.css}" rel="stylesheet">
+	<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+	<link rel="shortcut icon" th:href="@{/static/images/ico/favicon.ico}">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		th:href="@{/static/images/ico/apple-touch-icon-144-precomposed.png}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+		th:href="@{/static/images/ico/apple-touch-icon-114-precomposed.png}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		th:href="@{/static/images/ico/apple-touch-icon-72-precomposed.png}">
+	<link rel="apple-touch-icon-precomposed" th:href="@{/static/images/ico/apple-touch-icon-57-precomposed.png}">
+</head><!--/head-->
+
+<body>
+
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a th:href="@{/home}">Home</a></li>
+					<li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed ">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image"><input type="checkbox" id="selectAll"></td>
+							<td class="image">Item</td>
+							<td class="description">Name</td>
+
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p:${listP}">
+							<td class="image"><input type="checkbox" class="product"></td>
+							<td class="cart_product">
+								<a href=""><img th:src="${p.image}" alt="" style="height: 70px;width: 60px;"></a>
+							</td>
+							<td class="cart_description">
+								<a class="d-block h5 mb-2" id="name"
+									th:href="'/detail/' + ${p.getProduct().getProduct_id()}">
+									<h4 th:text="${p.getProduct().name}" style="font-family: emoji;"></h4>
+								</a>
+
+
+							</td>
+
+							<td class="cart_price">
+								<h4><span class="price" th:data-product-id="${p.getProduct().getProduct_id()}" th:text="${p.price}"
+								style="font-family: emoji;"></span> $</h4>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<button class="cart_quantity_down" th:value="${p.getProduct().getProduct_id()}"> -
+									</button>
+									<input readonly class="cart_quantity_input" type="text" name="quantity"
+										th:value="${p.quantity}" min="1"
+										th:data-product-id="${p.getProduct().getProduct_id()}" style="font-family: emoji;">
+									<button class="cart_quantity_up" th:value="${p.getProduct().getProduct_id()}"> +
+									</button>
+								</div>
+							</td>
+							<td class="cart_total" >
+								<h4><span class="total" th:data-product-id="${p.getProduct().getProduct_id()}" 
+								 th:text="${p.price * p.quantity}" style="font-family: emoji;"></span> $</h4>
+
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete"
+									th:href="'/cart/delete/' + ${p.getProduct().getProduct_id()}"><i
+										class="fas fa-times"></i></a>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your
+					delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							<li>
+								<input type="checkbox">
+								<label>Use Coupon Code</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Use Gift Voucher</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Estimate Shipping & Taxes</label>
+							</li>
+						</ul>
+						<ul class="user_info">
+							<li class="single_field">
+								<label>Country:</label>
+								<select>
+									<option>United States</option>
+									<option>Bangladesh</option>
+									<option>UK</option>
+									<option>India</option>
+									<option>Pakistan</option>
+									<option>Ucrane</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+
+							</li>
+							<li class="single_field">
+								<label>Region / State:</label>
+								<select>
+									<option>Select</option>
+									<option>Dhaka</option>
+									<option>London</option>
+									<option>Dillih</option>
+									<option>Lahore</option>
+									<option>Alaska</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+
+							</li>
+							<li class="single_field zip-field">
+								<label>Zip Code:</label>
+								<input type="text">
+							</li>
+						</ul>
+						<a class="btn btn-default update" href="">Get Quotes</a>
+						<a class="btn btn-default check_out" href="">Continue</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$59</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+						<a class="btn btn-default update" href="">Update</a>
+						<a class="btn btn-default check_out" href="">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- -->
+	<script>
+		document.getElementById('selectAll').addEventListener('change', function () {
+			var productCheckboxes = document.querySelectorAll('.product');
+			for (var i = 0; i < productCheckboxes.length; i++) {
+				productCheckboxes[i].checked = this.checked;
+			}
+		});
+	</script>
+	<script>
+		document.querySelectorAll('.cart_quantity_up').forEach(button => {
+			button.addEventListener('click', () => {
+				const productId = button.value;
+				const quantityElement = document.querySelector(`.cart_quantity_input[data-product-id="${productId}"]`);
+				const totalElement = document.querySelector(`.total[data-product-id="${productId}"]`);
+				const priceElement = document.querySelector(`.price[data-product-id="${productId}"]`);
+				let quantity = parseInt(quantityElement.value);
+				let price = parseFloat(priceElement.textContent)
+				
+
+				if (!isNaN(quantity)) {
+					quantity += 1;
+					quantityElement.value = quantity;
+					totalElement.textContent = (quantity * price).toFixed(1) ;
+					updateQuantityInDatabase(productId, quantity);
+				} else {
+					console.log('productId không hợp lệ');
+				}
+			});
+		});
+
+		document.querySelectorAll('.cart_quantity_down').forEach(button => {
+			button.addEventListener('click', () => {
+				const productId = button.value;		
+				const quantityElement = document.querySelector(`.cart_quantity_input[data-product-id="${productId}"]`);
+				const totalElement = document.querySelector(`.total[data-product-id="${productId}"]`);
+				const priceElement = document.querySelector(`.price[data-product-id="${productId}"]`);
+				let quantity = parseInt(quantityElement.value);
+				let price = parseFloat(priceElement.textContent)
+				
+				if ( quantity > 1) {
+					quantity -= 1;
+					quantityElement.value = quantity;
+					totalElement.textContent = (quantity * price).toFixed(1) ;
+					updateQuantityInDatabase(productId, quantity);
+				}
+			});
+		});
+
+
+		function updateQuantityInDatabase(productId, quantity) {
+			fetch('/updateQuantity', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: `id=${productId}&quantity=${quantity}`,
+			})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Lỗi mạng');
+					}
+				})
+				.catch(error => {
+					console.error('Lỗi: ' + error);
+				});
+		}
+	</script>
+	<!--<script th:src="@{/static/js/jquery.js}"></script> 
+	
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script th:src="@{/static/js/jquery.scrollUp.min.js}"></script>
+	<script th:src="@{/static/js/jquery.prettyPhoto.js}"></script>
+	
+	<script th:src="@{/static/js/cart.js}"></script>
+	-->
+
+
+</body>
+
+</html>

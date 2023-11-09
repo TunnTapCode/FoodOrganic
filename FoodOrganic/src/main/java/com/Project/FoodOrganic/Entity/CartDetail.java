@@ -1,8 +1,8 @@
 package com.Project.FoodOrganic.Entity;
 
-import java.math.BigDecimal;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,12 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @Table(name = "CartDetail")
 
@@ -31,9 +26,12 @@ public class CartDetail {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "product_id")
 	private Product product;
-
+    @Column
 	private int quantity;
-	private BigDecimal price;
+    @Column
+	private Double price;
+    @Column
+    private String image ;
 	public Long getCartDetailId() {
 		return cartDetailId;
 	}
@@ -58,23 +56,38 @@ public class CartDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public BigDecimal getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public CartDetail(Long cartDetailId, Cart cart, Product product, int quantity, BigDecimal price) {
-		super();
-		this.cartDetailId = cartDetailId;
+	
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public CartDetail( Cart cart, Product product, int quantity, Double price, String image) {
+		
 		this.cart = cart;
 		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
+		this.image = image;
 	}
 	public CartDetail() {
 		
 	}
+	@Override
+	public String toString() {
+		return "CartDetail [cartDetailId=" + cartDetailId + ", cart=" + cart + ", product=" + product + ", quantity="
+				+ quantity + ", price=" + price + ", image=" + image + "]";
+	}
+	
+	
 	
 	
 

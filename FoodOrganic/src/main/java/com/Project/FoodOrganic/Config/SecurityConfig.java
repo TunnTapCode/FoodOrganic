@@ -32,9 +32,13 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/signup", "/dangky", "/static/**").permitAll()
 						.anyRequest().authenticated())
-				.formLogin((login) -> login.loginPage("/login").usernameParameter("username")
-						.passwordParameter("password").loginProcessingUrl("/check").defaultSuccessUrl("/home", true)
+				.formLogin((login) -> login.loginPage("/login")
+						.usernameParameter("username")
+						.passwordParameter("password")
+						.loginProcessingUrl("/check")
+						.defaultSuccessUrl("/home", true)
 						.failureUrl("/login?error=true").permitAll())
+				
 				.logout((logout) -> logout.logoutUrl("/logout"))
 				
 				.rememberMe((remember) -> remember

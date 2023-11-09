@@ -1,0 +1,126 @@
+@charset "ISO-8859-1";
+
+body {
+	background: url(../img/bg-icon.png) center center repeat;
+	background-size: contain;
+
+}
+
+.container-custom {
+	box-shadow: 0 0 10px rgb(192, 192, 192);
+	height: auto;
+	padding: 30px 20px;
+	border-radius: 5px;
+}
+
+.container h3 {
+	margin-left: 20px;
+}
+
+
+.product-details {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+
+}
+
+.header {
+	margin-bottom: 150px;
+}
+
+.product-image-container {
+	max-height: 400px;
+	text-align: center;
+}
+
+.product-image {
+	max-height: auto;
+	max-width: auto;
+
+	text-align: center;
+	border-radius: 5px;
+
+
+}
+
+.quantity-input button {
+
+    height: 30px;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	background-color: rgb(192, 192, 192);
+}
+#decrease{
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+#increase{
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#quantity{
+	height: 30px;
+	width: 30px;
+	background-color: rgb(192, 192, 192);
+	border: none;
+	text-align: center;
+}
+
+
+
+/* CSS khi hover trên button */
+button:hover {
+	background-color: rgb(128, 128, 128);
+}
+
+/* CSS cho trường nhập số */
+input[type="number"] {
+	height: 30px;
+	width: 30px;
+	padding: 5px;
+	margin-right: 5px;
+	text-align: center;
+	
+	/* Thêm margin để tạo khoảng cách giữa button và input */
+}
+
+/* CSS cho container bao quanh button và input */
+.quantity-input {
+	display: flex;
+	/* Sử dụng flexbox để căn chỉnh button và input cạnh nhau */
+	align-items: center;
+	/* Căn giữa theo chiều dọc */
+}
+
+
+.related-products {
+	padding: 20px 0;
+}
+
+
+
+.related-product-card {
+
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+	height: 250px;
+	text-align: center;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.related-product-image {
+	height: 78%;
+	
+	max-height: auto;
+	max-width: auto;
+
+}
+ h6:hover{
+	
+	color: #309311 ;
+}

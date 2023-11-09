@@ -10,7 +10,8 @@ import com.Project.FoodOrganic.Entity.User;
 
 @Service
 public class CustomerUserDetail implements UserDetailsService{
-	@Autowired  UserService userService ;
+	@Autowired  
+	UserService userService ;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -19,10 +20,10 @@ public class CustomerUserDetail implements UserDetailsService{
 		if(userEntity == null) {
 			throw new UsernameNotFoundException(" Not found !");
 		}else {
-			
+			return 	org.springframework.security.core.userdetails.User.withUsername(username).password(userEntity.getPassword()).authorities(userEntity.getRole().getName()).build() ;
 		}
 		
-		return org.springframework.security.core.userdetails.User.withUsername(username).password(userEntity.getPassword()).authorities(userEntity.getRole().getName()).build() ;
+		
 	}
 	
 	

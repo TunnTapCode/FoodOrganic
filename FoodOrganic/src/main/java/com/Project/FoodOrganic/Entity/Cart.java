@@ -8,12 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 @Entity
 @Table(name = "cart")
 public class Cart {
@@ -36,13 +32,18 @@ public class Cart {
 		this.user = user;
 	}
 	public Cart(Long id, User user) {
-		super();
+		
 		this.id = id;
 		this.user = user;
 	}
 	public Cart() {
-		super();
+		
 	}
+	@Override
+	public String toString() {
+		return "Cart [id=" + id + ", user=" + user + "]";
+	}
+	
 	
 	
 	
