@@ -27,22 +27,32 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/signup", "/dangky", "/static/**").permitAll()
-						.anyRequest().authenticated())
-				.formLogin((login) -> login.loginPage("/login")
-						.usernameParameter("username")
-						.passwordParameter("password")
-						.loginProcessingUrl("/check")
-						.defaultSuccessUrl("/home", true)
-						.failureUrl("/login?error=true").permitAll())
-				
+						.requestMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().
+						authenticated())
+				.formLogin(
+						(login) -> login.loginPage("/login").usernameParameter("username").passwordParameter("password")
+								.loginProcessingUrl("/check")
+								.successHandler((request, response, authentication) -> {
+									
+									if (authentication.getAuthorities().stream()
+									        .anyMatch(authority -> authority.getAuthority().equals("ADMIN"))) {
+										response.sendRedirect("/admin/dashboard");
+									}else {
+										response.sendRedirect("/home");
+									}
+									
+									
+								}).failureUrl("/login?error=true").permitAll())
+
 				.logout((logout) -> logout.logoutUrl("/logout"))
-				
-				.rememberMe((remember) -> remember
-						.rememberMeServices(rememberMeServices(customerUserDetail)).key("JSESSIONID").tokenValiditySeconds(60));
+
+				.rememberMe((remember) -> remember.rememberMeServices(rememberMeServices(customerUserDetail))
+						.key("JSESSIONID").tokenValiditySeconds(60));
 
 		return http.build();
 	}

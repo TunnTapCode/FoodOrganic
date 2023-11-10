@@ -13,10 +13,12 @@ public class CustomerUserDetail implements UserDetailsService{
 	@Autowired  
 	UserService userService ;
 
+	@SuppressWarnings("unused")
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		User userEntity = userService.findByUsername(username);
+		System.out.println(userEntity.getRole().getName());
 		if(userEntity == null) {
 			throw new UsernameNotFoundException(" Not found !");
 		}else {

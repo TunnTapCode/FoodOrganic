@@ -27,11 +27,24 @@ public class Product {
 	private Double price ;
 	@Column(name = "quantity",nullable = false)
 	private int quantity;
-	@Column(name = "image",nullable = false , length = 255)
+	@Column(name = "image",nullable = false , length = 1000)
 	private String image;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "category_id")
 	private Category category ;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "status_id")
+	private StatusProduct statusProduct ;
+	
+	
+	public StatusProduct getStatusProduct() {
+		return statusProduct;
+	}
+	public void setStatusProduct(StatusProduct statusProduct) {
+		this.statusProduct = statusProduct;
+	}
 	public Long getProduct_id() {
 		return product_id;
 	}
@@ -76,8 +89,9 @@ public class Product {
 		this.image = image;
 	}
 	
+	
 	public Product(Long product_id, String name, String description, Double price, int quantity, String image,
-			Category category) {
+			Category category, StatusProduct statusProduct) {
 		super();
 		this.product_id = product_id;
 		this.name = name;
@@ -86,6 +100,7 @@ public class Product {
 		this.quantity = quantity;
 		this.image = image;
 		this.category = category;
+		this.statusProduct = statusProduct;
 	}
 	public Product() {
 		super();

@@ -34,5 +34,9 @@ public class ProductService {
 		return repo.findProductByProduct_id(id);
 	}
 	
+	public void save (Product product) {
+		 repo.save(product);
+	}
+	
 
 }
