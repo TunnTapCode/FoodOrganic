@@ -379,16 +379,23 @@
 												</a>
 											</td>
 											<td class="text-end p-3">
-												<a th:href="'/detail/' + ${p.product_id}"
-													class="btn btn-icon btn-pills btn-soft-primary"
-													data-bs-toggle="modal" data-bs-target="#viewprofile"
+												<a class="btn btn-icon btn-pills btn-soft-primary"
+													data-bs-toggle="modal" data-bs-target="#viewproduct"
 													th:data-id="${p.product_id}" th:data-productname="${p.name}"
 													th:data-price="${p.price}" th:data-quantity="${p.quantity}"
-													th:data-category="${p.getCategory().name}"><i
-														class="uil uil-eye"></i></a>
+													th:data-category="${p.getCategory().name}"
+													th:data-image="${p.image}"
+													th:data-status="${p.statusProduct.status_id}">
+													<i class="uil uil-eye"></i>
+												</a>
 												<a th:href="'/admin/update/' + ${p.product_id}"
 													class="btn btn-icon btn-pills btn-soft-success"
-													data-bs-toggle="modal" data-bs-target="#editprofile"><i
+													data-bs-toggle="modal" data-bs-target="#editproduct"
+													th:data-pid="${p.product_id}" th:data-pname="${p.name}"
+													th:data-pprice="${p.price}" th:data-pquantity="${p.quantity}"
+													th:data-pcategory="${p.getCategory().name}"
+													th:data-pimage="${p.image}"
+													th:data-pstatus="${p.statusProduct.status_id}"><i
 														class="uil uil-pen"></i></a>
 												<a th:href="'/admin/delete/' + ${p.product_id}"
 													class="btn btn-icon btn-pills btn-soft-danger"><i
@@ -492,7 +499,7 @@
 
 	<!-- Modal start -->
 	<!-- Profile Settings Start -->
-	<div class="modal fade" id="editprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="editproduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header border-bottom p-3">
@@ -502,44 +509,49 @@
 				<div class="modal-body p-3 pt-4">
 					<div class="row align-items-center">
 						<div class="col-lg-2 col-md-4">
-							<img th:src="@{/static/assets/images/doctors/01.jpg}"
-								class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="">
-						</div><!--end col-->
+							<div class="col-lg-2 col-md-4">
+								<img src="" id="imageproduct1" class="avatar avatar-small rounded-pill" alt="ảnh">
 
-						<div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
-							<h6 class="">Upload your picture</h6>
-							<p class="text-muted mb-0">For best results, use an image at least 256px by 256px in either
-								.jpg or .png format</p>
-						</div><!--end col-->
-
-						<div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
-							<a href="#" class="btn btn-primary">Upload</a>
-							<a href="#" class="btn btn-soft-primary ms-2">Remove</a>
-						</div><!--end col-->
+							</div>
+						</div>
 					</div><!--end row-->
 					<form class="mt-4">
-						<div class="row">
+						<div class="row">				
+						    <input  name="id" id="modalProductId1" type="hidden" value="" class="form-control">
 							<div class="col-md-6">
 								<div class="mb-3">
-									<label class="form-label">Tên Sản Phẩm</label>
-									<input name="name" id="name" type="text" class="form-control"
-										placeholder="First Name :">
+									<label class="form-label">Name</label>
+									<input name="name" id="modalProductName1" type="text" value="" class="form-control">
+								</div>			
+							</div>
+
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Price</label>
+									<input name="price" id="modalProductPrice1" type="text" value="" class="form-control"
+										>
 								</div>
 							</div><!--end col-->
 							<div class="col-md-6">
 								<div class="mb-3">
-									<label class="form-label">Your Email</label>
-									<input name="email" id="email" type="email" class="form-control"
-										placeholder="Your email :">
+									<label class="form-label">Quantity</label>
+									<input name="quantity" id="modalProductQuantity1" type="text" value="" class="form-control">
+										
 								</div>
 							</div><!--end col-->
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Category</label>
+									<input name="category" id="category" type="text" value="" class="form-control"
+										>
+								</div>
+							</div>
 
 						</div><!--end row-->
 
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="submit" id="submit" name="send" class="btn btn-primary"
-									value="Save changes">
+								<input type="submit" id="submit" name="send" class="btn btn-primary" value="Save ">
 							</div><!--end col-->
 						</div><!--end row-->
 					</form><!--end form-->
@@ -550,55 +562,65 @@
 	<!-- Profile Settings End -->
 
 	<!-- Profile Start -->
-	<div class="modal fade" id="viewprofile" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+	<div class="modal fade" id="viewproduct" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header border-bottom p-3">
-					<h5 class="modal-title" id="exampleModalLabel1">Profile</h5>
+					<h5 class="modal-title" id="exampleModalLabel1">Product</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
+
 				<div class="modal-body p-3 pt-4">
-					<div class="d-flex align-items-center">
-						<img th:src="@{/static/assets/images/client/01.jpg}" class="avatar avatar-small rounded-pill"
-							alt="">
-						<h5 class="mb-0 ms-3">Howard Tanner</h5>
+					<div class="row align-items-center">
+						<div class="col-lg-2 col-md-4">
+							<img src="" id="imageproduct"  class="avatar avatar-small rounded-pill" alt="">
+
+						</div><!--end col-->
+
+						<div class="col-lg-6 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+							<h5 class="mb-0 ms-3" id="modalProductName"></h5>
+						</div><!--end col-->
+
+
+						<div class="col-lg-1 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
+							<div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
+								<a href="#"><span id="modalProductStatus" class="badge bg-soft-success"></span>
+								</a>
+
+							</div>
+						</div><!--end col-->
+
 					</div>
+					<div class="d-flex align-items-center">
+
+					</div>
+
 					<ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
 						<li>
 							<ul class="list-unstyled mb-0">
 								<li class="d-flex">
 									<h6>ID:</h6>
-									<p class="text-muted ms-2" id="modalProductId"></p>
-								</li>
-								<li class="d-flex">
-									<h6>Tên Sản Phẩm:</h6>
-									<p class="text-muted ms-2" id="modalProductName"></p>
+									<h6 class="text-muted ms-2" id="modalProductId"></h6>
 								</li>
 								<li class="d-flex">
 									<h6>Price:</h6>
-									<p class="text-muted ms-2" id="modalProductPrice"></p>
-								</li>
-								<li class="d-flex">
-									<h6>Quantity:</h6>
-									<p class="text-muted ms-2" id="modalProductQuantity"></p>
-								</li>
-
-
-								<li class="d-flex">
-									<h6 class="mb-0">Category:</h6>
-									<p class="text-muted ms-2 mb-0" id="modalProductCategory"></p>
+									<h6 class="text-muted ms-2" id="modalProductPrice"></h6>
 								</li>
 							</ul>
 						</li>
 						<li>
 							<ul class="list-unstyled mb-0">
 								<li class="d-flex">
-									<h6>Date:</h6>
-									<p class="text-muted ms-2">20th Dec 2020</p>
+									<h6>Quantity:</h6>
+									<h6 class="text-muted ms-2" id="modalProductQuantity"></h6>
 								</li>
 
-
-
+								<li class="d-flex">
+									<h6 class="mb-0">Category:</h6>
+									<h6 class="text-muted ms-2 mb-0" id="modalProductCategory"></h6>
+								</li>
+								<li>
+								</li>
 
 							</ul>
 						</li>
@@ -612,19 +634,21 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			// Get modal and link elements
-			var modal = document.getElementById('viewprofile');
-			var linkData = {};
-			var link = document.querySelector('[data-bs-target="#viewprofile"]');
+			var modal = document.getElementById('viewproduct');
+			var links = document.querySelectorAll('[data-bs-target="#viewproduct"]');
 
-			// Add event listener for when the modal is shown
-			modal.addEventListener('show.bs.modal', function (event) {
-				var link = linkData.clickedLink;
-				if (link) {
+			// Add event listener for when any of the links is clicked
+			links.forEach(function (link) {
+				link.addEventListener('click', function () {
+					// Extract data from the clicked link
 					var productId = link.dataset.id;
+					console.log(productId);
 					var productName = link.dataset.productname;
 					var productPrice = link.dataset.price;
 					var productQuantity = link.dataset.quantity;
 					var productCategory = link.dataset.category;
+					var productImage = link.dataset.image;
+					var productStatus = link.dataset.status;
 
 					// Update modal content with the extracted values
 					document.getElementById('modalProductId').textContent = productId;
@@ -632,13 +656,71 @@
 					document.getElementById('modalProductPrice').textContent = productPrice + " $";
 					document.getElementById('modalProductQuantity').textContent = productQuantity;
 					document.getElementById('modalProductCategory').textContent = productCategory;
-				}
+					modal.querySelector('#imageproduct').src = productImage;
 
+					let status = parseInt(productStatus);
+
+					if (status == 1) {
+						document.getElementById('modalProductStatus').textContent = "Enable";
+
+
+					} else {
+						document.getElementById('modalProductStatus').textContent = "Disable";
+
+					}
+
+
+
+				});
 			});
 		});
-		function handleLinkClick(clickedLink) {
-			linkData.clickedLink = clickedLink; // Lưu trữ thông tin của liên kết đã nhấp
-		}
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get modal and link elements
+			var modal = document.getElementById('editproduct');
+			var links = document.querySelectorAll('[data-bs-target="#editproduct"]');
+
+			// Add event listener for when any of the links is clicked
+			links.forEach(function (link) {
+				link.addEventListener('click', function () {
+					// Extract data from the clicked link
+					var productId = link.dataset.pid;
+					
+					var productName = link.dataset.pname;
+					var productPrice = link.dataset.pprice;
+					var productQuantity = link.dataset.pquantity;
+					var productCategory = link.dataset.pcategory;
+					var productImage = link.dataset.pimage;
+					
+					var productStatus = link.dataset.pstatus;
+
+					// Update modal content with the extracted values
+					document.getElementById('modalProductName1').value = productName;
+					document.getElementById('modalProductId1').value = productId;
+					
+					document.getElementById('modalProductPrice1').value = productPrice + " $";
+					document.getElementById('modalProductQuantity1').value = productQuantity;
+					document.getElementById('modalProductCategory1').value = productCategory; 
+					modal.querySelector('#imageproduct1').src = productImage;
+                   
+
+				/*	let status = parseInt(productStatus);
+
+					if (status == 1) {
+						document.getElementById('modalProductStatus').textContent = "Enable";
+
+
+					} else {
+						document.getElementById('modalProductStatus').textContent = "Disable";
+
+					} */
+
+
+
+				});
+			});
+		});
 	</script>
 
 	<script th:src="@{/static/assets/js/bootstrap.bundle.min.js}"></script>
