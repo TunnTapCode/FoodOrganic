@@ -9,4 +9,5 @@ import com.Project.FoodOrganic.Entity.StatusProduct;
 public interface StatusProRepo extends JpaRepository<StatusProduct, Integer> {
   
  Optional<StatusProduct> findById(Integer id) ;
+ 
 }

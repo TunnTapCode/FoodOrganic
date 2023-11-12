@@ -31,7 +31,7 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/signup", "/dangky", "/static/**").permitAll()
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/signup", "/dangky", "/static/**","/home","/detail/**","/product","/","").permitAll()
 						.requestMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().
 						authenticated())
 				.formLogin(

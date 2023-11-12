@@ -1,5 +1,6 @@
 package com.Project.FoodOrganic.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,8 @@ public class StatusProService {
 	public Optional<StatusProduct> getById(Integer id) {
 		return statusProRepo.findById(id);
 	}
-
+	public List<StatusProduct> findAll() {
+		return statusProRepo.findAll();
+	}
+	
 }

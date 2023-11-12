@@ -25,11 +25,9 @@
 }
 
 .bg-icon {
-    background: url(../img/bg-icon.png) center center repeat;
-    background-size: contain;
+	 background: url(../img/bg-icon.png) center center repeat;
+	 background-size: contain; 
 }
-
-
 /*** Spinner ***/
 #spinner {
     opacity: 0;

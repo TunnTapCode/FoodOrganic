@@ -38,6 +38,9 @@ public class CartDetailService {
 	public List<CartDetail> findByProduct(Product product){
 		return cartDetailRepo.findByProduct(product);
 	}
+	public Long coutByCart(Cart cart){
+		return cartDetailRepo.countByCart(cart);
+	}
 	 
 	
 }

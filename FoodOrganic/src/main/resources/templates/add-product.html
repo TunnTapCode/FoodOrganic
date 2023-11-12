@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8" />
@@ -47,8 +47,8 @@
 			<div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
 				<div class="sidebar-brand">
 					<a href="index.html">
-						<img th:src="@{/static/assets/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
-						<img th:src="@{/static/assets/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode" alt="" style="height: 55px;margin-left: 50px;">
+						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode" alt="" style="height: 55px;margin-left: 50px;">
 					</a>
 				</div>
 
@@ -148,10 +148,12 @@
 				<div class="header-bar d-flex justify-content-between border-bottom">
 					<div class="d-flex align-items-center">
 						<a href="#" class="logo-icon">
-							<img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
+							<img th:src="@{/static/assets/images/logo-2.png}" height="30" class="small" alt="">
 							<span class="big">
-								<img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-								<img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode"
+									alt="">
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode"
+									alt="">
 							</span>
 						</a>
 						<a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -187,37 +189,7 @@
 										</div>
 									</a>
 
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/european.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">European</small>
-										</div>
-									</a>
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/indian.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Indian</small>
-										</div>
-									</a>
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/japanese.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Japanese</small>
-										</div>
-									</a>
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/russian.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Russian</small>
-										</div>
-									</a>
+							
 								</div>
 							</div>
 						</li>
@@ -421,7 +393,7 @@
 											<div class="mb-3">
 												<label class="form-label">Category</label>
 												<select class="form-control department-name select2input"
-													name="category">
+													name="category" >
 													<option th:each="c:${listC}" th:value="${c.id}" th:text="${c.name}">
 													</option>
 

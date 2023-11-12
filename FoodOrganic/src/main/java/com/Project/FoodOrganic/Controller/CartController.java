@@ -48,6 +48,13 @@ public class CartController {
 		return "cart";
 		
 	}
+	
+	@GetMapping("/checkout")
+	public String checkout() {
+		return "checkout" ;
+	}
+	
+	
 	@GetMapping("/{id}")
 	public String cartHome(@PathVariable("id") Long id) {
 		
@@ -142,10 +149,7 @@ public class CartController {
 		
 	}
 	
-	@GetMapping("/checkout")
-	public String checkout() {
-		return "checkout" ;
-	}
+	
 	
 	
 	

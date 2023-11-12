@@ -37,6 +37,9 @@ public class ProductService {
 	public void save (Product product) {
 		 repo.save(product);
 	}
+	public void delete (Product product) {
+		 repo.delete(product);
+	}
 	
 
 }

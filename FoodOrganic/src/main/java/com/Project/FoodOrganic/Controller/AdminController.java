@@ -56,12 +56,12 @@ public class AdminController {
 			Product p = new Product();	
 			model.addAttribute("Product", p);
 			model.addAttribute("msg","Thêm sản phẩm thành công .") ;
-			return "redirect:/admin/add-product" ;
+			return "add-product" ;
 		} catch (Exception e) {
 			Product p = new Product();	
 			model.addAttribute("msg1","Thêm sản phẩm thất bại .") ;
 			model.addAttribute("Product", p);
-			return "redirect:/admin/add-product" ;
+			return "add-product" ;
 		}
 		
 	}
@@ -69,26 +69,66 @@ public class AdminController {
 	@GetMapping("/all-product")
 	public String All_Product(Model model) {
 		List<Product> listP = productService.getAllProduct();
-		
+		List<Category> listC = categoryService.getAll();
+		List<StatusProduct> listS = service.findAll();	
+		model.addAttribute("listS", listS);
+		model.addAttribute("listC", listC);
 		model.addAttribute("listP", listP);
 		
 		return "all-product" ;
 	}
-	@GetMapping("/update/{id}")
-	public String update_Product(@PathVariable("id") Long id ,Model model) {
+	@PostMapping("/update")
+	public String update(
+			@RequestParam("id") Long id ,
+			@RequestParam("name") String name ,
+			@RequestParam("image") String image ,
+			@RequestParam("description") String description ,
+			@RequestParam("price") Double price ,
+			@RequestParam("quantity") int quantity ,
+			@RequestParam("status") int status ,
+			@RequestParam("category") Long category , Model model) {
+		
 		try {
 			Product product = productService.findProductById(id);
+		    Optional<Category> cate = categoryService.findById(category);
+		    Optional<StatusProduct> sta = service.getById(status);
+		    System.out.println(cate.get());
+		    
 			if(product == null) {
 				throw new Exception() ;
 			}else {
-				model.addAttribute("p", product);
-				return "update-produt" ;
+				product.setCategory(cate.get()) ;
+				product.setDescription(description);
+				product.setImage(image);
+				product.setName(name);
+				product.setPrice(price) ;
+				product.setQuantity(quantity);
+				product.setStatusProduct(sta.get());
+				productService.save(product);
+				return "redirect:/admin/all-product" ;
 			}
 			
 		} catch (Exception e) {
 			return "redirect:/admin/all-product" ;
 		}
 			
+	}
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Long id ) {
+		Product product = productService.findProductById(id);
+		try {
+			if(product == null) {
+				throw new Exception() ;
+			}else {
+				productService.delete(product);
+				return "redirect:/admin/all-product" ;
+			}
+			
+		} catch (Exception e) {
+			return "redirect:/admin/all-product" ;
+		}
+		
+		
 	}
 	
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8" />
@@ -13,6 +13,8 @@
 	<meta name="Version" content="v1.2.0" />
 	<!-- favicon -->
 	<link rel="shortcut icon" th:href="@{/static/assets/images/favicon.ico.png}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
 	<!-- Bootstrap -->
 	<link th:href="@{/static/assets/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
 	<!-- simplebar -->
@@ -44,8 +46,8 @@
 			<div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
 				<div class="sidebar-brand">
 					<a href="index.html">
-						<img th:src="@{/static/assets/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
-						<img th:src="@{/static/assets/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode" alt="" style="height: 55px;margin-left: 50px;">
+						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode" alt="" style="height: 55px;margin-left: 50px;">
 					</a>
 				</div>
 
@@ -144,11 +146,11 @@
 				<div class="header-bar d-flex justify-content-between border-bottom">
 					<div class="d-flex align-items-center">
 						<a href="#" class="logo-icon">
-							<img th:src="@{/static/assets/images/logo-icon.png}" height="30" class="small" alt="">
+							<img th:src="@{/static/assets/images/logo-2.png}" height="30" class="small" alt="">
 							<span class="big">
-								<img th:src="@{/static/assets/images/logo-dark.png}" height="24" class="logo-light-mode"
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode"
 									alt="">
-								<img th:src="@{/static/assets/images/logo-light.png}" height="24" class="logo-dark-mode"
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode"
 									alt="">
 							</span>
 						</a>
@@ -385,6 +387,7 @@
 													th:data-price="${p.price}" th:data-quantity="${p.quantity}"
 													th:data-category="${p.getCategory().name}"
 													th:data-image="${p.image}"
+													th:data-description="${p.description}"
 													th:data-status="${p.statusProduct.status_id}">
 													<i class="uil uil-eye"></i>
 												</a>
@@ -395,6 +398,7 @@
 													th:data-pprice="${p.price}" th:data-pquantity="${p.quantity}"
 													th:data-pcategory="${p.getCategory().name}"
 													th:data-pimage="${p.image}"
+													th:data-description="${p.description}"
 													th:data-pstatus="${p.statusProduct.status_id}"><i
 														class="uil uil-pen"></i></a>
 												<a th:href="'/admin/delete/' + ${p.product_id}"
@@ -503,21 +507,30 @@
 		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header border-bottom p-3">
-					<h5 class="modal-title" id="exampleModalLabel">Product Settings</h5>
+					<h5 class="modal-title" id="exampleModalLabel"> Edit Product </h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-3 pt-4">
 					<div class="row align-items-center">
-						<div class="col-lg-2 col-md-4">
 							<div class="col-lg-2 col-md-4">
-								<img src="" id="imageproduct1" class="avatar avatar-small rounded-pill" alt="ảnh">
+								<img src="" id="imageproduct1" class="avatar avatar-small rounded-pill " alt="ảnh" style="height: 220px;width: 235px;margin-left: 280px;">
 
 							</div>
-						</div>
 					</div><!--end row-->
-					<form class="mt-4">
+					<form class="mt-4" th:action="@{/admin/update}" method="post">
 						<div class="row">				
 						    <input  name="id" id="modalProductId1" type="hidden" value="" class="form-control">
+						    <div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Status</label>
+									<select class="form-control department-name select2input" name="status">
+											<option th:each="s:${listS}" th:value="${s.status_id}" th:text="${s.status_name}">
+											</option>
+									</select>	 					    
+								</div>			
+							</div>
+						    
+						   
 							<div class="col-md-6">
 								<div class="mb-3">
 									<label class="form-label">Name</label>
@@ -535,23 +548,44 @@
 							<div class="col-md-6">
 								<div class="mb-3">
 									<label class="form-label">Quantity</label>
-									<input name="quantity" id="modalProductQuantity1" type="text" value="" class="form-control">
+									<input name="quantity" id="modalProductQuantity1"  type="text" value="" class="form-control">
 										
 								</div>
 							</div><!--end col-->
 							<div class="col-md-6">
 								<div class="mb-3">
 									<label class="form-label">Category</label>
-									<input name="category" id="category" type="text" value="" class="form-control"
-										>
+									    
+									    <select class="form-control department-name select2input" name="category">
+												<option th:each="c:${listC}" th:value="${c.id}" th:text="${c.name}">
+												</option>
+
+										</select>
 								</div>
 							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Image</label>
+									<input name="image" id="imageproduct2"  type="text" value="" class="form-control">
+										
+								</div>
+							</div><!--end col-->
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Description</label>
+									<textarea name="description" id="description1"  type="text" value="" class="form-control"></textarea>
+										
+								</div>
+							</div><!--end col-->
+							
+							
 
 						</div><!--end row-->
 
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="submit" id="submit" name="send" class="btn btn-primary" value="Save ">
+								<input type="submit" id="submit" name="send" class="btn btn-primary"  value="Update ">
+								<button type="button" class="btn btn-danger" data-bs-dismiss="modal"  aria-label="Close">Cancel</button>
 							</div><!--end col-->
 						</div><!--end row-->
 					</form><!--end form-->
@@ -569,31 +603,96 @@
 					<h5 class="modal-title" id="exampleModalLabel1">Product</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-
+				
 				<div class="modal-body p-3 pt-4">
 					<div class="row align-items-center">
-						<div class="col-lg-2 col-md-4">
-							<img src="" id="imageproduct"  class="avatar avatar-small rounded-pill" alt="">
+							<div class="col-lg-2 col-md-4">
+								<img src="" id="imageproduct" class="avatar avatar-small rounded-pill " alt="ảnh" style="height: 170px;width: 185px;margin-left: 140px;">
 
-						</div><!--end col-->
+							</div>
+					</div><!--end row-->
+					
+						<div class="row">				
+						   
+						    <div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Status</label>
+									<a ><span id="modalProductStatus" class="badge bg-soft-success">   </span>
+								</a> 					    
+								</div>			
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">ID</label>
+									 <input  name="id" id="modalProductId" type="text" value="" class="form-control" readonly>
+								</div>			
+							</div>
+						    
+						   
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Name</label>
+									<input name="name" id="modalProductName" type="text" value="" class="form-control" readonly>
+								</div>			
+							</div>
 
-						<div class="col-lg-6 col-md-8 text-center text-md-start mt-4 mt-sm-0">
-							<h5 class="mb-0 ms-3" id="modalProductName"></h5>
-						</div><!--end col-->
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Price</label>
+									<input name="price" id="modalProductPrice" type="text" value="" class="form-control" readonly
+										>
+								</div>
+							</div><!--end col-->
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Quantity</label>
+									<input name="quantity" id="modalProductQuantity"  type="text" value="" class="form-control" readonly>
+										
+								</div>
+							</div><!--end col-->
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Category</label>
+									    <input name="quantity" id="modalProductCategory"  type="text" value="" class="form-control" readonly>
+									   
+								</div>
+							</div>
+							
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Description</label>
+									<textarea name="description" id="description"  type="text" value="" class="form-control" readonly></textarea>
+										
+								</div>
+							</div><!--end col-->
+							
+							
 
+						</div><!--end row-->
 
-						<div class="col-lg-1 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
-							<div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
+						
+					
+				</div>
+				
+
+			<!--	<div class="modal-body p-3 pt-4">
+					<div class="row align-items-center">
+						<div class="col-lg-4 ">
+							<img src="" id="imageproduct"  class="avatar avatar-small rounded-pill" alt="" style="height: 160px; width: 170px;">
+						</div>
+					
+
+						<div class="col-lg-4 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+							<h5 class="mb-0 " id="modalProductName" style="margin: 0;"></h5>
+							<div class="col-lg-2 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
 								<a href="#"><span id="modalProductStatus" class="badge bg-soft-success"></span>
 								</a>
 
 							</div>
-						</div><!--end col-->
+						</div>
 
 					</div>
-					<div class="d-flex align-items-center">
-
-					</div>
+					
 
 					<ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
 						<li>
@@ -606,6 +705,11 @@
 									<h6>Price:</h6>
 									<h6 class="text-muted ms-2" id="modalProductPrice"></h6>
 								</li>
+								<li>
+								<h6 class="mb-0">Description:<input class="text-muted ms-2" id="modalProductDescription" ></input></h6>
+									
+						</li>
+								
 							</ul>
 						</li>
 						<li>
@@ -619,17 +723,17 @@
 									<h6 class="mb-0">Category:</h6>
 									<h6 class="text-muted ms-2 mb-0" id="modalProductCategory"></h6>
 								</li>
-								<li>
-								</li>
+								
 
 							</ul>
 						</li>
+						
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
-	<!-- Profile End -->
+	<!-- Profile End  -->
 	<!-- Modal end -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
@@ -641,25 +745,24 @@
 			links.forEach(function (link) {
 				link.addEventListener('click', function () {
 					// Extract data from the clicked link
-					var productId = link.dataset.id;
-					console.log(productId);
+					var productId = link.dataset.id;		
 					var productName = link.dataset.productname;
 					var productPrice = link.dataset.price;
 					var productQuantity = link.dataset.quantity;
 					var productCategory = link.dataset.category;
 					var productImage = link.dataset.image;
 					var productStatus = link.dataset.status;
+					 var description = link.dataset.description ;
 
 					// Update modal content with the extracted values
-					document.getElementById('modalProductId').textContent = productId;
-					document.getElementById('modalProductName').textContent = productName;
-					document.getElementById('modalProductPrice').textContent = productPrice + " $";
-					document.getElementById('modalProductQuantity').textContent = productQuantity;
-					document.getElementById('modalProductCategory').textContent = productCategory;
+					document.getElementById('modalProductId').value = productId;
+					document.getElementById('modalProductName').value = productName;
+					document.getElementById('modalProductPrice').value = productPrice;
+					document.getElementById('modalProductQuantity').value = productQuantity;
+					document.getElementById('modalProductCategory').value = productCategory;
+					document.getElementById('description').value = description;
 					modal.querySelector('#imageproduct').src = productImage;
-
 					let status = parseInt(productStatus);
-
 					if (status == 1) {
 						document.getElementById('modalProductStatus').textContent = "Enable";
 
@@ -692,29 +795,33 @@
 					var productQuantity = link.dataset.pquantity;
 					var productCategory = link.dataset.pcategory;
 					var productImage = link.dataset.pimage;
-					
+					var description = link.dataset.description
 					var productStatus = link.dataset.pstatus;
 
 					// Update modal content with the extracted values
 					document.getElementById('modalProductName1').value = productName;
 					document.getElementById('modalProductId1').value = productId;
 					
-					document.getElementById('modalProductPrice1').value = productPrice + " $";
+					document.getElementById('modalProductPrice1').value = productPrice ;
 					document.getElementById('modalProductQuantity1').value = productQuantity;
-					document.getElementById('modalProductCategory1').value = productCategory; 
+					//document.getElementById('modalProductCategory1').value = productCategory; 
 					modal.querySelector('#imageproduct1').src = productImage;
+					document.getElementById('imageproduct2').value = productImage;
+					document.getElementById('description1').textContent = description;
+					
+					
                    
 
-				/*	let status = parseInt(productStatus);
+					let status = parseInt(productStatus);
 
 					if (status == 1) {
-						document.getElementById('modalProductStatus').textContent = "Enable";
+						document.getElementById('modalProductStatus').value = "Enable";
 
 
 					} else {
-						document.getElementById('modalProductStatus').textContent = "Disable";
+						document.getElementById('modalProductStatus').value = "Disable";
 
-					} */
+					} 
 
 
 
@@ -722,6 +829,7 @@
 			});
 		});
 	</script>
+
 
 	<script th:src="@{/static/assets/js/bootstrap.bundle.min.js}"></script>
 	<!-- simplebar -->
