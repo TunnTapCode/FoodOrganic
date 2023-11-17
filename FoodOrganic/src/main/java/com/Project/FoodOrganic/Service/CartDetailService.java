@@ -26,7 +26,6 @@ public class CartDetailService {
 		cartDetailRepo.delete(cartDetail) ;
 	}
 	
-
 	
 	public List<CartDetail> findByCart(Cart cart){
 		return cartDetailRepo.findByCart(cart);

@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Project.FoodOrganic.Entity.Category;
+import com.Project.FoodOrganic.Entity.OrderDetail;
+import com.Project.FoodOrganic.Entity.Orders;
 import com.Project.FoodOrganic.Entity.Product;
 import com.Project.FoodOrganic.Entity.StatusProduct;
 import com.Project.FoodOrganic.Service.CategoryService;
+import com.Project.FoodOrganic.Service.OrderDetailService;
+import com.Project.FoodOrganic.Service.OrderService;
 import com.Project.FoodOrganic.Service.ProductService;
 import com.Project.FoodOrganic.Service.StatusProService;
 
@@ -29,12 +33,17 @@ public class AdminController {
 	ProductService productService ;
 	@Autowired
 	StatusProService service ;
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	OrderDetailService orderDetailService;
 	
 	@GetMapping("/dashboard")
 	public String admin() {
 		return "dashboard" ;
 	}
 	
+
 	@GetMapping("/add-product")
 	public String Add_product(Model model) {
 		Product p = new Product();
@@ -79,7 +88,7 @@ public class AdminController {
 	}
 	@PostMapping("/update")
 	public String update(
-			@RequestParam("id") Long id ,
+			@RequestParam("id") Long id , 
 			@RequestParam("name") String name ,
 			@RequestParam("image") String image ,
 			@RequestParam("description") String description ,
@@ -130,6 +139,40 @@ public class AdminController {
 		
 		
 	}
+	
+	@GetMapping("/order-processing/")
+	public String all_order(Model model,@RequestParam(name = "status" ) String status) {
+		List<Orders> listO = orderService.findAllOrderByStatus(status);
+		model.addAttribute("listO", listO);
+		return "order-processing" ;
+	}
+	@GetMapping("/detail-order/{id}")
+	public String detail_order(@PathVariable Long id , Model model) {
+		Optional<Orders> o = orderService.findById(id);
+		List<OrderDetail> list = orderDetailService.findByOrder(o.get()) ;
+		model.addAttribute("listO", list);
+		return "detail-order" ;
+	}
+	@GetMapping("/update-status/{id}")
+	public String update_status(@PathVariable Long id ,@RequestParam(name = "statusO") Integer status, Model model) {
+		Optional<Orders> o = orderService.findById(id);
+		System.out.println(status);
+		System.out.println(o.get());
+		if(o.isPresent()) {
+			if(status == 1) {
+				o.get().setStatus("transported");
+				orderService.save(o.get());
+				return "redirect:/admin/order-processing/?status=transported" ;
+			}else {
+				o.get().setStatus("canceled");
+				orderService.save(o.get());
+				return "redirect:/admin/order-processing/?status=canceled" ;
+			}
+		}
+		
+		return "redirect:/admin/order-processing" ;
+	}
+	
 	
 
 }

@@ -84,12 +84,23 @@
 					<a class="btn-sm-square bg-white rounded-circle ms-3" href="">
 						<small class="fa fa-search text-body"></small>
 					</a>
-					<a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+					<div class="nav-item dropdown">
+						<a class="btn-sm-square bg-white rounded-circle ms-3" href="">
 						<small class="fa fa-user text-body"></small>
 					</a>
-					<a class="btn-sm-square bg-white rounded-circle ms-3" href="">
-						<small class="fa fa-shopping-bag text-body"></small>
-					</a>
+						<div class="dropdown-menu m-0">
+							<a href="blog.html" class="dropdown-item">Blog Grid</a>
+							<a href="feature.html" class="dropdown-item">Our Features</a>
+							<a th:if="${auth != null}" th:href="@{/logout}" class="dropdown-item">Logout</a>
+							<a th:if="${auth == null}" th:href="@{/login}" class="dropdown-item">Login</a>
+							<a href="404.html" class="dropdown-item">404 Page</a>
+						</div>
+					</div>
+					<a href="/cart" class="position-relative bg-white  ms-3 " style="height: 31px; text-align: center;border-radius: 50%;width: 31px;padding-top: 1px;" >
+                               <small class="fa fa-shopping-bag text-body"></small>
+                               <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 15px; min-width: 15px;" th:if="${count == null}" th:text="'0'"></span>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark" style="top: -5px; left: 15px; height: 15px; min-width: 15px;" th:if="${count != null}"  th:text="${count}"></span>
+                    </a>
 				</div>
 			</div>
 		</nav>

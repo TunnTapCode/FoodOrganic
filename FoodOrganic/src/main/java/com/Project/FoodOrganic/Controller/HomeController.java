@@ -38,15 +38,20 @@ public class HomeController {
 	
 
 	@GetMapping({"/home", "/"})
-	public String getAllProduct(ModelMap model,Authentication authentication) {	
-		
+	public String getAllProduct(ModelMap model,Authentication auth) {	
+		if(auth != null) {
+			User u = userService.findByUsername(auth.getName());
+			Cart cart = cartService.getByUser(u);
+			Long count = cartDetailService.coutByCart(cart);
+			model.addAttribute("count", count);
+		}
 		List<Product> list1 = service.findTop7ByCategoryOrderByProduct_id(1L);
 		List<Product> list2 = service.findTop7ByCategoryOrderByProduct_id(2L);
 		List<Product> list3 = service.findTop7ByCategoryOrderByProduct_id(3L);
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
-		model.addAttribute("auth", authentication);
+		model.addAttribute("auth", auth);
 		return "home";
 	}
 	
