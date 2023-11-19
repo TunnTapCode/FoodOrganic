@@ -72,7 +72,7 @@
 							</ul>
 						</div>
 					</li>
-						<li class="sidebar-dropdown">
+					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
@@ -359,7 +359,7 @@
 											<th class="border-bottom p-3" style="min-width: 180px;">Order Date</th>
 											<th class="border-bottom p-3">Total</th>
 											<th class="border-bottom p-3">Status</th>
-											<th class="border-bottom p-3" style="min-width: 100px;"></th>
+											<th class="border-bottom p-3"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -400,12 +400,6 @@
 													<i class="uil uil-eye"></i>
 												</a>
 
-												<a class="btn btn-icon btn-pills btn-soft-success"
-													th:href="'/admin/update-status/' + ${o.order_id} + '?statusO=1' " ><i
-														class="uil uil-check"></i></a>
-												<a class="btn btn-icon btn-pills btn-soft-danger"
-												th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' " ><i
-														class="uil uil-times"></i></a>
 											</td>
 										</tr>
 

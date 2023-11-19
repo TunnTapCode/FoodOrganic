@@ -35,7 +35,15 @@ public class HomeController {
 	@Autowired
 	CartDetailService cartDetailService ;
 	
-	
+	@GetMapping("/tracking")
+	public String o() {
+		return "order-tracking";
+	}
+
+	@GetMapping("/profile")
+	public String profile() {
+		return "profile";
+	}
 
 	@GetMapping({"/home", "/"})
 	public String getAllProduct(ModelMap model,Authentication auth) {	
