@@ -11,12 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
+
 @Entity
 @Table(name = "Reviews")
 public class Reviews {
@@ -28,14 +24,71 @@ public class Reviews {
 	private String comment ;
 	@Column(name = "reviewDate")
 	private Date review_date ;
-	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "product_id")
-	private Product product ;
-	
+	@Column(name = "rate_star")
+	private Integer star ;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id")
 	private User user ;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Date getReview_date() {
+		return review_date;
+	}
+
+	public void setReview_date(Date review_date) {
+		this.review_date = review_date;
+	}
+	public Integer getStar() {
+		return star;
+	}
+
+	public void setStar(Integer star) {
+		this.star = star;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+
+	public Reviews(Long id, String comment, Date review_date, Integer star, User user) {
+		super();
+		this.id = id;
+		this.comment = comment;
+		this.review_date = review_date;
+		this.star = star;
+		this.user = user;
+	}
+
+	public Reviews() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Reviews [id=" + id + ", comment=" + comment + ", review_date=" + review_date + ", star=" + star
+				+ ", user=" + user + "]";
+	}
 
 	
 }

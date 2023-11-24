@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.Project.FoodOrganic.Entity.Cart;
 import com.Project.FoodOrganic.Entity.Category;
+
 import com.Project.FoodOrganic.Entity.Product;
 import com.Project.FoodOrganic.Entity.User;
 import com.Project.FoodOrganic.Service.CartDetailService;
 import com.Project.FoodOrganic.Service.CartService;
 import com.Project.FoodOrganic.Service.CategoryService;
+import com.Project.FoodOrganic.Service.OrderService;
 import com.Project.FoodOrganic.Service.ProductService;
 import com.Project.FoodOrganic.Service.UserService;
 
@@ -35,15 +37,10 @@ public class HomeController {
 	@Autowired
 	CartDetailService cartDetailService ;
 	
-	@GetMapping("/tracking")
-	public String o() {
-		return "order-tracking";
-	}
-
-	@GetMapping("/profile")
-	public String profile() {
-		return "profile";
-	}
+	@Autowired
+	OrderService orderService ;
+	
+	
 
 	@GetMapping({"/home", "/"})
 	public String getAllProduct(ModelMap model,Authentication auth) {	
@@ -60,32 +57,11 @@ public class HomeController {
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 		model.addAttribute("auth", auth);
-		return "home";
+		return "Home/home";
 	}
 	
 
-//	@GetMapping("/detail/{product_id}")
-//	public String detail_Product1(@PathVariable Long product_id, Model model) {
-//		Optional<Product> product = service.getProductById(product_id);
-//	     if(product.isEmpty()) {
-//	    	 return"redirect:/home" ;
-//	    }else {
-//	    	
-//			List<Product> list = service.getAllProductByCategoryId(product.get().getCategory().getId());
-//			for(Product p : list) {
-//				if(p.getProduct_id() == product_id) {
-//					list.remove(p);
-//					break ;
-//				}
-//			}
-//			model.addAttribute("p", product);
-//			model.addAttribute("listP", list);
-//
-//			return "detail";
-//	    }
-//		
-//
-//	}
+
 	@GetMapping("/detail/{product_id}")
 	public String detail_Product(@PathVariable Long product_id, Model model,Authentication auth) {
 		if(auth != null) {
@@ -112,7 +88,7 @@ public class HomeController {
 			model.addAttribute("listC", listC);
 			model.addAttribute("listP", list);
 
-			return "shop-detail";
+			return "Home/shop-detail";
 	    }
 		
 

@@ -2,6 +2,7 @@ package com.Project.FoodOrganic.Entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,11 @@ public class Blogs {
 	private String title;
 	private String content;
 	private Date createdDate;
+	
+	@Column(name = "tags" )
+	private String tags ;
+	@Column(name = "image" )
+	private String image ;
 	public Long getId() {
 		return id;
 	}
@@ -42,5 +48,36 @@ public class Blogs {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Blogs(Long id, String title, String content, Date createdDate, String tags) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.createdDate = createdDate;
+		this.tags = tags;
+	}
+	public Blogs() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Blogs [id=" + id + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate
+				+ ", tags=" + tags + ", image=" + image + "]";
+	}
+	
+	
 	
 }

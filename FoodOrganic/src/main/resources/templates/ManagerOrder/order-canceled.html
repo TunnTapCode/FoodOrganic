@@ -72,7 +72,7 @@
 							</ul>
 						</div>
 					</li>
-					<li class="sidebar-dropdown">
+						<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
@@ -80,10 +80,11 @@
                                 <li ><a th:href="@{/admin/order-canceled}">Order Canceled</a></li>
                                  <li ><a th:href="@{/admin/order-transported}">Order Transported</a></li>
                                  <li ><a th:href="@{/admin/order-completed}">Order Completed</a></li>
-                                <li><a href="calendar.html">Calendar</a></li>
+                               
                             </ul>
 						</div>
 					</li>
+
 
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
@@ -359,7 +360,7 @@
 											<th class="border-bottom p-3" style="min-width: 180px;">Order Date</th>
 											<th class="border-bottom p-3">Total</th>
 											<th class="border-bottom p-3">Status</th>
-											<th class="border-bottom p-3"></th>
+											<th class="border-bottom p-3" style="min-width: 100px;"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -400,6 +401,12 @@
 													<i class="uil uil-eye"></i>
 												</a>
 
+												<a class="btn btn-icon btn-pills btn-soft-success"
+													th:href="'/admin/update-status/' + ${o.order_id} + '?statusO=1' " ><i
+														class="uil uil-check"></i></a>
+												<a class="btn btn-icon btn-pills btn-soft-danger"
+												th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' " ><i
+														class="uil uil-times"></i></a>
 											</td>
 										</tr>
 

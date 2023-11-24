@@ -37,6 +37,9 @@
 					<span class="login100-form-title p-b-43">
 						Đăng Ký
 					</span>
+					<div th:if="${msg1 != null}" class="alert alert-success">
+                    <p th:text="${msg1}"></p>
+                    </div>	
 					<div th:if="${msg != null}" class="alert alert-danger">
                     <p th:text="${msg}"></p>
                     </div>		

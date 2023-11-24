@@ -41,6 +41,6 @@ public class ProductController {
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
-		return "product" ;
+		return "Home/product" ;
 	}
 }

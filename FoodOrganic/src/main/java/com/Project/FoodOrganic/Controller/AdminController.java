@@ -1,9 +1,14 @@
 package com.Project.FoodOrganic.Controller;
 
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.Project.FoodOrganic.Entity.Blogs;
 import com.Project.FoodOrganic.Entity.Category;
 import com.Project.FoodOrganic.Entity.OrderDetail;
 import com.Project.FoodOrganic.Entity.Orders;
 import com.Project.FoodOrganic.Entity.Product;
 import com.Project.FoodOrganic.Entity.StatusProduct;
+import com.Project.FoodOrganic.Service.BlogsService;
 import com.Project.FoodOrganic.Service.CategoryService;
 import com.Project.FoodOrganic.Service.OrderDetailService;
 import com.Project.FoodOrganic.Service.OrderService;
@@ -37,10 +45,12 @@ public class AdminController {
 	OrderService orderService;
 	@Autowired
 	OrderDetailService orderDetailService;
+	@Autowired
+	BlogsService blogsService;
 
 	@GetMapping("/dashboard")
 	public String admin() {
-		return "dashboard";
+		return "Dashboard/dashboard";
 	}
 
 	@GetMapping("/add-product")
@@ -49,7 +59,7 @@ public class AdminController {
 		List<Category> listC = categoryService.getAll();
 		model.addAttribute("Product", p);
 		model.addAttribute("listC", listC);
-		return "add-product";
+		return "ManagerProduct/add-product";
 	}
 
 	@PostMapping("/add-product")
@@ -65,12 +75,12 @@ public class AdminController {
 			Product p = new Product();
 			model.addAttribute("Product", p);
 			model.addAttribute("msg", "Thêm sản phẩm thành công .");
-			return "add-product";
+			return "ManagerProduct/add-product";
 		} catch (Exception e) {
 			Product p = new Product();
 			model.addAttribute("msg1", "Thêm sản phẩm thất bại .");
 			model.addAttribute("Product", p);
-			return "add-product";
+			return "ManagerProduct/add-product";
 		}
 
 	}
@@ -84,7 +94,7 @@ public class AdminController {
 		model.addAttribute("listC", listC);
 		model.addAttribute("listP", listP);
 
-		return "all-product";
+		return "ManagerProduct/all-product";
 	}
 
 	@PostMapping("/update")
@@ -141,7 +151,7 @@ public class AdminController {
 		List<Orders> listO = orderService.findAllOrderByStatus("processing");
 		model.addAttribute("listO", listO);
 
-		return "order-processing";
+		return "ManagerOrder/order-processing";
 	}
 
 	@GetMapping("/order-transported")
@@ -149,7 +159,7 @@ public class AdminController {
 		List<Orders> listO = orderService.findAllOrderByStatus("transported");
 		model.addAttribute("listO", listO);
 
-		return "order-transported";
+		return "ManagerOrder/order-transported";
 	}
 
 	@GetMapping("/order-canceled")
@@ -157,7 +167,7 @@ public class AdminController {
 		List<Orders> listO = orderService.findAllOrderByStatus("canceled");
 		model.addAttribute("listO", listO);
 
-		return "order-canceled";
+		return "ManagerOrder/order-canceled";
 	}
 
 	@GetMapping("/order-completed")
@@ -165,7 +175,7 @@ public class AdminController {
 		List<Orders> listO = orderService.findAllOrderByStatus("completed");
 		model.addAttribute("listO", listO);
 
-		return "order-completed";
+		return "ManagerOrder/order-completed";
 	}
 
 	@GetMapping("/detail-order/{id}")
@@ -173,7 +183,7 @@ public class AdminController {
 		Optional<Orders> o = orderService.findById(id);
 		List<OrderDetail> list = orderDetailService.findByOrder(o.get());
 		model.addAttribute("listO", list);
-		return "detail-order";
+		return "ManagerOrder/detail-order";
 	}
 
 	@GetMapping("/update-status/{id}")
@@ -199,5 +209,67 @@ public class AdminController {
 
 		return "redirect:/admin/order-processing";
 	}
+
+	@GetMapping("/blogs")
+	public String all_blog(Model model) {
+		List<Blogs> listB = blogsService.findAll();
+		Blogs blogs = new Blogs();
+		model.addAttribute("blogs", blogs);
+		model.addAttribute("listB", listB);
+		return "Blog/all-blogs-admin";
+	}
+
+	@PostMapping("/add_blogs")
+	public String add_blog(@RequestParam(name = "input-file") MultipartFile file, @RequestParam(name = "title") String title,
+			@RequestParam(name = "date")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+			@RequestParam(name = "tags") String tags,
+			@RequestParam(name = "content") String content) throws IOException {
+		String image = saveImage(file);
+		Blogs blogs = new Blogs();
+		blogs.setContent(content);
+		blogs.setCreatedDate(date);
+		blogs.setImage(image);
+		blogs.getTags();
+		blogs.setTitle(title);
+		blogsService.save(blogs);
+		return "redirect:/admin/blogs";
+	}
+
+	@GetMapping("/blogs-detail/{id}")
+	public String blog_detail(@PathVariable Long id,Model model) {
+		Optional<Blogs> blogs = blogsService.findById(id);
+		model.addAttribute("blogs", blogs.get());
+		return "Blog/blog-detail-admin";
+	}
+	@GetMapping("/delete_blogs/{id}")
+	public String delete_blog(@PathVariable Long id) {
+		 Optional<Blogs> blogs = blogsService.findById(id);
+		 if(blogs.get() != null) {
+			 blogsService.delete(blogs.get());
+			 return "redirect:/admin/blogs";
+		 }else {
+			 return "redirect:/admin/blogs";
+		}
+		
+	}
+	
+	private String saveImage(MultipartFile file) throws IOException {
+        
+        String fileName =  file.getOriginalFilename();
+        String uploadDir = "C:\\Users\\Admin\\Desktop\\FoodOrganic\\FoodOrganic\\src\\main\\resources\\static\\img";
+
+        File uploadPath = new File(uploadDir);
+        System.out.println(uploadPath);
+
+        if (!uploadPath.exists()) {
+            uploadPath.mkdirs();
+        }
+
+        File dest = new File(uploadPath.getAbsolutePath() + "/" + fileName);
+        file.transferTo(dest);
+
+       
+        return "/static/img/" + fileName;
+    }
 
 }

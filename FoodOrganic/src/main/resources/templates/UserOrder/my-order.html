@@ -3,13 +3,13 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Doctris - Doctor Appointment Booking System</title>
+	<title>Đơn Hàng</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
 	<meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
 	<meta name="author" content="Shreethemes" />
 	<meta name="email" content="support@shreethemes.in" />
-	<meta name="website" content="../../../index.html" />
+	<meta name="website" content="../../../home.html" />
 	<meta name="Version" content="v1.2.0" />
 	<!-- favicon -->
 	<link rel="shortcut icon" th:href="@{/static/assets/images/favicon.ico.png}">
@@ -46,7 +46,7 @@
 		<nav id="sidebar" class="sidebar-wrapper">
 			<div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
 				<div class="sidebar-brand">
-					<a href="index.html">
+					<a href="/home">
 						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode" alt=""
 							style="height: 55px;margin-left: 50px;">
 						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode" alt=""
@@ -55,35 +55,11 @@
 				</div>
 
 				<ul class="sidebar-menu pt-3">
-					<li><a href="/admin/dashboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a>
+					<li><a href="/profile"><i class="uil uil-dashboard me-2 d-inline-block"></i>Thông tin cá nhân</a>
 					</li>
-					<li><a href="appointment.html"><i
-								class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
-
-
-					<li class="sidebar-dropdown">
-						<a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Product
-							Manager</a>
-						<div class="sidebar-submenu">
-							<ul>
-								<li><a href="/admin/all-product">All Product</a></li>
-								<li><a href="/admin/add-product">Add Product</a></li>
-								<li><a href="patient-profile.html">Profile</a></li>
-							</ul>
-						</div>
+					<li><a href="/my-order"><i class="uil uil-dashboard me-2 d-inline-block"></i>Đơn hàng</a>
 					</li>
-						<li class="sidebar-dropdown">
-						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
-						<div class="sidebar-submenu">
-							<ul>
-                                <li ><a th:href="@{/admin/order-processing}">Order Processing</a></li>
-                                <li ><a th:href="@{/admin/order-canceled}">Order Canceled</a></li>
-                                 <li ><a th:href="@{/admin/order-transported}">Order Transported</a></li>
-                                 <li ><a th:href="@{/admin/order-completed}">Order Completed</a></li>
-                                <li><a href="calendar.html">Calendar</a></li>
-                            </ul>
-						</div>
-					</li>
+					
 
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
@@ -97,39 +73,14 @@
 					</li>
 
 
-					<li class="sidebar-dropdown">
-						<a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-						<div class="sidebar-submenu">
-							<ul>
-								<li><a href="blogs.html">Blogs</a></li>
-								<li><a href="blog-detail.html">Blog Detail</a></li>
-							</ul>
-						</div>
-					</li>
-
-					<li class="sidebar-dropdown">
-						<a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
-						<div class="sidebar-submenu">
-							<ul>
-								<li><a href="faqs.html">FAQs</a></li>
-								<li><a href="review.html">Reviews</a></li>
-								<li><a href="invoice-list.html">Invoice List</a></li>
-								<li><a href="invoice.html">Invoice</a></li>
-								<li><a href="terms.html">Terms & Policy</a></li>
-								<li><a href="privacy.html">Privacy Policy</a></li>
-								<li><a href="error.html">404 !</a></li>
-								<li><a href="blank-page.html">Blank Page</a></li>
-							</ul>
-						</div>
-					</li>
-
+					
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i
 								class="uil uil-sign-in-alt me-2 d-inline-block"></i>Authentication</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a href="login.html">Login</a></li>
-								<li><a href="signup.html">Signup</a></li>
+								<li><a href="/login">Login</a></li>
+								<li><a href="/logout">Signup</a></li>
 								<li><a href="forgot-password.html">Forgot Password</a></li>
 								<li><a href="lock-screen.html">Lock Screen</a></li>
 								<li><a href="thankyou.html">Thank you...!</a></li>
@@ -137,10 +88,6 @@
 						</div>
 					</li>
 
-					<li><a href="components.html"><i class="uil uil-cube me-2 d-inline-block"></i>Components</a></li>
-
-					<li><a href="../landing/index-two.html" target="_blank"><i
-								class="uil uil-window me-2 d-inline-block"></i>Landing page</a></li>
 				</ul>
 				<!-- sidebar-menu  -->
 			</div>
@@ -186,145 +133,33 @@
 					</div>
 
 					<ul class="list-unstyled mb-0">
-						<li class="list-inline-item mb-0">
-							<div class="dropdown dropdown-primary">
-								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
-									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										th:src="@{/static/assets/images/language/american.png}"
-										class="avatar avatar-ex-small rounded-circle p-2" alt=""></button>
-								<div class="dropdown-menu dd-menu drop-ups dropdown-menu-end bg-white shadow border-0 mt-3 p-2"
-									data-simplebar style="height: 175px;">
-									<a href="javascript:void(0)" class="d-flex align-items-center">
-										<img th:src="@{/static/assets/images/language/chinese.png}"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Chinese</small>
-										</div>
-									</a>
-
-								</div>
-							</div>
-						</li>
-
-						<li class="list-inline-item mb-0 ms-1">
-							<a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-								aria-controls="offcanvasRight">
-								<div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings"
-										class="fea icon-sm"></i></div>
-							</a>
-						</li>
-
-						<li class="list-inline-item mb-0 ms-1">
-							<div class="dropdown dropdown-primary">
-								<button type="button"
-									class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0"
-									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-										data-feather="mail" class="fea icon-sm"></i></button>
-								<span
-									class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4
-									<span class="visually-hidden">unread mail</span></span>
-
-								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2"
-									data-simplebar style="height: 320px; width: 300px;">
-									<a href="#" class="d-flex align-items-center justify-content-between py-2">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/02.jpg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>Janalia</b> <small
-													class="text-muted fw-normal d-inline-block">1 hour
-													ago</small></small>
-										</div>
-									</a>
-
-									<a href="#"
-										class="d-flex align-items-center justify-content-between py-2 border-top">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/Codepen.svg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>codepen</b> <small
-													class="text-muted fw-normal d-inline-block">4 hour
-													ago</small></small>
-										</div>
-									</a>
-
-									<a href="#"
-										class="d-flex align-items-center justify-content-between py-2 border-top">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/03.jpg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>Cristina</b> <small
-													class="text-muted fw-normal d-inline-block">5 hour
-													ago</small></small>
-										</div>
-									</a>
-
-									<a href="#"
-										class="d-flex align-items-center justify-content-between py-2 border-top">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/dribbble.svg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>Dribbble</b> <small
-													class="text-muted fw-normal d-inline-block">24 hour
-													ago</small></small>
-										</div>
-									</a>
-
-									<a href="#"
-										class="d-flex align-items-center justify-content-between py-2 border-top">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/06.jpg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>Donald Aghori</b> <small
-													class="text-muted fw-normal d-inline-block">1 day
-													ago</small></small>
-										</div>
-									</a>
-
-									<a href="#"
-										class="d-flex align-items-center justify-content-between py-2 border-top">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/07.jpg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>Calvin</b> <small
-													class="text-muted fw-normal d-inline-block">2 day
-													ago</small></small>
-										</div>
-									</a>
-								</div>
-							</div>
-						</li>
+						
 
 						<li class="list-inline-item mb-0 ms-1">
 							<div class="dropdown dropdown-primary">
 								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
 									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										th:src="@{/static/assets/images/doctors/01.jpg}"
+										th:src="${user.image_Avt.url}"
 										class="avatar avatar-ex-small rounded-circle" alt=""></button>
 								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
 									style="min-width: 200px;">
 									<a class="dropdown-item d-flex align-items-center text-dark"
 										href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-										<img th:src="@{/static/assets/images/doctors/01.jpg}"
+										<img th:src="${user.image_Avt.url}"
 											class="avatar avatar-md-sm rounded-circle border shadow" alt="">
 										<div class="flex-1 ms-2">
-											<span class="d-block mb-1">Calvin Carlo</span>
-											<small class="text-muted">Orthopedic</small>
+											<span class="d-block mb-1" th:text="${user.username}">Calvin Carlo</span>
+											<small class="text-muted" th:text="${user.role.name}">Orthopedic</small>
 										</div>
 									</a>
-									<a class="dropdown-item text-dark" href="index.html"><span
+									<a class="dropdown-item text-dark" href="/home"><span
 											class="mb-0 d-inline-block me-1"><i
-												class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
-									<a class="dropdown-item text-dark" href="dr-profile.html"><span
+												class="uil uil-dashboard align-middle h6"></i></span> Home</a>
+									<a class="dropdown-item text-dark" href="/profile"><span
 											class="mb-0 d-inline-block me-1"><i
-												class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+												class="uil uil-setting align-middle h6"></i></span> Thông tin cá nhân</a>
 									<div class="dropdown-divider border-top"></div>
-									<a class="dropdown-item text-dark" href="lock-screen.html"><span
+									<a class="dropdown-item text-dark" href="/logout"><span
 											class="mb-0 d-inline-block me-1"><i
 												class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
 								</div>
@@ -336,106 +171,275 @@
 
 			<div class="container-fluid">
 				<div class="layout-specing">
-					<div class="d-md-flex justify-content-between">
-						<h5 class="mb-0">Order List</h5>
-
-						<nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
-							<ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-								<li class="breadcrumb-item">Order Manager</li>
-								<li class="breadcrumb-item active" aria-current="page">Order Processing</li>
-								
-							</ul>
-						</nav>
-					</div>
 
 					<div class="row">
-						<div class="col-12 mt-4">
-							<div class="table-responsive shadow rounded">
-								<table class="table table-center bg-white mb-0">
-									<thead>
-										<tr>
-											<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
-											<th class="border-bottom p-3">Username</th>
-											<th class="border-bottom p-3" style="min-width: 180px;">Order Date</th>
-											<th class="border-bottom p-3">Total</th>
-											<th class="border-bottom p-3">Status</th>
-											<th class="border-bottom p-3" style="min-width: 100px;"></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="o : ${listO}">
-											<th class="p-3" th:text="${o.order_id}"></th>
-											<td class="p-3" th:text="${o.user.username}"></td>
+						<div class="col-lg-12">
+							<nav>
+								<div class="nav nav-tabs mb-3">
+									<button class="nav-link active " type="button"  style="color: black;"
+										role="tab" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+										aria-controls="nav-about" aria-selected="true">Đang xử lý</button>
+									<button class="nav-link " type="button" role="tab"  style="color: black;"
+										id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+										aria-controls="nav-mission" aria-selected="false">Đang vận chuyển</button>
 
-											<td class="py-3" th:text="${o.getOrderDate()}">
+									<button class="nav-link " type="button" role="tab"  style="color: black;"
+										id="nav-mission1-tab" data-bs-toggle="tab" data-bs-target="#nav-mission1"
+										aria-controls="nav-mission" aria-selected="false">Đã hoàn thành</button>
 
-											</td>
-											<td class="p-3" th:text="${o.total_amount}"></td>
-											
-											<td class="p-3">
-												<a href="#"><span class="badge bg-soft-warning" th:if="${o.status == 'processing'}"
-														th:text="${o.status}">
-													</span>
-												</a>
-												<a href="#"><span class="badge bg-soft-success" th:if="${o.status == 'completed'}"
-														th:text="${o.status}">
-													</span>
-												</a>
-												<a href="#"><span class="badge bg-soft-danger" th:if="${o.status == 'canceled'}"
-														th:text="${o.status}">
-													</span>
-												</a>
-												<a href="#"><span class="badge bg-soft-primary" th:if="${o.status == 'transported'}"
-														th:text="${o.status}">
-													</span>
-												</a>
-												
-												
-											</td>
+									<button class="nav-link " type="button" role="tab" style="color: black;"
+										id="nav-mission2-tab" data-bs-toggle="tab" data-bs-target="#nav-mission2"
+										aria-controls="nav-mission" aria-selected="false">Đã huỷ</button>
+								</div>
+							</nav>
+							<div class="tab-content mb-5">
+								<div class="tab-pane active" id="nav-about" role="tabpanel"
+									aria-labelledby="nav-about-tab">
 
+									<div class="table-responsive shadow rounded">
+										<table class="table table-center bg-white mb-0">
+											<thead>
+												<tr>
+													<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+													<th class="border-bottom p-3">Username</th>
+													<th class="border-bottom p-3" style="min-width: 180px;">Order
+														Date</th>
+													<th class="border-bottom p-3">Total</th>
+													<th class="border-bottom p-3">Status</th>
+													<th class="border-bottom p-3" style="min-width: 100px;"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="o : ${listO}">
+													<th class="p-3" th:text="${o.order_id}"></th>
+													<td class="p-3" th:text="${o.user.username}"></td>
 
+													<td class="py-3" th:text="${o.getOrderDate()}">
 
-											<td class="text-end p-3">
-												<a th:href="'/admin/detail-order/' + ${o.order_id} " class="btn btn-icon btn-pills btn-soft-primary">	
-													<i class="uil uil-eye"></i>
-												</a>
+													</td>
+													<td class="p-3" th:text="${o.total_amount}"></td>
 
-												<a class="btn btn-icon btn-pills btn-soft-success"
-													th:href="'/admin/update-status/' + ${o.order_id} + '?statusO=1' " ><i
-														class="uil uil-check"></i></a>
-												<a class="btn btn-icon btn-pills btn-soft-danger"
-												th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' " ><i
-														class="uil uil-times"></i></a>
-											</td>
-										</tr>
+													<td class="p-3">
+														<a href="#"><span class="badge bg-soft-warning"
+																th:if="${o.status == 'processing'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-success"
+																th:if="${o.status == 'completed'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-danger"
+																th:if="${o.status == 'canceled'}" th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-primary"
+																th:if="${o.status == 'transported'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+													</td>
+													<td class="text-end p-3">
+														<a th:href="'/tracking/' + ${o.order_id} "
+															class="btn btn-icon btn-pills btn-soft-primary">
+															<i class="uil uil-eye"></i>
+														</a>			
+														<a class="btn btn-icon btn-pills btn-soft-danger"
+															th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' "><i
+																class="uil uil-times"></i></a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 
+									</div>
+								</div>
+								<div class="tab-pane" id="nav-mission" role="tabpanel"
+									aria-labelledby="nav-mission-tab">
 
+									<div class="table-responsive shadow rounded">
+										<table class="table table-center bg-white mb-0">
+											<thead>
+												<tr>
+													<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+													<th class="border-bottom p-3">Username</th>
+													<th class="border-bottom p-3" style="min-width: 180px;">Order
+														Date</th>
+													<th class="border-bottom p-3">Total</th>
+													<th class="border-bottom p-3">Status</th>
+													<th class="border-bottom p-3" style="min-width: 100px;"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="o : ${list1}">
+													<th class="p-3" th:text="${o.order_id}"></th>
+													<td class="p-3" th:text="${o.user.username}"></td>
 
-									</tbody>
-								</table>
+													<td class="py-3" th:text="${o.getOrderDate()}">
+
+													</td>
+													<td class="p-3" th:text="${o.total_amount}"></td>
+
+													<td class="p-3">
+														<a href="#"><span class="badge bg-soft-warning"
+																th:if="${o.status == 'processing'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-success"
+																th:if="${o.status == 'completed'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-danger"
+																th:if="${o.status == 'canceled'}" th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-primary"
+																th:if="${o.status == 'transported'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+													</td>
+													<td class="text-end p-3">
+														<a th:href="'/tracking/' + ${o.order_id} "
+															class="btn btn-icon btn-pills btn-soft-primary">
+															<i class="uil uil-eye"></i>
+														</a>
+														
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane" id="nav-mission1" role="tabpanel"
+									aria-labelledby="nav-mission1-tab">
+
+									<div class="table-responsive shadow rounded">
+										<table class="table table-center bg-white mb-0">
+											<thead>
+												<tr>
+													<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+													<th class="border-bottom p-3">Username</th>
+													<th class="border-bottom p-3" style="min-width: 180px;">Order
+														Date</th>
+													<th class="border-bottom p-3">Total</th>
+													<th class="border-bottom p-3">Status</th>
+													<th class="border-bottom p-3" style="min-width: 100px;"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="o : ${list2}">
+													<th class="p-3" th:text="${o.order_id}"></th>
+													<td class="p-3" th:text="${o.user.username}"></td>
+
+													<td class="py-3" th:text="${o.getOrderDate()}">
+
+													</td>
+													<td class="p-3" th:text="${o.total_amount}"></td>
+
+													<td class="p-3">
+														<a href="#"><span class="badge bg-soft-warning"
+																th:if="${o.status == 'processing'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-success"
+																th:if="${o.status == 'completed'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-danger"
+																th:if="${o.status == 'canceled'}" th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-primary"
+																th:if="${o.status == 'transported'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+													</td>
+													<td class="text-end p-3">
+														<a th:href="'/tracking/' + ${o.order_id} "
+															class="btn btn-icon btn-pills btn-soft-primary">
+															<i class="uil uil-eye"></i>
+														</a>
+
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane" id="nav-mission2" role="tabpanel"
+									aria-labelledby="nav-mission2-tab">
+
+									<div class="table-responsive shadow rounded">
+										<table class="table table-center bg-white mb-0">
+											<thead>
+												<tr>
+													<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+													<th class="border-bottom p-3">Username</th>
+													<th class="border-bottom p-3" style="min-width: 180px;">Order
+														Date</th>
+													<th class="border-bottom p-3">Total</th>
+													<th class="border-bottom p-3">Status</th>
+													<th class="border-bottom p-3" style="min-width: 100px;"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="o : ${list3}">
+													<th class="p-3" th:text="${o.order_id}"></th>
+													<td class="p-3" th:text="${o.user.username}"></td>
+
+													<td class="py-3" th:text="${o.getOrderDate()}">
+
+													</td>
+													<td class="p-3" th:text="${o.total_amount}"></td>
+
+													<td class="p-3">
+														<a href="#"><span class="badge bg-soft-warning"
+																th:if="${o.status == 'processing'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-success"
+																th:if="${o.status == 'completed'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-danger"
+																th:if="${o.status == 'canceled'}" th:text="${o.status}">
+															</span>
+														</a>
+														<a href="#"><span class="badge bg-soft-primary"
+																th:if="${o.status == 'transported'}"
+																th:text="${o.status}">
+															</span>
+														</a>
+													</td>
+													<td class="text-end p-3">
+														<a th:href="'/tracking/' + ${o.order_id} "
+															class="btn btn-icon btn-pills btn-soft-primary">
+															<i class="uil uil-eye"></i>
+														</a>
+
+														
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
+
 						</div>
+
 					</div><!--end row-->
 
-					<div class="row text-center">
-						<!-- PAGINATION START -->
-						<div class="col-12 mt-4">
-							<div class="d-md-flex align-items-center text-center justify-content-between">
-								<span class="text-muted me-3">Showing 1 - 10 out of 50</span>
-								<ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-									<li class="page-item"><a class="page-link" href="javascript:void(0)"
-											aria-label="Previous">Prev</a></li>
-									<li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)"
-											aria-label="Next">Next</a></li>
-								</ul>
-							</div>
-						</div><!--end col-->
-						<!-- PAGINATION END -->
-					</div><!--end row-->
+					
 				</div>
 			</div><!--end container-->
 

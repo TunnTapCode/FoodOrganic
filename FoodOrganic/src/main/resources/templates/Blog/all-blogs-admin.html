@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Doctris - Doctor Appointment Booking System</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+	<meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+	<meta name="author" content="Shreethemes" />
+	<meta name="email" content="support@shreethemes.in" />
+	<meta name="website" content="../../../index.html" />
+	<meta name="Version" content="v1.2.0" />
+	<!-- favicon -->
+	<link rel="shortcut icon" th:href="@{/static/assets/images/favicon.ico.png}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-..." crossorigin="anonymous" />
+
+	<!-- Bootstrap -->
+	<link th:href="@{/static/assets/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+	<!-- simplebar -->
+	<link th:href="@{/static/assets/css/simplebar.css}" rel="stylesheet" type="text/css" />
+	<!-- Icons -->
+	<link th:href="@{/static/assets/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/static/assets/css/remixicon.css}" rel="stylesheet" type="text/css" />
+	<link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+	<!-- Css -->
+	<link th:href="@{/static/assets/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<style>
+		.btn-delete-product {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Loader -->
+	<div id="preloader">
+		<div id="status">
+			<div class="spinner">
+				<div class="double-bounce1"></div>
+				<div class="double-bounce2"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Loader -->
+
+	<div class="page-wrapper doctris-theme toggled">
+		<nav id="sidebar" class="sidebar-wrapper">
+			<div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+				<div class="sidebar-brand">
+					<a href="index.html">
+						<img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+						<img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+					</a>
+				</div>
+
+				<ul class="sidebar-menu pt-3">
+					<li><a href="/admin/dashboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a>
+					</li>
+					<li><a href="appointment.html"><i
+								class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
+
+
+					<li class="sidebar-dropdown">
+						<a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Product
+							Manager</a>
+						<div class="sidebar-submenu">
+							<ul>
+								<li><a href="/admin/all-product">All Product</a></li>
+								<li><a href="/admin/add-product">Add Product</a></li>
+								<li><a href="patient-profile.html">Profile</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="sidebar-dropdown">
+						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
+						<div class="sidebar-submenu">
+							<ul>
+								<li><a th:href="@{/admin/order-processing}">Order Processing</a></li>
+								<li><a th:href="@{/admin/order-canceled}">Order Canceled</a></li>
+								<li><a th:href="@{/admin/order-transported}">Order Transported</a></li>
+								<li><a th:href="@{/admin/order-completed}">Order Completed</a></li>
+								<li><a href="calendar.html">Calendar</a></li>
+							</ul>
+						</div>
+					</li>
+
+					<li class="sidebar-dropdown">
+						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
+						<div class="sidebar-submenu">
+							<ul>
+								<li><a href="chat.html">Chat</a></li>
+								<li><a href="email.html">Email</a></li>
+								<li><a href="calendar.html">Calendar</a></li>
+							</ul>
+						</div>
+					</li>
+
+
+
+					<li class="sidebar-dropdown">
+						<a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+						<div class="sidebar-submenu">
+							<ul>
+								<li><a href="/admin/blogs">Blogs</a></li>
+
+							</ul>
+						</div>
+					</li>
+
+					<li><a href="components.html"><i class="uil uil-cube me-2 d-inline-block"></i>Components</a></li>
+
+					<li><a href="../landing/index-two.html" target="_blank"><i
+								class="uil uil-window me-2 d-inline-block"></i>Landing page</a></li>
+					<!-- sidebar-content  -->
+					<ul class="sidebar-footer list-unstyled mb-0">
+						<li class="list-inline-item mb-0 ms-1">
+							<a href="#" class="btn btn-icon btn-pills btn-soft-primary">
+								<i class="uil uil-comment icons"></i>
+							</a>
+						</li>
+					</ul>
+		</nav>
+		<!-- sidebar-wrapper  -->
+
+		<!-- Start Page Content -->
+		<main class="page-content bg-light">
+			<div class="top-header">
+				<div class="header-bar d-flex justify-content-between border-bottom">
+					<div class="d-flex align-items-center">
+						<a href="#" class="logo-icon">
+							<img th:src="@{/static/assets/images/logo-2.png}" height="30" class="small" alt="">
+							<span class="big">
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode"
+									alt="">
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode"
+									alt="">
+							</span>
+						</a>
+						<a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+							<i class="uil uil-bars"></i>
+						</a>
+						<div class="search-bar p-0 d-none d-lg-block ms-2">
+							<div id="search" class="menu-search mb-0">
+								<form role="search" method="get" id="searchform" class="searchform">
+									<div>
+										<input type="text" class="form-control border rounded-pill" name="s" id="s"
+											placeholder="Search Keywords...">
+										<input type="submit" id="searchsubmit" value="Search">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<ul class="list-unstyled mb-0">
+						<li class="list-inline-item mb-0">
+							<div class="dropdown dropdown-primary">
+								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+										src="../assets/images/language/american.png"
+										class="avatar avatar-ex-small rounded-circle p-2" alt=""></button>
+								<div class="dropdown-menu dd-menu drop-ups dropdown-menu-end bg-white shadow border-0 mt-3 p-2"
+									data-simplebar style="height: 175px;">
+
+									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
+										<img src="../assets/images/language/russian.png"
+											class="avatar avatar-client rounded-circle shadow" alt="">
+										<div class="flex-1 text-left ms-2 overflow-hidden">
+											<small class="text-dark mb-0">Russian</small>
+										</div>
+									</a>
+								</div>
+							</div>
+						</li>
+
+						<li class="list-inline-item mb-0 ms-1">
+							<a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+								aria-controls="offcanvasRight">
+								<div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings"
+										class="fea icon-sm"></i></div>
+							</a>
+						</li>
+
+						<li class="list-inline-item mb-0 ms-1">
+							<div class="dropdown dropdown-primary">
+								<button type="button"
+									class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0"
+									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+										data-feather="mail" class="fea icon-sm"></i></button>
+								<span
+									class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4
+									<span class="visually-hidden">unread mail</span></span>
+
+								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2"
+									data-simplebar style="height: 320px; width: 300px;">
+									<a href="#" class="d-flex align-items-center justify-content-between py-2">
+										<div class="d-inline-flex position-relative overflow-hidden">
+											<img th:src="@{/static/assets/images/client/02.jpg}"
+												class="avatar avatar-md-sm rounded-circle shadow" alt="">
+											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
+												email from <b>Janalia</b> <small
+													class="text-muted fw-normal d-inline-block">1 hour
+													ago</small></small>
+										</div>
+									</a>
+
+								</div>
+							</div>
+						</li>
+
+						<li class="list-inline-item mb-0 ms-1">
+							<div class="dropdown dropdown-primary">
+								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+										th:src="@{/static/assets/images/doctors/01.jpg}"
+										class="avatar avatar-ex-small rounded-circle" alt=""></button>
+								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+									style="min-width: 200px;">
+									<a class="dropdown-item d-flex align-items-center text-dark"
+										href="https://shreethemes.in/doctris/layouts/admin/profile.html">
+										<img th:src="@{/static/assets/images/doctors/01.jpg}"
+											class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+										<div class="flex-1 ms-2">
+											<span class="d-block mb-1">Calvin Carlo</span>
+											<small class="text-muted">Orthopedic</small>
+										</div>
+									</a>
+									<a class="dropdown-item text-dark" href="index.html"><span
+											class="mb-0 d-inline-block me-1"><i
+												class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+									<a class="dropdown-item text-dark" href="dr-profile.html"><span
+											class="mb-0 d-inline-block me-1"><i
+												class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+									<div class="dropdown-divider border-top"></div>
+									<a class="dropdown-item text-dark" href="lock-screen.html"><span
+											class="mb-0 d-inline-block me-1"><i
+												class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<div class="layout-specing">
+					<div class="d-md-flex justify-content-between">
+						<div>
+							<h5 class="mb-0">Blogs</h5>
+
+							<nav aria-label="breadcrumb" class="d-inline-block mt-1">
+								<ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
+									<li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Blogs</li>
+								</ul>
+							</nav>
+						</div>
+
+						<div class="mt-4 mt-sm-0">
+							<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add
+								Blog</a>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4" th:each="b : ${listB}">
+							
+							<div class="card blog blog-primary border-0 shadow rounded overflow-hidden"
+								style="height: 470px;" onmouseover="showIcon(this)" onmouseout="hideIcon(this)">
+								<a th:href="@{'/admin/delete_blogs/' + ${b.id}}" class="btn btn-icon btn-pills btn-soft-danger btn-delete-product active fadeUp"
+								style="display: none;position: absolute;
+			                    top: 5%; left: 90% ;transform: translate(-50%, -50%); "><i
+								class="uil uil-times"></i></a>
+								<a class="btn btn-icon btn-pills btn-soft-success btn-edit-product active fadeUp"
+								data-bs-toggle="modal" data-bs-target="#edit_avatar" style="display: none;position: absolute;
+			                    top: 14%; left: 90% ;transform: translate(-50%, -50%); "><i
+								class="uil uil-pen"></i></a>
+								<img th:src="@{${b.image}}" id="image_blog" class="img-fluid mx-auto me-2 mb-0" alt=""
+									style=" max-width: auto;height: 200px;width: 100%;max-height: auto;" >
+									
+								
+
+								<div class="card-body p-4">
+									<ul class="list-unstyled mb-2">
+										<i class="uil uil-calendar-alt text-dark h6 me-1"></i>
+										<li class="list-inline-item text-muted small me-3"
+											th:utext="${#dates.format(b.createdDate, 'dd-MM-yyyy')}">20th November, 2020
+										</li>
+										<li class="list-inline-item text-muted small"><i
+												class="uil uil-clock text-dark h6 me-1"></i>Vĩnh viễn</li>
+									</ul>
+									<a th:href="@{'/admin/blogs-detail/' + ${b.id}}" class="text-dark title h5"
+										id="limitedText" th:text="${b.title}"></a>
+									<div class="post-meta d-flex justify-content-between mt-3">
+										<ul class="list-unstyled mb-0">
+											<li class="list-inline-item me-2 mb-0"><a href="#"
+													class="text-muted like"><i
+														class="mdi mdi-heart-outline me-1"></i>33</a></li>
+											<li class="list-inline-item"><a href="#" class="text-muted comments"><i
+														class="mdi mdi-comment-outline me-1"></i>08</a></li>
+										</ul>
+										<a th:href="@{'/admin/blogs-detail/' + ${b.id}}" class="link">Read More</a>
+									</div>
+								</div>
+							</div>
+						</div><!--end col-->
+
+					</div><!--end row-->
+
+					<div class="row">
+						<div class="col-12 mt-4">
+							<ul class="pagination justify-content-end mb-0 list-unstyled">
+								<li class="page-item"><a class="page-link" href="javascript:void(0)"
+										aria-label="Previous">Prev</a></li>
+								<li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)"
+										aria-label="Next">Next</a></li>
+							</ul><!--end pagination-->
+						</div><!--end col-->
+					</div><!--end row-->
+				</div>
+			</div><!--end container-->
+
+			<!-- Footer Start -->
+			<footer class="bg-white shadow py-3">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col">
+							<div class="text-sm-start text-center">
+								<p class="mb-0 text-muted">
+									<script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i
+										class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html"
+										target="_blank" class="text-reset">Shreethemes</a>.
+								</p>
+							</div>
+						</div><!--end col-->
+					</div><!--end row-->
+				</div><!--end container-->
+			</footer><!--end footer-->
+			<!-- End -->
+		</main>
+		<!--End page-content" -->
+	</div>
+	<!-- page-wrapper -->
+
+	<!-- Start Modal -->
+	<div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header border-bottom p-3">
+					<h5 class="modal-title" id="exampleModalLabel">Add Blog</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body p-3 pt-4">
+					<form th:action="@{/admin/add_blogs}" method="post" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="d-grid">
+									<p class="text-muted">Upload your blog image here, Please click "Upload Image"
+										Button.</p>
+									<div
+										class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
+									</div>
+									<input type="file" id="input-file" name="input-file" accept="image/*"
+										onchange={handleChange()} hidden />
+									<label class="btn-upload btn btn-primary mt-4" for="input-file">Upload Image</label>
+								</div>
+							</div><!--end col-->
+							<div class="col-md-8 mt-4 mt-sm-0">
+								<div class="ms-md-4">
+
+									<div class="row">
+										<div class="col-12">
+											<div class="mb-3">
+												<label class="form-label">Blog Title <span
+														class="text-danger">*</span></label>
+												<input name="title" id="title" type="text" required
+													class="form-control">
+											</div>
+										</div><!--end col-->
+
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label"> Date : </label>
+												<input name="date" required type="date" class="form-control" id="date"
+													value="">
+											</div>
+										</div><!--end col-->
+
+
+										<div class="col-md-6">
+											<div class="mb-3">
+												<label class="form-label">Tags</label>
+												<input name="tags" required type="text" class="form-control" id="tags"
+													value="" placeholder="Healthy,Beautiful,...">
+											</div>
+										</div><!--end col-->
+
+										<div class="col-lg-12">
+											<div class="mb-3">
+												<label class="form-label">Description <span
+														class="text-danger">*</span></label>
+												<textarea name="content" id="content" rows="4"
+													class="form-control"></textarea>
+											</div>
+										</div><!--end col-->
+
+										<div class="col-lg-12 text-end">
+											<button type="submit" class="btn btn-primary">Add Blog</button>
+										</div><!--end col-->
+									</div>
+					</form>
+				</div>
+			</div><!--end col-->
+		</div><!--end row-->
+	</div>
+	</div>
+	</div>
+	</div>
+	<!-- End modal -->
+
+	<script th:src="@{/static/assets/js/bootstrap.bundle.min.js}"></script>
+	<!-- simplebar -->
+	<script th:src="@{/static/assets/js/simplebar.min.js}"></script>
+	<!-- Icons -->
+	<!-- Icons -->
+	<script th:src="@{/static/assets/js/feather.min.js}"></script>
+	<!-- Main Js -->
+	<script th:src="@{/static/assets/js/app.js}"></script>
+
+	<script>
+		const handleChange = () => {
+			const fileUploader = document.querySelector('#input-file');
+			const getFile = fileUploader.files
+			if (getFile.length !== 0) {
+				const uploadedFile = getFile[0];
+				readFile(uploadedFile);
+			}
+		}
+
+		const readFile = (uploadedFile) => {
+			if (uploadedFile) {
+				const reader = new FileReader();
+				reader.onload = () => {
+					const parent = document.querySelector('.preview-box');
+					const img = new Image();
+
+					img.onload = () => {
+						// Kiểm tra kích thước của ảnh
+						const maxWidth = 180; // Đặt kích thước tối đa mong muốn
+						const maxHeight = 300;
+
+						let width = img.width;
+						let height = img.height;
+
+						// Điều chỉnh kích thước nếu nó vượt quá kích thước tối đa
+						if (width > maxWidth || height > maxHeight) {
+							const ratio = Math.min(maxWidth / width, maxHeight / height);
+							width *= ratio;
+							height *= ratio;
+						}
+
+						parent.innerHTML = `<img class="preview-content" src=${reader.result} width=${width} height=${height} />`;
+					};
+
+					img.src = reader.result;
+				};
+
+				reader.readAsDataURL(uploadedFile);
+			}
+		};
+	</script>
+	<script>
+		var maxLength = 35;
+		var elements = document.querySelectorAll('#limitedText');
+
+		elements.forEach(function (element) {
+			if (element.textContent.length > maxLength) {
+				element.textContent = element.textContent.substring(0, maxLength) + '...';
+			}
+
+		});
+	</script>
+	<script>
+    function showIcon(element) {
+        // Hiển thị phần tử chứa biểu tượng khi con trỏ chuột vào
+        const iconContainer = element.querySelector('.btn-delete-product');
+         const iconContainer1 = element.querySelector('.btn-edit-product');
+        iconContainer.style.display = 'block';
+         iconContainer1.style.display = 'block';
+    }
+
+    function hideIcon(element) {
+        // Ẩn phần tử chứa biểu tượng khi con trỏ chuột ra
+        const iconContainer = element.querySelector('.btn-delete-product');
+        const iconContainer1 = element.querySelector('.btn-edit-product');
+        iconContainer.style.display = 'none';
+        iconContainer1.style.display = 'none';
+    }
+</script>
+</body>
+
+</html>

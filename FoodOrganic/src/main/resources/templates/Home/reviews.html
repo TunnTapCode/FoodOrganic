@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Foody - Organic Food Website Template</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+
+	<!-- Favicon -->
+	<link th:href="@{/static/img/favicon.ico}" rel="icon">
+
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+		rel="stylesheet">
+
+	<!-- Icon Font Stylesheet -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link th:href="@{/static/lib/animate/animate.min.css}" rel="stylesheet">
+	<link th:href="@{/static/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/static/demo/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Template Stylesheet -->
+	<link th:href="@{/static/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Spinner Start -->
+	<div id="spinner"
+		class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+		<div class="spinner-border text-primary" role="status"></div>
+	</div>
+	<!-- Spinner End -->
+
+
+	<!-- Navbar Start -->
+	<div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+		<div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+			<div class="col-lg-6 px-5 text-start">
+				<small><i class="fa fa-map-marker-alt me-2"></i>Mê Linh ,Hà Nội</small>
+				<small class="ms-4"><i class="fa fa-envelope me-2"></i>tuannqhe160900@fpt.edu.vn</small>
+			</div>
+			<div class="col-lg-6 px-5 text-end">
+				<small>Follow us:</small>
+				<a class="text-body ms-3" href="https://www.facebook.com/nq.tunn25"><i
+						class="fab fa-facebook-f"></i></a>
+				<a class="text-body ms-3" href="https://www.instagram.com/nq.tunn"><i class="fab fa-instagram"></i></a>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+			<a href="/home" class="navbar-brand ms-4 ms-lg-0">
+				<h1 class="fw-bold text-primary m-0">F<span class="text-secondary">oo</span>dy</h1>
+			</a>
+			<button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+				data-bs-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-nav ms-auto p-4 p-lg-0">
+					<a th:href="@{/home}" class="nav-item nav-link active">Home</a>
+					<a href="/product" class="nav-item nav-link">Products</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+						<div class="dropdown-menu m-0">
+							<a href="blog.html" class="dropdown-item">Blog Grid</a>
+							<a href="/review" class="dropdown-item">Reviews</a>
+							<a href="about.html" class="dropdown-item">About Us</a>
+						</div>
+					</div>
+
+
+					
+				</div>
+				<div class="d-none d-lg-flex ms-2">
+					<a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+						<small class="fa fa-search text-body"></small>
+					</a>
+					<div class="nav-item dropdown">
+						<a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+							<small class="fa fa-user text-body"></small>
+						</a>
+						<div class="dropdown-menu m-0">
+							<a href="/profile" class="dropdown-item">Thông tin cá nhân</a>
+							<a href="/my-order" class="dropdown-item">Đơn hàng</a>
+							<a th:if="${auth != null}" th:href="@{/logout}" class="dropdown-item">Logout</a>
+							<a th:if="${auth == null}" th:href="@{/login}" class="dropdown-item">Login</a>
+
+						</div>
+					</div>
+
+					<a href="/cart" class="position-relative bg-white  ms-3 "
+						style="height: 31px; text-align: center;border-radius: 50%;width: 31px;padding-top: 1px;">
+						<small class="fa fa-shopping-bag text-body"></small>
+						<span
+							class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+							style="top: -5px; left: 15px; height: 15px; min-width: 15px;" th:if="${count == null}"
+							th:text="'0'"></span>
+						<span
+							class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark"
+							style="top: -5px; left: 15px; height: 15px; min-width: 15px;" th:if="${count != null}"
+							th:text="${count}"></span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!-- Navbar End -->
+	
+	
+
+
+
+	<!-- Page Header Start -->
+	<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+		<div class="container">
+			<h1 class="display-3 mb-3 animated slideInDown">Shop Reviews</h1>
+			<nav aria-label="breadcrumb animated slideInDown">
+				<ol class="breadcrumb mb-0">
+					<li class="breadcrumb-item"><a class="text-body" href="#">Home</a></li>
+					<li class="breadcrumb-item"><a class="text-body" href="#">Pages</a></li>
+					<li class="breadcrumb-item text-dark active" aria-current="page">Review</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!-- Page Header End -->
+	<!-- Testimonial Start -->
+	<div class="container-fluid bg-light bg-icon py-6 mb-5">
+		<div class="container">
+			<div class="section-header text-center mx-auto mb-5 wow " data-wow-delay="0.1s"
+				style="max-width: 500px;">
+				<h1 class="display-5 mb-3">Shop Review</h1>
+				<p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+			</div>
+			<div class="owl-carousel testimonial-carousel wow " >
+				<div class="testimonial-item position-relative bg-white p-5 mt-4" th:each="r : ${list5}" style="height: 250px;">
+					<i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
+					<p id="limitedText" class="mb-4" th:text="${r.comment}"></p>
+					<div class="d-flex align-items-center">
+						<img class="flex-shrink-0 rounded-circle" th:src="${r.user.image_Avt.url}" alt="" style="margin-top: auto;">
+						<div class="ms-3">
+							<h5 class="mb-1" th:text="${r.user.username}">Client Name</h5>
+							<div class="d-flex mb-3" id="star-container" >
+									<div th:each="i : ${#numbers.sequence(1, 5)}">
+										<i th:class="${i le r.star} ? 'fa fa-star text-secondary' : 'fa fa-star '"></i>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<!-- Testimonial End -->
+	<div class="row">
+		<div class="col-lg-1 col-md-1">
+			<p></p>
+		</div>
+		<div class="col-lg-10 col-md-10">
+			<nav>
+				<div class="nav nav-tabs mb-3">
+
+					<button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+						id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+						aria-controls="nav-mission" aria-selected="true"
+						style="font-size: 35px; color: black;">Reviews</button>
+				</div>
+			</nav>
+			<div class="tab-content mb-5">
+
+				<div class="tab-pane active" >
+
+					<div class="d-flex" th:each="r : ${all}">
+						<img th:src="${r.user.image_Avt.url}" class="img-fluid rounded-circle p-3"
+							style="width: 100px; height: 100px;" alt="">
+						<div class="">
+							<div class="d-flex ">
+								<h5 th:text="${r.user.username}"></h5>
+							</div>
+							<div class="d-flex mb-3" id="star-container" >
+									<div th:each="i : ${#numbers.sequence(1, 5)}">
+										<i th:class="${i le r.star} ? 'fa fa-star text-secondary' : 'fa fa-star '"></i>
+									</div>
+							</div>
+							<p class="mb-2" style="font-size: 14px;" th:text="${r.review_date}"></p>
+
+							<p id="limitedText" class="text-dark" th:text="${r.comment}"></p>
+
+
+						</div>
+						
+					</div>
+					
+				</div>
+
+			</div>
+			<div th:if="${size != null || size == 0}">
+				<form th:action="@{/comment}" method="post" onsubmit="return validateForm()">
+					<div class="row g-4">
+						<div class="col-lg-12">
+							<div class="border-bottom rounded my-4">
+								<textarea name="comment" id="comment" class="form-control border-1" cols="30" rows="8"
+									placeholder="Đánh giá của bạn *" spellcheck="false"></textarea>
+							</div>
+						</div>
+						<input type="hidden" id="star" name="star" />
+
+						<div class="col-lg-12">
+							<div class="d-flex justify-content-between py-3 mb-5">
+								<div class="d-flex align-items-center" style="font-size: 20px;">
+									<p class="mb-0 me-2" style="font-size: 25px;color: black;">Đánh giá :</p>
+									<div class="d-flex mb-0" id="star-container">
+										<div th:each="i : ${#numbers.sequence(1, 5)}">
+											<i class="fa fa-star" th:id="'star-' + ${i}"
+												th:onclick="'rate(' + ${i} + ')'"></i>
+										</div>
+									</div>
+								</div>
+
+								<button type="submit"
+									class="btn border border-secondary text-primary rounded-pill px-4 py-3">
+									Bình luận</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-lg-1 col-md-1">
+			<p></p>
+		</div>
+
+	</div>
+
+
+
+
+
+	<!-- Footer Start -->
+	<div class="container-fluid bg-dark footer pt-5 wow fadeIn" data-wow-delay="0.1s">
+		<div class="container py-5">
+			<div class="row g-5">
+				<div class="col-lg-3 col-md-6">
+					<h1 class="fw-bold text-primary mb-4">F<span class="text-secondary">oo</span>dy</h1>
+					<p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
+						stet lorem sit clita</p>
+					<div class="d-flex pt-2">
+						<a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+								class="fab fa-twitter"></i></a>
+						<a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+								class="fab fa-facebook-f"></i></a>
+						<a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+								class="fab fa-youtube"></i></a>
+						<a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+								class="fab fa-linkedin-in"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<h4 class="text-light mb-4">Address</h4>
+					<p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+					<p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+					<p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<h4 class="text-light mb-4">Quick Links</h4>
+					<a class="btn btn-link" href="">About Us</a>
+					<a class="btn btn-link" href="">Contact Us</a>
+					<a class="btn btn-link" href="">Our Services</a>
+					<a class="btn btn-link" href="">Terms & Condition</a>
+					<a class="btn btn-link" href="">Support</a>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<h4 class="text-light mb-4">Newsletter</h4>
+					<p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+					<div class="position-relative mx-auto" style="max-width: 400px;">
+						<input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+							placeholder="Your email">
+						<button type="button"
+							class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+						&copy; <a href="#">Your Site Name</a>, All Right Reserved.
+					</div>
+					<div class="col-md-6 text-center text-md-end">
+						<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+						Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+						<br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer End -->
+
+
+	<!-- Back to Top -->
+	<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+			class="bi bi-arrow-up"></i></a>
+
+	<script>
+		function rate(starCount) {
+			// Đặt giá trị cho ô input ẩn
+			document.getElementById('star').value = starCount;
+
+			// Hiển thị số sao được chọn
+			for (var i = 1; i <= 5; i++) {
+				var starElement = document.getElementById('star-' + i);
+				if (i <= starCount) {
+					starElement.classList.add('text-secondary');
+				} else {
+					starElement.classList.remove('text-secondary');
+				}
+			}
+		}
+		function validateForm() {
+			// Kiểm tra xem người dùng đã chọn số sao chưa
+			var selectedStar = document.getElementById('star').value;
+			var comment = document.getElementById('comment').textContent;
+			if (selectedStar === "") {
+				alert("Vui lòng đánh giá sao");
+				return false; // Ngăn form được gửi đi
+
+			} else {
+				return true; // Cho phép form được gửi đi
+			}
+
+
+		}
+	</script>
+	<script>
+        var maxLength = 129;
+        var elements = document.querySelectorAll('#limitedText');
+
+        elements.forEach(function(element) {
+            if (element.textContent.length > maxLength) {
+                element.textContent = element.textContent.substring(0, maxLength) + '...';
+            }
+           
+        });
+    </script>
+
+	<script>
+		// Hàm reload trang sau mỗi 1 phút (60000 milliseconds)
+		function autoReload() {
+			//location.reload();
+		}
+
+		// Đặt hàm autoReload để chạy sau mỗi 1 phút
+		//setTimeout(autoReload, 60000);
+	</script>
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/static/lib/wow/wow.min.js}"></script>
+	<script th:src="@{/static/lib/easing/easing.min.js}"></script>
+	<script th:src="@{/static/lib/waypoints/waypoints.min.js}"></script>
+	<script th:src="@{/static/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+	<!-- Template Javascript -->
+	<script th:src="@{/static/js/main.js}"></script>
+</body>
+
+</html>

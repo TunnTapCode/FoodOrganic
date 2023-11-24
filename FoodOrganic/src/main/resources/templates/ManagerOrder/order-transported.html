@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8" />
@@ -12,21 +12,21 @@
 	<meta name="website" content="../../../index.html" />
 	<meta name="Version" content="v1.2.0" />
 	<!-- favicon -->
-	<link rel="shortcut icon" href="../assets/images/favicon.ico.png">
+	<link rel="shortcut icon" th:href="@{/static/assets/images/favicon.ico.png}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha512-..." crossorigin="anonymous" />
+
 	<!-- Bootstrap -->
 	<link th:href="@{/static/assets/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
 	<!-- simplebar -->
 	<link th:href="@{/static/assets/css/simplebar.css}" rel="stylesheet" type="text/css" />
-	<!-- Select2 -->
-	<link th:href="@{/static/assets/css/select2.min.css}" rel="stylesheet" />
-	<!-- Date picker -->
-	<link rel="stylesheet" th:href="@{/static/assets/css/flatpickr.min.css}">
 	<!-- Icons -->
 	<link th:href="@{/static/assets/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
 	<link th:href="@{/static/assets/css/remixicon.css}" rel="stylesheet" type="text/css" />
 	<link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
 	<!-- Css -->
 	<link th:href="@{/static/assets/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
+
 
 </head>
 
@@ -47,50 +47,44 @@
 			<div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
 				<div class="sidebar-brand">
 					<a href="index.html">
-						<img th:src="@{/static/assets/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
-						<img th:src="@{/static/assets/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode" alt=""
+							style="height: 55px;margin-left: 50px;">
+						<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode" alt=""
+							style="height: 55px;margin-left: 50px;">
 					</a>
 				</div>
 
 				<ul class="sidebar-menu pt-3">
-					<li><a href="/admin/dashboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+					<li><a href="/admin/dashboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a>
+					</li>
 					<li><a href="appointment.html"><i
 								class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
 
-					<li class="sidebar-dropdown">
-						<a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
-						<div class="sidebar-submenu">
-							<ul>
-								<li><a href="doctors.html">Doctors</a></li>
-								<li><a href="add-doctor.html">Add Doctor</a></li>
-								<li><a href="dr-profile.html">Profile</a></li>
-							</ul>
-						</div>
-					</li>
 
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Product
 							Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a href="patients.html">All Product </a></li>
+								<li><a href="/admin/all-product">All Product</a></li>
 								<li><a href="/admin/add-product">Add Product</a></li>
 								<li><a href="patient-profile.html">Profile</a></li>
 							</ul>
 						</div>
 					</li>
-					<li class="sidebar-dropdown">
+						<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a th:href="/admin/order-processing/?status=processing">Order Processing</a></li>
-								<li><a th:href="/admin/order-processing/?status=canceled">Order Canceled</a></li>
-								<li><a th:href="/admin/order-processing/?status=transported">Order Transported</a></li>
-								<li><a href="email.html">Email</a></li>
-								<li><a href="calendar.html">Calendar</a></li>
-							</ul>
+                                <li ><a th:href="@{/admin/order-processing}">Order Processing</a></li>
+                                <li ><a th:href="@{/admin/order-canceled}">Order Canceled</a></li>
+                                 <li ><a th:href="@{/admin/order-transported}">Order Transported</a></li>
+                                 <li ><a th:href="@{/admin/order-completed}">Order Completed</a></li>
+                                
+                            </ul>
 						</div>
 					</li>
+
 
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
@@ -103,18 +97,6 @@
 						</div>
 					</li>
 
-					<li class="sidebar-dropdown">
-						<a href="javascript:void(0)"><i
-								class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
-						<div class="sidebar-submenu">
-							<ul>
-								<li><a href="shop.html">Shop</a></li>
-								<li><a href="product-detail.html">Shop Detail</a></li>
-								<li><a href="shopcart.html">Shopcart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-							</ul>
-						</div>
-					</li>
 
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
@@ -147,8 +129,8 @@
 								class="uil uil-sign-in-alt me-2 d-inline-block"></i>Authentication</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a href="/login">Login</a></li>
-								<li><a href="/signup">Signup</a></li>
+								<li><a href="login.html">Login</a></li>
+								<li><a href="signup.html">Signup</a></li>
 								<li><a href="forgot-password.html">Forgot Password</a></li>
 								<li><a href="lock-screen.html">Lock Screen</a></li>
 								<li><a href="thankyou.html">Thank you...!</a></li>
@@ -180,10 +162,12 @@
 				<div class="header-bar d-flex justify-content-between border-bottom">
 					<div class="d-flex align-items-center">
 						<a href="#" class="logo-icon">
-							<img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
+							<img th:src="@{/static/assets/images/logo-2.png}" height="30" class="small" alt="">
 							<span class="big">
-								<img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-								<img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-light-mode"
+									alt="">
+								<img th:src="@{/static/assets/images/logo-2.png}" height="24" class="logo-dark-mode"
+									alt="">
 							</span>
 						</a>
 						<a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -207,49 +191,18 @@
 							<div class="dropdown dropdown-primary">
 								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
 									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										src="../assets/images/language/american.png"
+										th:src="@{/static/assets/images/language/american.png}"
 										class="avatar avatar-ex-small rounded-circle p-2" alt=""></button>
 								<div class="dropdown-menu dd-menu drop-ups dropdown-menu-end bg-white shadow border-0 mt-3 p-2"
 									data-simplebar style="height: 175px;">
 									<a href="javascript:void(0)" class="d-flex align-items-center">
-										<img src="../assets/images/language/chinese.png"
+										<img th:src="@{/static/assets/images/language/chinese.png}"
 											class="avatar avatar-client rounded-circle shadow" alt="">
 										<div class="flex-1 text-left ms-2 overflow-hidden">
 											<small class="text-dark mb-0">Chinese</small>
 										</div>
 									</a>
 
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/european.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">European</small>
-										</div>
-									</a>
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/indian.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Indian</small>
-										</div>
-									</a>
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/japanese.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Japanese</small>
-										</div>
-									</a>
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/russian.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Russian</small>
-										</div>
-									</a>
 								</div>
 							</div>
 						</li>
@@ -276,7 +229,7 @@
 									data-simplebar style="height: 320px; width: 300px;">
 									<a href="#" class="d-flex align-items-center justify-content-between py-2">
 										<div class="d-inline-flex position-relative overflow-hidden">
-											<img src="../assets/images/client/02.jpg"
+											<img th:src="@{/static/assets/images/client/02.jpg}"
 												class="avatar avatar-md-sm rounded-circle shadow" alt="">
 											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
 												email from <b>Janalia</b> <small
@@ -288,7 +241,7 @@
 									<a href="#"
 										class="d-flex align-items-center justify-content-between py-2 border-top">
 										<div class="d-inline-flex position-relative overflow-hidden">
-											<img src="../assets/images/client/Codepen.svg"
+											<img th:src="@{/static/assets/images/client/Codepen.svg}"
 												class="avatar avatar-md-sm rounded-circle shadow" alt="">
 											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
 												email from <b>codepen</b> <small
@@ -300,7 +253,7 @@
 									<a href="#"
 										class="d-flex align-items-center justify-content-between py-2 border-top">
 										<div class="d-inline-flex position-relative overflow-hidden">
-											<img src="../assets/images/client/03.jpg"
+											<img th:src="@{/static/assets/images/client/03.jpg}"
 												class="avatar avatar-md-sm rounded-circle shadow" alt="">
 											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
 												email from <b>Cristina</b> <small
@@ -312,7 +265,7 @@
 									<a href="#"
 										class="d-flex align-items-center justify-content-between py-2 border-top">
 										<div class="d-inline-flex position-relative overflow-hidden">
-											<img src="../assets/images/client/dribbble.svg"
+											<img th:src="@{/static/assets/images/client/dribbble.svg}"
 												class="avatar avatar-md-sm rounded-circle shadow" alt="">
 											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
 												email from <b>Dribbble</b> <small
@@ -324,7 +277,7 @@
 									<a href="#"
 										class="d-flex align-items-center justify-content-between py-2 border-top">
 										<div class="d-inline-flex position-relative overflow-hidden">
-											<img src="../assets/images/client/06.jpg"
+											<img th:src="@{/static/assets/images/client/06.jpg}"
 												class="avatar avatar-md-sm rounded-circle shadow" alt="">
 											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
 												email from <b>Donald Aghori</b> <small
@@ -336,7 +289,7 @@
 									<a href="#"
 										class="d-flex align-items-center justify-content-between py-2 border-top">
 										<div class="d-inline-flex position-relative overflow-hidden">
-											<img src="../assets/images/client/07.jpg"
+											<img th:src="@{/static/assets/images/client/07.jpg}"
 												class="avatar avatar-md-sm rounded-circle shadow" alt="">
 											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
 												email from <b>Calvin</b> <small
@@ -352,13 +305,13 @@
 							<div class="dropdown dropdown-primary">
 								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
 									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										src="../assets/images/doctors/01.jpg"
+										th:src="@{/static/assets/images/doctors/01.jpg}"
 										class="avatar avatar-ex-small rounded-circle" alt=""></button>
 								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
 									style="min-width: 200px;">
 									<a class="dropdown-item d-flex align-items-center text-dark"
 										href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-										<img src="../assets/images/doctors/01.jpg"
+										<img th:src="@{/static/assets/images/doctors/01.jpg}"
 											class="avatar avatar-md-sm rounded-circle border shadow" alt="">
 										<div class="flex-1 ms-2">
 											<span class="d-block mb-1">Calvin Carlo</span>
@@ -385,96 +338,109 @@
 			<div class="container-fluid">
 				<div class="layout-specing">
 					<div class="d-md-flex justify-content-between">
-						<h5 class="mb-0">Add New Product</h5>
+						<h5 class="mb-0">Order List</h5>
 
 						<nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
 							<ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-
-								<li class="breadcrumb-item"><a href="patients.html">Product Manager</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Add Product</li>
+								<li class="breadcrumb-item">Order Manager</li>
+								<li class="breadcrumb-item active" aria-current="page">Order Processing</li>
+								
 							</ul>
 						</nav>
 					</div>
 
 					<div class="row">
-						<div class="col-lg-12 mt-4">
-							<div class="card border-0 p-4 rounded shadow">
-								<div th:if="${msg != null}" class="alert alert-success">
-									<h4 th:text="${msg}" style="text-align: center;"></h4>
-								</div>
-								<div th:if="${msg1 != null}" class="alert alert-danger">
-									<h4 th:text="'Thêm sản phẩm thất bại .'" style="text-align: center;"></h4>
-								</div>
-								<form class="mt-4" th:action="@{/admin/update-product}" method="post"
-									th:object="${p}">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="mb-3">
-												<label class="form-label">Tên sản phẩm</label>
-												<input name="name" id="name" th:field="*{name}" type="text"
-													class="form-control">
-											</div>
-										</div><!-- -->
+						<div class="col-12 mt-4">
+							<div class="table-responsive shadow rounded">
+								<table class="table table-center bg-white mb-0">
+									<thead>
+										<tr>
+											<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+											<th class="border-bottom p-3">Username</th>
+											<th class="border-bottom p-3" style="min-width: 180px;">Order Date</th>
+											<th class="border-bottom p-3">Total</th>
+											<th class="border-bottom p-3">Status</th>
+											<th class="border-bottom p-3" style="min-width: 100px;"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="o : ${listO}">
+											<th class="p-3" th:text="${o.order_id}"></th>
+											<td class="p-3" th:text="${o.user.username}"></td>
 
-										<div class="col-md-6">
-											<div class="mb-3">
-												<label class="form-label">Mô tả</label>
-												<input name="description" th:field="*{description}" id="description"
-													type="text" class="form-control">
-											</div>
-										</div><!--end col-->
+											<td class="py-3" th:text="${o.getOrderDate()}">
 
-										<div class="col-md-6">
-											<div class="mb-3">
-												<label class="form-label">Giá</label>
-												<input name="price" th:field="*{price}" id="price" type="text"
-													class="form-control">
-											</div>
-										</div><!--end col-->
-
-										<div class="col-md-6">
-											<div class="mb-3">
-												<label class="form-label">Số lượng</label>
-												<input  th:field="*{quantity}"  type="text"
-													class="form-control">
-											</div>
-										</div><!--end col-->
-										<div class="col-md-6">
-											<div class="mb-3">
-												<label class="form-label">Url ảnh</label>
-												<input name="image" th:field="*{image}" type="text"
-													class="form-control">
-											</div>
-										</div><!--end col-->
+											</td>
+											<td class="p-3" th:text="${o.total_amount}"></td>
+											
+											<td class="p-3">
+												<a href="#"><span class="badge bg-soft-warning" th:if="${o.status == 'processing'}"
+														th:text="${o.status}">
+													</span>
+												</a>
+												<a href="#"><span class="badge bg-soft-success" th:if="${o.status == 'completed'}"
+														th:text="${o.status}">
+													</span>
+												</a>
+												<a href="#"><span class="badge bg-soft-danger" th:if="${o.status == 'canceled'}"
+														th:text="${o.status}">
+													</span>
+												</a>
+												<a href="#"><span class="badge bg-soft-primary" th:if="${o.status == 'transported'}"
+														th:text="${o.status}">
+													</span>
+												</a>
+												
+												
+											</td>
 
 
 
-										<div class="col-md-6">
-											<div class="mb-3">
-												<label class="form-label">Category</label>
-												<select class="form-control department-name select2input"
-													name="category">
-													<option th:each="c:${listC}" th:value="${c.id}" th:text="${c.name}">
-													</option>
+											<td class="text-end p-3">
+												<a th:href="'/admin/detail-order/' + ${o.order_id} " class="btn btn-icon btn-pills btn-soft-primary">	
+													<i class="uil uil-eye"></i>
+												</a>
 
-												</select>
-											</div>
-										</div><!--end col-->
-									</div><!--end row-->
+												<a class="btn btn-icon btn-pills btn-soft-success"
+													th:href="'/admin/update-status/' + ${o.order_id} + '?statusO=3' " ><i
+														class="uil uil-check"></i></a>
+												<a class="btn btn-icon btn-pills btn-soft-danger"
+												th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' " ><i
+														class="uil uil-times"></i></a>
+											</td>
+										</tr>
 
-									<button type="submit" class="btn btn-success">Add Product</button>
-								</form>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div><!--end row-->
+
+					<div class="row text-center">
+						<!-- PAGINATION START -->
+						<div class="col-12 mt-4">
+							<div class="d-md-flex align-items-center text-center justify-content-between">
+								<span class="text-muted me-3">Showing 1 - 10 out of 50</span>
+								<ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+									<li class="page-item"><a class="page-link" href="javascript:void(0)"
+											aria-label="Previous">Prev</a></li>
+									<li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+									<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+									<li class="page-item"><a class="page-link" href="javascript:void(0)"
+											aria-label="Next">Next</a></li>
+								</ul>
 							</div>
 						</div><!--end col-->
-
-
+						<!-- PAGINATION END -->
 					</div><!--end row-->
 				</div>
 			</div><!--end container-->
 
-			<!-- Footer Start -->
 
-			<!-- End -->
 		</main>
 		<!--End page-content" -->
 	</div>
@@ -485,8 +451,8 @@
 		aria-labelledby="offcanvasRightLabel">
 		<div class="offcanvas-header p-4 border-bottom">
 			<h5 id="offcanvasRightLabel" class="mb-0">
-				<img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
-				<img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+				<img th:src="@{/static/assets/images/logo-dark.png}" height="24" class="light-version" alt="">
+				<img th:src="@{/static/assets/images/logo-light.png}" height="24" class="dark-version" alt="">
 			</h5>
 			<button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
 				aria-label="Close"><i class="uil uil-times fs-4"></i></button>
@@ -500,36 +466,15 @@
 							<ul class="text-center list-unstyled mb-0">
 								<li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
 										onclick="setTheme('style-rtl')"><img
-											src="../assets/images/layouts/light-dash-rtl.png"
+											th:src="@{/static/assets/images/layouts/light-dash-rtl.png}"
 											class="img-fluid rounded-md shadow-md d-block" alt=""><span
 											class="text-muted mt-2 d-block">RTL Version</span></a></li>
 								<li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
-										onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+										onclick="setTheme('style')"><img
+											th:src="@{/static/assets/images/layouts/light-dash.png}"
 											class="img-fluid rounded-md shadow-md d-block" alt=""><span
 											class="text-muted mt-2 d-block">LTR Version</span></a></li>
-								<li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
-										onclick="setTheme('style-dark-rtl')"><img
-											src="../assets/images/layouts/dark-dash-rtl.png"
-											class="img-fluid rounded-md shadow-md d-block" alt=""><span
-											class="text-muted mt-2 d-block">RTL Version</span></a></li>
-								<li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
-										onclick="setTheme('style-dark')"><img
-											src="../assets/images/layouts/dark-dash.png"
-											class="img-fluid rounded-md shadow-md d-block" alt=""><span
-											class="text-muted mt-2 d-block">LTR Version</span></a></li>
-								<li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
-										onclick="setTheme('style-dark')"><img
-											src="../assets/images/layouts/dark-dash.png"
-											class="img-fluid rounded-md shadow-md d-block" alt=""><span
-											class="text-muted mt-2 d-block">Dark Version</span></a></li>
-								<li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
-										onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
-											class="img-fluid rounded-md shadow-md d-block" alt=""><span
-											class="text-muted mt-2 d-block">Light Version</span></a></li>
-								<li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
-											src="../assets/images/layouts/landing-light.png"
-											class="img-fluid rounded-md shadow-md d-block" alt=""><span
-											class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+
 							</ul>
 						</div>
 					</div>
@@ -559,125 +504,276 @@
 	</div>
 	<!-- Offcanvas End -->
 
-	<!-- View Appintment Start -->
-	<div class="modal fade" id="viewappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
+	<!-- Modal start -->
+	<!-- Profile Settings Start -->
+	<div class="modal fade" id="editproduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header border-bottom p-3">
-					<h5 class="modal-title" id="exampleModalLabel">Appointment Detail</h5>
+					<h5 class="modal-title" id="exampleModalLabel"> Edit Product </h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-3 pt-4">
-					<div class="d-flex align-items-center">
-						<img src="../assets/images/client/01.jpg" class="avatar avatar-small rounded-pill" alt="">
-						<h5 class="mb-0 ms-3">Howard Tanner</h5>
-					</div>
-					<ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
-						<li>
-							<ul class="list-unstyled mb-0">
-								<li class="d-flex">
-									<h6>Age:</h6>
-									<p class="text-muted ms-2">25 year old</p>
-								</li>
+					<div class="row align-items-center">
+						<div class="col-lg-2 col-md-4">
+							<img src="" id="imageproduct1" class="avatar avatar-small rounded-pill " alt="ảnh"
+								style="height: 220px;width: 235px;margin-left: 280px;">
 
-								<li class="d-flex">
-									<h6>Gender:</h6>
-									<p class="text-muted ms-2">Male</p>
-								</li>
+						</div>
+					</div><!--end row-->
+					<form class="mt-4" th:action="@{/admin/update}" method="post">
+						<div class="row">
+							<input name="id" id="modalProductId1" type="hidden" value="" class="form-control">
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Status</label>
+									<select class="form-control department1-name select2input" name="status">
+										<option>
+										</option>
+									</select>
+								</div>
+							</div>
 
-								<li class="d-flex">
-									<h6 class="mb-0">Department:</h6>
-									<p class="text-muted ms-2 mb-0">Cardiology</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<ul class="list-unstyled mb-0">
-								<li class="d-flex">
-									<h6>Date:</h6>
-									<p class="text-muted ms-2">20th Dec 2020</p>
-								</li>
 
-								<li class="d-flex">
-									<h6>Time:</h6>
-									<p class="text-muted ms-2">11:00 AM</p>
-								</li>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Name</label>
+									<input name="name" id="modalProductName1" type="text" value="" class="form-control">
+								</div>
+							</div>
 
-								<li class="d-flex">
-									<h6 class="mb-0">Doctor:</h6>
-									<p class="text-muted ms-2 mb-0">Dr. Calvin Carlo</p>
-								</li>
-							</ul>
-						</li>
-					</ul>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Price</label>
+									<input name="price" id="modalProductPrice1" type="text" value=""
+										class="form-control">
+								</div>
+							</div><!--end col-->
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Quantity</label>
+									<input name="quantity" id="modalProductQuantity1" type="text" value=""
+										class="form-control">
+
+								</div>
+							</div><!--end col-->
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Category</label>
+
+									<select class="form-control department-name select2input" name="category">
+										<option>
+										</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Image</label>
+									<input name="image" id="imageproduct2" type="text" value="" class="form-control">
+
+								</div>
+							</div><!--end col-->
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Description</label>
+									<textarea name="description" id="description1" type="text" value=""
+										class="form-control"></textarea>
+
+								</div>
+							</div><!--end col-->
+
+
+
+						</div><!--end row-->
+
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="submit" id="submit" name="send" class="btn btn-primary" value="Update ">
+								<button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+									aria-label="Close">Cancel</button>
+							</div><!--end col-->
+						</div><!--end row-->
+					</form><!--end form-->
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- View Appintment End -->
+	<!-- Profile Settings End -->
 
-	<!-- Accept Appointment Start -->
-	<div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- Profile Start -->
+	<div class="modal fade" id="viewDetailOrder" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<div class="modal-body py-5">
-					<div class="text-center">
-						<div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto"
-							style="height: 95px; width:95px;">
-							<i class="uil uil-check-circle h1 mb-0"></i>
-						</div>
-						<div class="mt-4">
-							<h4>Accept Appointment</h4>
-							<p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to
-								get immediate assistance, emergency treatment.</p>
-							<div class="mt-4">
-								<a href="#" class="btn btn-soft-success">Accept</a>
-							</div>
-						</div>
-					</div>
+				<div class="modal-header border-bottom p-3">
+					<h5 class="modal-title" id="exampleModalLabel1">Product</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Accept Appointment End -->
 
-	<!-- Cancel Appointment Start -->
-	<div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body py-5">
-					<div class="text-center">
-						<div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto"
-							style="height: 95px; width:95px;">
-							<i class="uil uil-times-circle h1 mb-0"></i>
+				<div class="modal-body p-3 pt-4">
+					<div class="row align-items-center">
+						<div class="col-lg-2 col-md-4">
+							<img src="" id="imageproduct" class="avatar avatar-small rounded-pill " alt="ảnh"
+								style="height: 170px;width: 185px;margin-left: 140px;">
+
 						</div>
-						<div class="mt-4">
-							<h4>Cancel Appointment</h4>
-							<p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to
-								get immediate assistance, emergency treatment.</p>
-							<div class="mt-4">
-								<a href="#" class="btn btn-soft-danger">Cancel</a>
+					</div><!--end row-->
+
+					<div class="row">
+
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Status</label>
+								<a><span id="modalProductStatus" class="badge bg-soft-success"> </span></a>
+
 							</div>
 						</div>
-					</div>
+						<div class="col-md-12">
+							<div class="mb-3">
+								<label class="form-label">ID</label>
+								<input name="id" id="modalProductId" type="text" value="" class="form-control" readonly>
+							</div>
+						</div>
+
+
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Name</label>
+								<input name="name" id="modalProductName" type="text" value="" class="form-control"
+									readonly>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Price</label>
+								<input name="price" id="modalProductPrice" type="text" value="" class="form-control"
+									readonly>
+							</div>
+						</div><!--end col-->
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Quantity</label>
+								<input name="quantity" id="modalProductQuantity" type="text" value=""
+									class="form-control" readonly>
+
+							</div>
+						</div><!--end col-->
+						<div class="col-md-6">
+							<div class="mb-3">
+								<label class="form-label">Category</label>
+								<input name="quantity" id="modalProductCategory" type="text" value=""
+									class="form-control" readonly>
+
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="mb-3">
+								<label class="form-label">Description</label>
+								<textarea name="description" id="description" type="text" value="" class="form-control"
+									readonly></textarea>
+
+							</div>
+						</div><!--end col-->
+
+					</div><!--end row-->
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Cancel Appointment End -->
+	<!-- Profile End  -->
 	<!-- Modal end -->
 
-	<!-- javascript -->
-	<script th:src="@{/static/assets/js/jquery.min.js}"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get modal and link elements
+			var modal = document.getElementById('editproduct');
+			var links = document.querySelectorAll('[data-bs-target="#editproduct"]');
+
+			// Add event listener for when any of the links is clicked
+			links.forEach(function (link) {
+				link.addEventListener('click', function () {
+					// Extract data from the clicked link
+					var productId = link.dataset.pid;
+
+					var productName = link.dataset.pname;
+					var productPrice = link.dataset.pprice;
+					var productQuantity = link.dataset.pquantity;
+					var productCategory = link.dataset.pcategory;
+					var productImage = link.dataset.pimage;
+					var description = link.dataset.description
+					var productStatus = link.dataset.pstatus;
+
+					// Update modal content with the extracted values
+					document.getElementById('modalProductName1').value = productName;
+					document.getElementById('modalProductId1').value = productId;
+
+					document.getElementById('modalProductPrice1').value = productPrice;
+					document.getElementById('modalProductQuantity1').value = productQuantity;
+					//document.getElementById('modalProductCategory1').value = productCategory; 
+					modal.querySelector('#imageproduct1').src = productImage;
+					document.getElementById('imageproduct2').value = productImage;
+					document.getElementById('description1').textContent = description;
+
+
+
+
+					let status = parseInt(productStatus);
+
+					if (status == 1) {
+						document.getElementById('modalProductStatus').value = "Enable";
+
+
+					} else {
+						document.getElementById('modalProductStatus').value = "Disable";
+
+					}
+					// Lấy phần tử select bằng cách sử dụng ID hoặc class
+					var selectElement = document.querySelector('.department1-name');
+					// Lấy tất cả các option trong select
+					var options1 = selectElement.options;
+					// Duyệt qua từng option và kiểm tra giá trị
+					for (var i = 0; i < options1.length; i++) {
+						if (options1[i].value === productStatus) {
+
+							// Nếu giá trị của option trùng với giá trị cần kiểm tra, chọn option đó
+							options1[i].selected = true;
+							break; // Dừng vòng lặp nếu đã tìm thấy giá trị
+						}
+					}
+
+
+					// Lấy phần tử select bằng cách sử dụng ID hoặc class
+					var selectElement = document.querySelector('.department-name');
+					// Lấy tất cả các option trong select
+					var options = selectElement.options;
+					console.log(productCategory);
+
+					// Duyệt qua từng option và kiểm tra giá trị
+					for (var i = 0; i < options.length; i++) {
+						if (options[i].value === productCategory) {
+							console.log(true);
+							// Nếu giá trị của option trùng với giá trị cần kiểm tra, chọn option đó
+							options[i].selected = true;
+							break; // Dừng vòng lặp nếu đã tìm thấy giá trị
+						}
+					}
+
+
+
+				});
+			});
+		});
+	</script>
+
+
+
 	<script th:src="@{/static/assets/js/bootstrap.bundle.min.js}"></script>
 	<!-- simplebar -->
 	<script th:src="@{/static/assets/js/simplebar.min.js}"></script>
-	<!-- Select2 -->
-	<script th:src="@{/static/assets/js/select2.min.js}"></script>
-	<script th:src="@{/static/assets/js/select2.init.js}"></script>
-	<!-- Datepicker -->
-	<script th:src="@{/static/assets/js/flatpickr.min.js}"></script>
-	<script th:src="@{/static/assets/js/flatpickr.init.js}"></script>
+	<!-- Icons -->
 	<!-- Icons -->
 	<script th:src="@{/static/assets/js/feather.min.js}"></script>
 	<!-- Main Js -->

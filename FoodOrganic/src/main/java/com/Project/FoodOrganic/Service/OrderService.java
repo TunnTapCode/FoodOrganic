@@ -27,5 +27,8 @@ public class OrderService {
 	public List<Orders> findAllOrderByStatus(String status){
 		return orderRepo.findAllOrderByStatus(status);
 	}
+	public List<Orders> findAllOrderByStatusAndU(String status,Long id){
+		return orderRepo.findAllOrderByStatusAndUser_id(status,id);
+	}
 
 }

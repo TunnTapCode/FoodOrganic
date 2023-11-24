@@ -15,6 +15,9 @@ public interface OrderRepo extends JpaRepository<Orders, Long> {
      Optional<Orders> findById(Long id) ;
      
      @Query(value = "SELECT * FROM orders o where o.status = :status  order by o.status asc;" , nativeQuery = true)
- 	List<Orders> findAllOrderByStatus(@Param("status") String status);
+ 	 List<Orders> findAllOrderByStatus(@Param("status") String status);
+     
+     @Query(value = "SELECT * FROM orders o where o.status = :status and o.user_id = :id ;" , nativeQuery = true)
+ 	 List<Orders> findAllOrderByStatusAndUser_id(@Param("status") String status,@Param("id") Long id );
 
 }

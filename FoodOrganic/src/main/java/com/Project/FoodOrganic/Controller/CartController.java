@@ -61,11 +61,11 @@ public class CartController {
 			Long count = cartDetailService.coutByCart(cart);
 			model.addAttribute("count", count);
 		}
-		User u = userService.findByUsername(userService.getUsername());
+		User u = userService.findByUsername(auth.getName());
 		Cart cart = cartService.getByUser(u);
 		List<CartDetail> list = cartDetailService.findByCart(cart);
 		model.addAttribute("listP", list);
-		return "cart";
+		return "Cart/cart";
 
 	}
 
@@ -105,7 +105,7 @@ public class CartController {
 				throw new Exception();
 			}
 
-			return "checkout";
+			return "Cart/checkout";
 		} catch (Exception e) {
 			return "redirect:/cart";
 		}
@@ -120,7 +120,7 @@ public class CartController {
 			Long count = cartDetailService.coutByCart(cart);
 			model.addAttribute("count", count);
 		}
-		return "checkout";
+		return "Cart/checkout";
 	}
 
 	@PostMapping("/thanh-toan")

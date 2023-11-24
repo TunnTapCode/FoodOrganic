@@ -84,8 +84,6 @@
                             </ul>
 						</div>
 					</li>
-
-
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
 						<div class="sidebar-submenu">
@@ -338,13 +336,12 @@
 			<div class="container-fluid">
 				<div class="layout-specing">
 					<div class="d-md-flex justify-content-between">
-						<h5 class="mb-0">Order List</h5>
+						<h5 class="mb-0">Product List</h5>
 
 						<nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
 							<ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-								<li class="breadcrumb-item">Order Manager</li>
-								<li class="breadcrumb-item active" aria-current="page">Order Processing</li>
-								
+								<li class="breadcrumb-item">Product Manager</li>
+								<li class="breadcrumb-item active" aria-current="page">All Product</li>
 							</ul>
 						</nav>
 					</div>
@@ -356,57 +353,70 @@
 									<thead>
 										<tr>
 											<th class="border-bottom p-3" style="min-width: 50px;">Id</th>
-											<th class="border-bottom p-3">Username</th>
-											<th class="border-bottom p-3" style="min-width: 180px;">Order Date</th>
-											<th class="border-bottom p-3">Total</th>
+											<th class="border-bottom p-3">Image</th>
+											<th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+											<th class="border-bottom p-3">Price</th>
+											<th class="border-bottom p-3">Quantity</th> 
 											<th class="border-bottom p-3">Status</th>
 											<th class="border-bottom p-3" style="min-width: 100px;"></th>
+											
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="o : ${listO}">
-											<th class="p-3" th:text="${o.order_id}"></th>
-											<td class="p-3" th:text="${o.user.username}"></td>
+										<tr th:each="p : ${listP}">
+											<th class="p-3" th:text="${p.product_id}"></th>
+											<td class="py-3">
+												<a th:href="'/detail/' + ${p.product_id}" class="text-dark">
+													<div class="d-flex align-items-center">
+														<img th:src="${p.image}"
+															class="avatar avatar-md-sm rounded-circle shadow" alt="">
 
-											<td class="py-3" th:text="${o.getOrderDate()}">
-
+													</div>
+												</a>
 											</td>
-											<td class="p-3" th:text="${o.total_amount}"></td>
-											
+											<td class="py-3">
+												<a href="#" class="text-dark">
+													<div class="d-flex align-items-center">
+														<span class="ms-2" th:text="${p.name}"></span>
+													</div>
+												</a>
+											</td>
+											<td class="p-3" th:text="${p.price}"></td>
+											<td class="p-3" th:text="${p.quantity}"></td>
 											<td class="p-3">
-												<a href="#"><span class="badge bg-soft-warning" th:if="${o.status == 'processing'}"
-														th:text="${o.status}">
+												<a href="#"><span class="badge bg-soft-success"
+														th:if="${p.statusProduct.status_id == 1}">
+														Enable
 													</span>
 												</a>
-												<a href="#"><span class="badge bg-soft-success" th:if="${o.status == 'completed'}"
-														th:text="${o.status}">
+												<a href="#"><span class="badge bg-soft-danger"
+														th:if="${p.statusProduct.status_id == 2}">
+														Disable
 													</span>
 												</a>
-												<a href="#"><span class="badge bg-soft-danger" th:if="${o.status == 'canceled'}"
-														th:text="${o.status}">
-													</span>
-												</a>
-												<a href="#"><span class="badge bg-soft-primary" th:if="${o.status == 'transported'}"
-														th:text="${o.status}">
-													</span>
-												</a>
-												
-												
 											</td>
-
-
-
 											<td class="text-end p-3">
-												<a th:href="'/admin/detail-order/' + ${o.order_id} " class="btn btn-icon btn-pills btn-soft-primary">	
+												<a class="btn btn-icon btn-pills btn-soft-primary"
+													data-bs-toggle="modal" data-bs-target="#viewproduct"
+													th:data-id="${p.product_id}" th:data-productname="${p.name}"
+													th:data-price="${p.price}" th:data-quantity="${p.quantity}"
+													th:data-category="${p.getCategory().name}"
+													th:data-image="${p.image}" th:data-description="${p.description}"
+													th:data-status="${p.statusProduct.status_id}">
 													<i class="uil uil-eye"></i>
 												</a>
-
-												<a class="btn btn-icon btn-pills btn-soft-success"
-													th:href="'/admin/update-status/' + ${o.order_id} + '?statusO=3' " ><i
-														class="uil uil-check"></i></a>
-												<a class="btn btn-icon btn-pills btn-soft-danger"
-												th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' " ><i
-														class="uil uil-times"></i></a>
+												
+												<a 	class="btn btn-icon btn-pills btn-soft-success"
+													data-bs-toggle="modal" data-bs-target="#editproduct"
+													th:data-pid="${p.product_id}" th:data-pname="${p.name}"
+													th:data-pprice="${p.price}" th:data-pquantity="${p.quantity}"
+													th:data-pcategory="${p.getCategory().id}"
+													th:data-pimage="${p.image}" th:data-description="${p.description}"
+													th:data-pstatus="${p.statusProduct.status_id}"><i
+														class="uil uil-pen"></i></a>
+												<a th:href="'/admin/delete/' + ${p.product_id}"
+													class="btn btn-icon btn-pills btn-soft-danger"><i
+														class="uil uil-trash"></i></a>
 											</td>
 										</tr>
 
@@ -528,12 +538,12 @@
 								<div class="mb-3">
 									<label class="form-label">Status</label>
 									<select class="form-control department1-name select2input" name="status">
-										<option>
+										<option th:each="s:${listS}" th:value="${s.status_id}"
+											th:text="${s.status_name}">
 										</option>
 									</select>
 								</div>
 							</div>
-
 
 							<div class="col-md-6">
 								<div class="mb-3">
@@ -554,17 +564,14 @@
 									<label class="form-label">Quantity</label>
 									<input name="quantity" id="modalProductQuantity1" type="text" value=""
 										class="form-control">
-
 								</div>
 							</div><!--end col-->
 							<div class="col-md-6">
 								<div class="mb-3">
 									<label class="form-label">Category</label>
-
-									<select class="form-control department-name select2input" name="category">
-										<option>
+									<select class="form-control department-name select2input"  name="category">
+										<option th:each="c:${listC}" th:value="${c.id}" th:text="${c.name}">
 										</option>
-
 									</select>
 								</div>
 							</div>
@@ -572,7 +579,6 @@
 								<div class="mb-3">
 									<label class="form-label">Image</label>
 									<input name="image" id="imageproduct2" type="text" value="" class="form-control">
-
 								</div>
 							</div><!--end col-->
 							<div class="col-md-12">
@@ -580,12 +586,8 @@
 									<label class="form-label">Description</label>
 									<textarea name="description" id="description1" type="text" value=""
 										class="form-control"></textarea>
-
 								</div>
 							</div><!--end col-->
-
-
-
 						</div><!--end row-->
 
 						<div class="row">
@@ -603,7 +605,7 @@
 	<!-- Profile Settings End -->
 
 	<!-- Profile Start -->
-	<div class="modal fade" id="viewDetailOrder" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+	<div class="modal fade" id="viewproduct" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header border-bottom p-3">
@@ -626,7 +628,9 @@
 							<div class="mb-3">
 								<label class="form-label">Status</label>
 								<a><span id="modalProductStatus" class="badge bg-soft-success"> </span></a>
-
+								
+								
+								
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -677,15 +681,52 @@
 
 							</div>
 						</div><!--end col-->
-
 					</div><!--end row-->
+
 				</div>
+	
 			</div>
 		</div>
 	</div>
 	<!-- Profile End  -->
 	<!-- Modal end -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get modal and link elements
+			var modal = document.getElementById('viewproduct');
+			var links = document.querySelectorAll('[data-bs-target="#viewproduct"]');
 
+			// Add event listener for when any of the links is clicked
+			links.forEach(function (link) {
+				link.addEventListener('click', function () {
+					// Extract data from the clicked link
+					var productId = link.dataset.id;
+					var productName = link.dataset.productname;
+					var productPrice = link.dataset.price;
+					var productQuantity = link.dataset.quantity;
+					var productCategory = link.dataset.category;
+					var productImage = link.dataset.image;
+					var productStatus = link.dataset.status;
+					var description = link.dataset.description;
+
+					// Update modal content with the extracted values
+					document.getElementById('modalProductId').value = productId;
+					document.getElementById('modalProductName').value = productName;
+					document.getElementById('modalProductPrice').value = productPrice;
+					document.getElementById('modalProductQuantity').value = productQuantity;
+					document.getElementById('modalProductCategory').value = productCategory;
+					document.getElementById('description').value = description;
+					modal.querySelector('#imageproduct').src = productImage;
+					let status = parseInt(productStatus);
+					if (status === 1) {
+					 document.getElementById('modalProductStatus').textContent = "Enable";
+					} else {
+						document.getElementById('modalProductStatus').textContent = "Disable";
+					}
+				});
+			});
+		});
+	</script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			// Get modal and link elements
@@ -737,13 +778,13 @@
 					// Duyệt qua từng option và kiểm tra giá trị
 					for (var i = 0; i < options1.length; i++) {
 						if (options1[i].value === productStatus) {
-
+							
 							// Nếu giá trị của option trùng với giá trị cần kiểm tra, chọn option đó
 							options1[i].selected = true;
 							break; // Dừng vòng lặp nếu đã tìm thấy giá trị
 						}
 					}
-
+					
 
 					// Lấy phần tử select bằng cách sử dụng ID hoặc class
 					var selectElement = document.querySelector('.department-name');
