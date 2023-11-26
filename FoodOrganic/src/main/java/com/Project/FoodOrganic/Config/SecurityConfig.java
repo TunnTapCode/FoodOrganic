@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
@@ -59,7 +58,8 @@ public class SecurityConfig {
 
 	@Bean
 	WebSecurityCustomizer webSecurity() {
-		return (web) -> web.ignoring().requestMatchers("/css/**", "/fonts/**", "/img/**", "/js/**", "/lib/**",
+		return (web) -> web.ignoring().requestMatchers("/css/**", "/images/**", "/fonts/**", "/img/**", "/js/**",
+				"/lib/**",
 				"/scss/**", "/vendeor/**", "/static/**");
 	}
 

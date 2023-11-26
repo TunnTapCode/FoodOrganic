@@ -227,6 +227,7 @@ public class AdminController {
 		String image = saveImage(file);
 		Blogs blogs = new Blogs();
 		blogs.setContent(content);
+		blogs.setTags(tags);
 		blogs.setCreatedDate(date);
 		blogs.setImage(image);
 		blogs.getTags();
@@ -256,7 +257,7 @@ public class AdminController {
 	private String saveImage(MultipartFile file) throws IOException {
         
         String fileName =  file.getOriginalFilename();
-        String uploadDir = "C:\\Users\\Admin\\Desktop\\FoodOrganic\\FoodOrganic\\src\\main\\resources\\static\\img";
+		String uploadDir = "src/main/resources/static/img";
 
         File uploadPath = new File(uploadDir);
         System.out.println(uploadPath);
@@ -266,10 +267,11 @@ public class AdminController {
         }
 
         File dest = new File(uploadPath.getAbsolutePath() + "/" + fileName);
+		System.out.println(dest);
         file.transferTo(dest);
 
        
-        return "/static/img/" + fileName;
+		return "/static/img/" + fileName;
     }
 
 }

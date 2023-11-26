@@ -17,6 +17,7 @@ public class Blogs {
 	private Long id;
 
 	private String title;
+	@Column(columnDefinition = "text")
 	private String content;
 	private Date createdDate;
 	

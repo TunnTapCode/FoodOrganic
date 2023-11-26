@@ -271,20 +271,22 @@
 					</div>
 
 					<div class="row">
-						<div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4" th:each="b : ${listB}">
+						<div class="col-xl-2 col-lg-3 col-md-4 col-6 mt-4" th:each="b : ${listB}">
 							
 							<div class="card blog blog-primary border-0 shadow rounded overflow-hidden"
 								style="height: 470px;" onmouseover="showIcon(this)" onmouseout="hideIcon(this)">
-								<a th:href="@{'/admin/delete_blogs/' + ${b.id}}" class="btn btn-icon btn-pills btn-soft-danger btn-delete-product active fadeUp"
+								
+								<a id="delete_btn" class="btn btn-icon btn-pills btn-soft-danger btn-delete-product active fadeUp" 
+								data-bs-toggle="modal" data-bs-target="#delete_blog" th:data-id = "${b.id}"
 								style="display: none;position: absolute;
 			                    top: 5%; left: 90% ;transform: translate(-50%, -50%); "><i
 								class="uil uil-times"></i></a>
 								<a class="btn btn-icon btn-pills btn-soft-success btn-edit-product active fadeUp"
-								data-bs-toggle="modal" data-bs-target="#edit_avatar" style="display: none;position: absolute;
+								data-bs-toggle="modal" data-bs-target="#edit_blog" style="display: none;position: absolute;
 			                    top: 14%; left: 90% ;transform: translate(-50%, -50%); "><i
 								class="uil uil-pen"></i></a>
 								<img th:src="@{${b.image}}" id="image_blog" class="img-fluid mx-auto me-2 mb-0" alt=""
-									style=" max-width: auto;height: 200px;width: 100%;max-height: auto;" >
+									style=" max-width: 100%;height: 200px;width: 100%;max-height: 100%;" >
 									
 								
 
@@ -311,9 +313,10 @@
 									</div>
 								</div>
 							</div>
-						</div><!--end col-->
+						</div><!-- th:href="@{'/admin/delete_blogs/' + ${b.id}}" end col-->
 
 					</div><!--end row-->
+					
 
 					<div class="row">
 						<div class="col-12 mt-4">
@@ -402,8 +405,15 @@
 										<div class="col-md-6">
 											<div class="mb-3">
 												<label class="form-label">Tags</label>
-												<input name="tags" required type="text" class="form-control" id="tags"
-													value="" placeholder="Healthy,Beautiful,...">
+												<select class="form-control" name="tags">
+                                                        <option value="Healthy">Healthy</option>
+                                                        <option value="Beautiful">Beautiful</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Life">Life</option>
+                                                        <option value="Other">Other</option>
+
+                                                    </select>
+												
 											</div>
 										</div><!--end col-->
 
@@ -429,6 +439,45 @@
 	</div>
 	</div>
 	<!-- End modal -->
+	<!-- Start Modal -->
+	<div class="modal fade" id="delete_blog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xs modal-dialog-centered custom-modal">
+			<div class="modal-content">
+				<div class="modal-header border-bottom p-3">
+					<h5 class="modal-title" id="exampleModalLabel">Xoá Blog</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body p-3 pt-4">
+					
+						<div class="row">
+							
+							<div class="col-md-12 mt-6 mt-sm-0">
+								<div class="ms-md-4">
+
+									<div class="row">
+										<div class="col-lg-12 text-center" >
+											<h5 style="padding-bottom: 45px;">Bạn có muốn xoá bài viết này ?</h5>
+										</div><!--end col-->
+										<div class="col-lg-6 col-6 text-start" >
+											<button type="button" class="btn btn-danger"  data-bs-dismiss="modal" aria-label="Close">Không</button>
+										</div><!--end col-->
+										<div class="col-lg-6 col-6 text-end">
+											<a href="" id="myLink" class="btn btn-primary" style="margin-right: 25px;">Có</a>
+										</div><!--end col-->
+									</div>
+								</div>
+							</div>
+						</div>
+					
+				</div>
+			</div><!--end col-->
+		</div><!--end row-->
+	</div>
+	</div>
+	</div>
+	</div>
+	<!-- End modal -->
 
 	<script th:src="@{/static/assets/js/bootstrap.bundle.min.js}"></script>
 	<!-- simplebar -->
@@ -438,6 +487,35 @@
 	<script th:src="@{/static/assets/js/feather.min.js}"></script>
 	<!-- Main Js -->
 	<script th:src="@{/static/assets/js/app.js}"></script>
+	
+	 <script>
+   
+            
+            
+             console.log(id);
+              
+   
+              
+     </script>
+     
+     <script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get modal and link elements
+			var modal = document.getElementById('delete_blog');
+			var links = document.querySelectorAll('[data-bs-target="#delete_blog"]');
+
+			// Add event listener for when any of the links is clicked
+			links.forEach(function (link) {
+				link.addEventListener('click', function () {
+					
+					var id = link.dataset.id;
+					var myData = "/admin/delete_blogs/" + id;
+					document.getElementById("myLink").setAttribute("href", myData);
+					
+				});
+			});
+		});
+	</script>
 
 	<script>
 		const handleChange = () => {
@@ -481,6 +559,7 @@
 			}
 		};
 	</script>
+	
 	<script>
 		var maxLength = 35;
 		var elements = document.querySelectorAll('#limitedText');

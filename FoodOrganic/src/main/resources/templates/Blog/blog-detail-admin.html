@@ -238,10 +238,10 @@
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
                             <div>
-                                <h5 class="mb-0" th:text="${blogs.title}"}></h5>
+                                <h5 style="white-space: pre-line;" class="mb-0" th:text="${blogs.title}"}></h5>
 
                                 <ul class="list-unstyled mt-2 mb-0">
-                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> ADMIN</li>
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Admin</li>
                                     <i class="mdi mdi-calendar-check"></i> <li class="list-inline-item date text-muted" th:utext="${#dates.format(blogs.createdDate, 'dd-MM-yyyy')}"> 1st January, 2021</li>
                                 </ul>
                             </div>
