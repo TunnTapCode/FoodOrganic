@@ -66,25 +66,24 @@
 							Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a href="/admin/all-product">All Product</a></li>
-								<li><a href="/admin/add-product">Add Product</a></li>
+								<li><a href="/admin/product/all-product">All Product</a></li>
+								<li><a href="/admin/product/add-product">Add Product</a></li>
 								<li><a href="patient-profile.html">Profile</a></li>
 							</ul>
 						</div>
 					</li>
-						<li class="sidebar-dropdown">
+					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
-                                <li ><a th:href="@{/admin/order-processing}">Order Processing</a></li>
-                                <li ><a th:href="@{/admin/order-canceled}">Order Canceled</a></li>
-                                 <li ><a th:href="@{/admin/order-transported}">Order Transported</a></li>
-                                 <li ><a th:href="@{/admin/order-completed}">Order Completed</a></li>
-                               
-                            </ul>
+								<li><a th:href="@{/admin/order/order-processing}">Order Processing</a></li>
+								<li><a th:href="@{/admin/order/order-canceled}">Order Canceled</a></li>
+								<li><a th:href="@{/admin/order/order-transported}">Order Transported</a></li>
+								<li><a th:href="@{/admin/order/order-completed}">Order Completed</a></li>
+
+							</ul>
 						</div>
 					</li>
-
 
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
@@ -305,17 +304,17 @@
 							<div class="dropdown dropdown-primary">
 								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
 									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										th:src="@{/static/assets/images/doctors/01.jpg}"
+										th:src="${user.image_Avt.url}" 
 										class="avatar avatar-ex-small rounded-circle" alt=""></button>
 								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
 									style="min-width: 200px;">
 									<a class="dropdown-item d-flex align-items-center text-dark"
 										href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-										<img th:src="@{/static/assets/images/doctors/01.jpg}"
+										<img th:src="${user.image_Avt.url}" 
 											class="avatar avatar-md-sm rounded-circle border shadow" alt="">
 										<div class="flex-1 ms-2">
-											<span class="d-block mb-1">Calvin Carlo</span>
-											<small class="text-muted">Orthopedic</small>
+											<span class="d-block mb-1" th:text="${user.username}"></span>
+											<small class="text-muted" th:text="${user.role.name}"></small>
 										</div>
 									</a>
 									<a class="dropdown-item text-dark" href="index.html"><span
@@ -397,15 +396,15 @@
 
 
 											<td class="text-end p-3">
-												<a th:href="'/admin/detail-order/' + ${o.order_id} " class="btn btn-icon btn-pills btn-soft-primary">	
+												<a th:href="'/admin/order/detail-order/' + ${o.order_id} " class="btn btn-icon btn-pills btn-soft-primary">	
 													<i class="uil uil-eye"></i>
 												</a>
 
 												<a class="btn btn-icon btn-pills btn-soft-success"
-													th:href="'/admin/update-status/' + ${o.order_id} + '?statusO=1' " ><i
+													th:href="'/admin/order/update-status/' + ${o.order_id} + '?statusO=1' " ><i
 														class="uil uil-check"></i></a>
 												<a class="btn btn-icon btn-pills btn-soft-danger"
-												th:href="'/admin/update-status/' +${o.order_id} + '?statusO=2' " ><i
+												th:href="'/admin/order/update-status/' +${o.order_id} + '?statusO=2' " ><i
 														class="uil uil-times"></i></a>
 											</td>
 										</tr>

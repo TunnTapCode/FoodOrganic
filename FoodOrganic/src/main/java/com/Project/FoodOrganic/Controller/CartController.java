@@ -53,6 +53,7 @@ public class CartController {
 	@Autowired
 	OrderDetailService orderDetailService;
 
+	//return cart page
 	@GetMapping()
 	public String showcart(Model model, Authentication auth) {
 		if (auth != null) {
@@ -68,7 +69,9 @@ public class CartController {
 		return "Cart/cart";
 
 	}
-
+	
+	
+    //Start chosee many product  send to checkout page  
 	@PostMapping("/checkout")
 	public String checkoutProduct(@RequestParam(name = "productSelect", required = false) List<Long> ListId,
 			Authentication auth, Model model) {
@@ -112,24 +115,13 @@ public class CartController {
 
 	}
 
-	@GetMapping("/checkout")
-	public String checkout(Authentication auth, Model model) {
-		if (auth != null) {
-			User u = userService.findByUsername(auth.getName());
-			Cart cart = cartService.getByUser(u);
-			Long count = cartDetailService.coutByCart(cart);
-			model.addAttribute("count", count);
-		}
-		return "Cart/checkout";
-	}
-
+ //Start send all infor insert to order table , OrderDetail table , odersInfor table -> done order
 	@PostMapping("/thanh-toan")
 	public String thanh_toan(@ModelAttribute OdersInfor odersInfor,
 			@RequestParam(name = "Cartid", required = false) List<Long> listId, Authentication auth) {
 		try {
 			User u = userService.findByUsername(auth.getName());
 			Date currentTime = new Date();
-
 			Orders orders = new Orders();
 			Cart cart = cartService.getByUser(u);
 			List<CartDetail> list = cartDetailService.findByCart(cart);
@@ -164,7 +156,16 @@ public class CartController {
 				orderDetailService.save(orderDetail);
 
 			}
-			
+			List<Product> listPro = productService.getAllProduct();
+			for (int i = 0; i < listPro.size(); i++) {
+				for (int j = 0; j < newList.size(); j++) {
+					if(listPro.get(i).getProduct_id() == newList.get(j).getProduct().getProduct_id()) {
+						int newQuantity = listPro.get(i).getQuantity() - newList.get(j).getQuantity() ;
+						listPro.get(i).setQuantity(newQuantity);
+						productService.save(listPro.get(i));
+					}
+				}
+			}
 			for(int i = 0; i < list.size(); i++) {
 				for (int j = 0; j < newList.size(); j++) {
 					if(list.get(i).getCartDetailId() == newList.get(j).getCartDetailId()) {
@@ -174,13 +175,16 @@ public class CartController {
 			}
 			
 			
-			return "redirect:/home";
+			return "redirect:/my-order";
 
 		} catch (Exception e) {
 			return "redirect:/home";
 		}
 
 	}
+	//End send all infor insert to order table , OrderDetail table , odersInfor table -> done order
+	
+	//Start add to cart with one quantity product 
 
 	@SuppressWarnings("unused")
 	@GetMapping("/{id}")
@@ -238,8 +242,11 @@ public class CartController {
 		}
 
 
-	}
-
+	}	
+	//End  add to cart with one quantity product 
+	
+	
+	//Start add to cart with many quantity product
 	@SuppressWarnings("unused")
 	@PostMapping()
 	public String cart(@RequestParam(name = "id", required = false) Long id,
@@ -298,17 +305,15 @@ public class CartController {
 
 
 	}
+	//End  add to cart with many quantity product 
 
+	//Start xoá 1 sản phẩm trong cart
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Long id,Authentication auth) {
 		User u = userService.findByUsername(auth.getName());
 		Cart cart = cartService.getByUser(u);
 		List<CartDetail> listDetail = cartDetailService.findByCart(cart);
-		for (CartDetail c : listDetail) {
-			System.out.println(c);
-		}
-	   System.out.println(listDetail);
-		
+
 		if (listDetail.isEmpty()) {
 			return "redirect:/cart";
 
@@ -325,5 +330,6 @@ public class CartController {
 		}
 
 	}
+	//End xoá 1 sản phẩm trong cart
 
 }

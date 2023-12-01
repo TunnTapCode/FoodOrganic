@@ -63,15 +63,14 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="/home" class="nav-item nav-link">Home</a>
-                            <a href="/product" class="nav-item nav-link">Shop</a>
-                            <a href="shop-detail.html" class="nav-item nav-link active">Shop Detail</a>
+                            <a href="/product" class="nav-item nav-link">Product</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     
                                    
-                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                    <a href="/user/blogs" class="dropdown-item">Blog</a>
+                                    <a href="/review" class="dropdown-item">Reviews</a>
                                 </div>
                             </div>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -88,7 +87,7 @@
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
 									<a href="/profile" class="dropdown-item">Thông tin cá nhân</a>
 								    <a href="/my-order" class="dropdown-item">Đơn hàng</a>
-                                    <a href="/logout" class="dropdown-item">Logout</a>  
+                                    <a href="/logout" class=" dropdown-item">Logout</a>  
                                     
                                 </div>
                             </div>
@@ -156,13 +155,18 @@
                                 <br>
                                 <h4 >Category : <span class=" mb-3" th:text="${p.get().category.name}"></span></h4>
                                  <br>
-                                <h4 class="fw-bold mb-3">Price : <span class="mb-3" th:text="${p.get().price}"></span> $</h4>
+                                  <h4 class="fw-bold mb-3" th:if="${p.get().category.id == 2}">Giá : <span class="mb-3" th:text="${p.get().price}" ></span> $/bó</h4>
+                                 <br>
+                                <h4 class="fw-bold mb-3" th:if="${p.get().category.id != 2}">Giá : <span class="mb-3" th:text="${p.get().price}" ></span> $/kg</h4>
+                                
+                                 <h4 th:if="${p.get().category.id != 2}">Số Lượng Còn : <span class=" mb-3" th:text="${p.get().quantity}" ></span> kg</h4>
+                                
+                                 <h4 th:if="${p.get().category.id == 2}">Số Lượng Còn : <span class=" mb-3" th:text="${p.get().quantity}" ></span> bó</h4>
                                  <br>
 
 							   <p th:if="${p.get().description != null}" th:text="${p.get().description}"></p>
 							   <p th:if="${p.get().description == null}" th:text="'Không có mô tả nào'"></p>
-							     <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+							    
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border" >
@@ -179,67 +183,11 @@
                                 
                                 <button href="#" th:if="${p.get().quantity != 0}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
                                    
-							     <p  th:if="${p.get().quantity == 0}" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" style="background-color: gray;"><i class="fa fa-shopping-bag me-2 text-primary"></i> Đã hết hàng</p>
+							     <p  th:if="${p.get().quantity == 0}" class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger" ><i class="fa fa-shopping-bag me-2 text-primary"></i> Đã hết hàng</p>
 						     </form>   
                             </div>
-                            <div class="col-lg-12">
-                                <nav>
-                                    <div class="nav nav-tabs mb-3">
-                                      
-                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
-                                            id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
-                                            aria-controls="nav-mission" aria-selected="true" style="font-size: 24px;">Reviews</button>
-                                    </div>
-                                </nav>
-                                <div class="tab-content mb-5">
-    
-                                    <div class="tab-pane active" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                        <div class="d-flex">
-                                            <img th:src="@{/static/demo/img/avatar.jpg}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>Jason Smith</h5>   
-                                                </div>
-                                                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex">
-                                            <img th:src="@{/static/demo/img/avatar.jpg}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                
-                                                <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                        <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                            amet diam et eos labore. 3</p>
-                                        <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                            Clita erat ipsum et lorem et sit</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <form action="#">
-                                <div class="row g-4">
-                                    <div class="col-lg-12">
-                                        <div class="border-bottom rounded my-4">
-                                            <textarea name="" id="" class="form-control border-1" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="d-flex justify-content-between py-3 mb-5">
-                                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                            
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-xl-3">
@@ -271,7 +219,7 @@
                 <h1 class="fw-bold mb-0">Related products</h1>
                 <div class="vesitable">
                     <div class="owl-carousel vegetable-carousel justify-content-center">
-                        <div class="border border-primary rounded position-relative vesitable-item" th:each= " p : ${listP}">
+                        <div class="border border-primary rounded position-relative vesitable-item" th:each= " p : ${listP}" th:if="${p.quantity != 0}">
                             <div class="vesitable-img">
                                 <img th:src="${p.image}" class="img-fluid w-100 rounded-top" alt="" style="height: 260px; max-width: auto;max-width: auto;">
                                 

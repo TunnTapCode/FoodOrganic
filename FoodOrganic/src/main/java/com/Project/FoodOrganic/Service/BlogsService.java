@@ -28,4 +28,8 @@ public class BlogsService {
 		 blogsRepo.delete(blogs);
 	}
 
+	public List<Blogs> findTop9Blog () {
+		return blogsRepo.findTop9NewestBlog();
+	}
+
 }

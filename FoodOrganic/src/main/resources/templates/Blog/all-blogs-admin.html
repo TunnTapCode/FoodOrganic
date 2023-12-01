@@ -28,7 +28,7 @@
 	<link th:href="@{/static/assets/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<style>
+	<style>
 		.btn-delete-product {
 			display: none;
 			position: absolute;
@@ -73,8 +73,8 @@
 							Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a href="/admin/all-product">All Product</a></li>
-								<li><a href="/admin/add-product">Add Product</a></li>
+								<li><a href="/admin/product/all-product">All Product</a></li>
+								<li><a href="/admin/product/add-product">Add Product</a></li>
 								<li><a href="patient-profile.html">Profile</a></li>
 							</ul>
 						</div>
@@ -83,15 +83,15 @@
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block "></i>Order Manager</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a th:href="@{/admin/order-processing}">Order Processing</a></li>
-								<li><a th:href="@{/admin/order-canceled}">Order Canceled</a></li>
-								<li><a th:href="@{/admin/order-transported}">Order Transported</a></li>
-								<li><a th:href="@{/admin/order-completed}">Order Completed</a></li>
-								<li><a href="calendar.html">Calendar</a></li>
+								<li><a th:href="@{/admin/order/order-processing}">Order Processing</a></li>
+								<li><a th:href="@{/admin/order/order-canceled}">Order Canceled</a></li>
+								<li><a th:href="@{/admin/order/order-transported}">Order Transported</a></li>
+								<li><a th:href="@{/admin/order/order-completed}">Order Completed</a></li>
+
 							</ul>
 						</div>
 					</li>
-
+					</li>
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
 						<div class="sidebar-submenu">
@@ -102,15 +102,11 @@
 							</ul>
 						</div>
 					</li>
-
-
-
 					<li class="sidebar-dropdown">
 						<a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
 						<div class="sidebar-submenu">
 							<ul>
 								<li><a href="/admin/blogs">Blogs</a></li>
-
 							</ul>
 						</div>
 					</li>
@@ -161,25 +157,6 @@
 					</div>
 
 					<ul class="list-unstyled mb-0">
-						<li class="list-inline-item mb-0">
-							<div class="dropdown dropdown-primary">
-								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
-									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										src="../assets/images/language/american.png"
-										class="avatar avatar-ex-small rounded-circle p-2" alt=""></button>
-								<div class="dropdown-menu dd-menu drop-ups dropdown-menu-end bg-white shadow border-0 mt-3 p-2"
-									data-simplebar style="height: 175px;">
-
-									<a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-										<img src="../assets/images/language/russian.png"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Russian</small>
-										</div>
-									</a>
-								</div>
-							</div>
-						</li>
 
 						<li class="list-inline-item mb-0 ms-1">
 							<a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
@@ -189,48 +166,22 @@
 							</a>
 						</li>
 
-						<li class="list-inline-item mb-0 ms-1">
-							<div class="dropdown dropdown-primary">
-								<button type="button"
-									class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0"
-									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-										data-feather="mail" class="fea icon-sm"></i></button>
-								<span
-									class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4
-									<span class="visually-hidden">unread mail</span></span>
-
-								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2"
-									data-simplebar style="height: 320px; width: 300px;">
-									<a href="#" class="d-flex align-items-center justify-content-between py-2">
-										<div class="d-inline-flex position-relative overflow-hidden">
-											<img th:src="@{/static/assets/images/client/02.jpg}"
-												class="avatar avatar-md-sm rounded-circle shadow" alt="">
-											<small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-												email from <b>Janalia</b> <small
-													class="text-muted fw-normal d-inline-block">1 hour
-													ago</small></small>
-										</div>
-									</a>
-
-								</div>
-							</div>
-						</li>
 
 						<li class="list-inline-item mb-0 ms-1">
 							<div class="dropdown dropdown-primary">
 								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
 									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										th:src="@{/static/assets/images/doctors/01.jpg}"
-										class="avatar avatar-ex-small rounded-circle" alt=""></button>
+										th:src="${user.image_Avt.url}" class="avatar avatar-ex-small rounded-circle"
+										alt=""></button>
 								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
 									style="min-width: 200px;">
 									<a class="dropdown-item d-flex align-items-center text-dark"
 										href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-										<img th:src="@{/static/assets/images/doctors/01.jpg}"
+										<img th:src="${user.image_Avt.url}"
 											class="avatar avatar-md-sm rounded-circle border shadow" alt="">
 										<div class="flex-1 ms-2">
-											<span class="d-block mb-1">Calvin Carlo</span>
-											<small class="text-muted">Orthopedic</small>
+											<span class="d-block mb-1" th:text="${user.username}"></span>
+											<small class="text-muted" th:text="${user.role.name}"></small>
 										</div>
 									</a>
 									<a class="dropdown-item text-dark" href="index.html"><span
@@ -271,24 +222,28 @@
 					</div>
 
 					<div class="row">
-						<div class="col-xl-2 col-lg-3 col-md-4 col-6 mt-4" th:each="b : ${listB}">
-							
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 mt-4" th:each="b : ${listB}">
+
 							<div class="card blog blog-primary border-0 shadow rounded overflow-hidden"
 								style="height: 470px;" onmouseover="showIcon(this)" onmouseout="hideIcon(this)">
-								
-								<a id="delete_btn" class="btn btn-icon btn-pills btn-soft-danger btn-delete-product active fadeUp" 
-								data-bs-toggle="modal" data-bs-target="#delete_blog" th:data-id = "${b.id}"
-								style="display: none;position: absolute;
-			                    top: 5%; left: 90% ;transform: translate(-50%, -50%); "><i
-								class="uil uil-times"></i></a>
+								<!-- button delete blog start-->
+								<a id="delete_btn"
+									class="btn btn-icon btn-pills btn-soft-danger btn-delete-product active fadeUp"
+									data-bs-toggle="modal" data-bs-target="#delete_blog" th:data-id="${b.id}" style="display: none;position: absolute;
+			                    top: 5%; left: 90% ;transform: translate(-50%, -50%); "><i class="uil uil-times"></i></a>
+								<!-- button delete blog end -->
+
+								<!-- button edit blog start -->
 								<a class="btn btn-icon btn-pills btn-soft-success btn-edit-product active fadeUp"
-								data-bs-toggle="modal" data-bs-target="#edit_blog" style="display: none;position: absolute;
-			                    top: 14%; left: 90% ;transform: translate(-50%, -50%); "><i
-								class="uil uil-pen"></i></a>
+									data-bs-toggle="modal" data-bs-target="#edit_blog" th:data-title="${b.title}"
+									th:data-date="${b.createdDate}" th:data-tags="${b.tags}"
+									th:data-content="${b.content}" th:data-id="${b.id}" style="display: none;position: absolute;
+			                    top: 14%; left: 90% ;transform: translate(-50%, -50%); "><i class="uil uil-pen"></i></a>
+								<!-- button edit blog end -->
 								<img th:src="@{${b.image}}" id="image_blog" class="img-fluid mx-auto me-2 mb-0" alt=""
-									style=" max-width: 100%;height: 200px;width: 100%;max-height: 100%;" >
-									
-								
+									style=" max-width: 100%;height: 200px;width: 100%;max-height: 100%;">
+
+
 
 								<div class="card-body p-4">
 									<ul class="list-unstyled mb-2">
@@ -299,7 +254,7 @@
 										<li class="list-inline-item text-muted small"><i
 												class="uil uil-clock text-dark h6 me-1"></i>Vĩnh viễn</li>
 									</ul>
-									<a th:href="@{'/admin/blogs-detail/' + ${b.id}}" class="text-dark title h5"
+									<a th:href="@{'/admin/blogs/blogs-detail/' + ${b.id}}" class="text-dark lh-base title h5"
 										id="limitedText" th:text="${b.title}"></a>
 									<div class="post-meta d-flex justify-content-between mt-3">
 										<ul class="list-unstyled mb-0">
@@ -309,14 +264,14 @@
 											<li class="list-inline-item"><a href="#" class="text-muted comments"><i
 														class="mdi mdi-comment-outline me-1"></i>08</a></li>
 										</ul>
-										<a th:href="@{'/admin/blogs-detail/' + ${b.id}}" class="link">Read More</a>
+										<a th:href="@{'/admin/blogs/blogs-detail/' + ${b.id}}" class="link">Read More</a>
 									</div>
 								</div>
 							</div>
-						</div><!-- th:href="@{'/admin/delete_blogs/' + ${b.id}}" end col-->
+						</div><!-- end col-->
 
 					</div><!--end row-->
-					
+
 
 					<div class="row">
 						<div class="col-12 mt-4">
@@ -356,6 +311,68 @@
 	</div>
 	<!-- page-wrapper -->
 
+	<div class="modal fade" id="edit_blog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header border-bottom p-3">
+					<h5 class="modal-title" id="exampleModalLabel"> Edit Product </h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-3 pt-4">
+					<form class="mt-4" th:action="@{/admin/blogs/edit_blog}" method="post">
+						<div class="row">
+							<input name="BlogId" id="modalBlogId" type="hidden" value="" class="form-control">
+
+
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Blog Title</label>
+									<input name="title_edit" id="title_edit" type="text" value="" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label">Date</label>
+									<input name="date_edit" id="date_edit" type="date" value="" class="form-control">
+								</div>
+							</div><!--end col-->
+
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label class="form-label tags-name">Tags</label>
+									<select class="form-control tags-name select2input" id="tag_edit" name="tag_edit">
+										<option value="Healthy">Healthy</option>
+										<option value="Beautiful">Beautiful</option>
+										<option value="Business">Business</option>
+										<option value="Life">Life</option>
+										<option value="Other">Other</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="mb-3">
+									<label class="form-label">Description<span class="text-danger"> *</span></label>
+									<textarea name="content_edit" id="content_edit" type="text" value="" rows="4"
+										class="form-control"></textarea>
+								</div>
+							</div><!--end col-->
+						</div><!--end row-->
+
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="submit" id="submit" name="send" class="btn btn-primary" value="Update ">
+								<button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+									aria-label="Close">Cancel</button>
+							</div><!--end col-->
+						</div><!--end row-->
+					</form><!--end form-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Profile Settings End -->
+
 	<!-- Start Modal -->
 	<div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-centered">
@@ -366,7 +383,7 @@
 				</div>
 
 				<div class="modal-body p-3 pt-4">
-					<form th:action="@{/admin/add_blogs}" method="post" enctype="multipart/form-data">
+					<form th:action="@{/admin/blogs/add_blogs}" method="post" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-md-4">
 								<div class="d-grid">
@@ -382,7 +399,6 @@
 							</div><!--end col-->
 							<div class="col-md-8 mt-4 mt-sm-0">
 								<div class="ms-md-4">
-
 									<div class="row">
 										<div class="col-12">
 											<div class="mb-3">
@@ -400,20 +416,17 @@
 													value="">
 											</div>
 										</div><!--end col-->
-
-
 										<div class="col-md-6">
 											<div class="mb-3">
 												<label class="form-label">Tags</label>
 												<select class="form-control" name="tags">
-                                                        <option value="Healthy">Healthy</option>
-                                                        <option value="Beautiful">Beautiful</option>
-                                                        <option value="Business">Business</option>
-                                                        <option value="Life">Life</option>
-                                                        <option value="Other">Other</option>
+													<option value="Healthy">Healthy</option>
+													<option value="Beautiful">Beautiful</option>
+													<option value="Business">Business</option>
+													<option value="Life">Life</option>
+													<option value="Other">Other</option>
 
-                                                    </select>
-												
+												</select>
 											</div>
 										</div><!--end col-->
 
@@ -430,6 +443,10 @@
 											<button type="submit" class="btn btn-primary">Add Blog</button>
 										</div><!--end col-->
 									</div>
+								</div>
+							</div>
+						</div>
+
 					</form>
 				</div>
 			</div><!--end col-->
@@ -449,27 +466,29 @@
 				</div>
 
 				<div class="modal-body p-3 pt-4">
-					
-						<div class="row">
-							
-							<div class="col-md-12 mt-6 mt-sm-0">
-								<div class="ms-md-4">
 
-									<div class="row">
-										<div class="col-lg-12 text-center" >
-											<h5 style="padding-bottom: 45px;">Bạn có muốn xoá bài viết này ?</h5>
-										</div><!--end col-->
-										<div class="col-lg-6 col-6 text-start" >
-											<button type="button" class="btn btn-danger"  data-bs-dismiss="modal" aria-label="Close">Không</button>
-										</div><!--end col-->
-										<div class="col-lg-6 col-6 text-end">
-											<a href="" id="myLink" class="btn btn-primary" style="margin-right: 25px;">Có</a>
-										</div><!--end col-->
-									</div>
+					<div class="row">
+
+						<div class="col-md-12 mt-6 mt-sm-0">
+							<div class="ms-md-4">
+
+								<div class="row">
+									<div class="col-lg-12 text-center">
+										<h5 style="padding-bottom: 45px;">Bạn có muốn xoá bài viết này ?</h5>
+									</div><!--end col-->
+									<div class="col-lg-6 col-6 text-start">
+										<button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+											aria-label="Close">Không</button>
+									</div><!--end col-->
+									<div class="col-lg-6 col-6 text-end">
+										<a href="" id="myLink" class="btn btn-primary"
+											style="margin-right: 25px;">Có</a>
+									</div><!--end col-->
 								</div>
 							</div>
 						</div>
-					
+					</div>
+
 				</div>
 			</div><!--end col-->
 		</div><!--end row-->
@@ -487,18 +506,61 @@
 	<script th:src="@{/static/assets/js/feather.min.js}"></script>
 	<!-- Main Js -->
 	<script th:src="@{/static/assets/js/app.js}"></script>
-	
-	 <script>
-   
-            
-            
-             console.log(id);
-              
-   
-              
-     </script>
-     
-     <script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get modal and link elements
+			var modal = document.getElementById('edit_blog');
+			var links = document.querySelectorAll('[data-bs-target="#edit_blog"]');
+
+			// Add event listener for when any of the links is clicked
+			links.forEach(function (link) {
+				link.addEventListener('click', function () {
+
+					var id = link.dataset.id;
+					var title = link.dataset.title;
+					var content = link.dataset.content;
+					var d = link.dataset.date;
+					var tags = link.dataset.tags;
+
+					var date_edit = formatDate(d);
+					
+
+					document.getElementById('modalBlogId').value = id;
+					document.getElementById('title_edit').value = title;
+					document.getElementById('content_edit').value = content;
+					document.getElementById('date_edit').value = date_edit;
+
+					function formatDate(d) {
+						var date1 = new Date(d.toString());
+						var month = (date1.getMonth() + 1).toString().padStart(2, '0');
+						var day = date1.getDate().toString().padStart(2, '0');
+						var year = date1.getFullYear();
+						return year.toString() + '-' + month.toString() + '-' + day.toString();
+					}
+
+
+					var selectElement = document.querySelector('#tag_edit');
+					// Lấy tất cả các option trong select
+					var options = selectElement.options;
+					
+
+					// Duyệt qua từng option và kiểm tra giá trị
+					for (var i = 0; i < options.length; i++) {
+						
+						if (options[i].value === tags) {	
+									
+							options[i].selected = true;
+							break; // Dừng vòng lặp nếu đã tìm thấy giá trị
+						}
+					}
+
+				});
+			});
+		});
+	</script>
+
+	<script>
 		document.addEventListener('DOMContentLoaded', function () {
 			// Get modal and link elements
 			var modal = document.getElementById('delete_blog');
@@ -507,11 +569,11 @@
 			// Add event listener for when any of the links is clicked
 			links.forEach(function (link) {
 				link.addEventListener('click', function () {
-					
+
 					var id = link.dataset.id;
-					var myData = "/admin/delete_blogs/" + id;
+					var myData = "/admin/blogs/delete_blogs/" + id;
 					document.getElementById("myLink").setAttribute("href", myData);
-					
+
 				});
 			});
 		});
@@ -559,7 +621,7 @@
 			}
 		};
 	</script>
-	
+
 	<script>
 		var maxLength = 35;
 		var elements = document.querySelectorAll('#limitedText');
@@ -572,22 +634,22 @@
 		});
 	</script>
 	<script>
-    function showIcon(element) {
-        // Hiển thị phần tử chứa biểu tượng khi con trỏ chuột vào
-        const iconContainer = element.querySelector('.btn-delete-product');
-         const iconContainer1 = element.querySelector('.btn-edit-product');
-        iconContainer.style.display = 'block';
-         iconContainer1.style.display = 'block';
-    }
+		function showIcon(element) {
+			// Hiển thị phần tử chứa biểu tượng khi con trỏ chuột vào
+			const iconContainer = element.querySelector('.btn-delete-product');
+			const iconContainer1 = element.querySelector('.btn-edit-product');
+			iconContainer.style.display = 'block';
+			iconContainer1.style.display = 'block';
+		}
 
-    function hideIcon(element) {
-        // Ẩn phần tử chứa biểu tượng khi con trỏ chuột ra
-        const iconContainer = element.querySelector('.btn-delete-product');
-        const iconContainer1 = element.querySelector('.btn-edit-product');
-        iconContainer.style.display = 'none';
-        iconContainer1.style.display = 'none';
-    }
-</script>
+		function hideIcon(element) {
+			// Ẩn phần tử chứa biểu tượng khi con trỏ chuột ra
+			const iconContainer = element.querySelector('.btn-delete-product');
+			const iconContainer1 = element.querySelector('.btn-edit-product');
+			iconContainer.style.display = 'none';
+			iconContainer1.style.display = 'none';
+		}
+	</script>
 </body>
 
 </html>

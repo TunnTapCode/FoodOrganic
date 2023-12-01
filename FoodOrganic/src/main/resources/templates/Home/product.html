@@ -140,13 +140,13 @@
 					<ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
 						<li class="nav-item me-2">
 							<a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill"
-								href="#tab-1">Vegetable</a>
+								href="#tab-1"> Fruits </a>
 						</li>
 						<li class="nav-item me-2">
-							<a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Fruits </a>
+							<a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2"> Vegetable </a>
 						</li>
 						<li class="nav-item me-0">
-							<a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Fresh</a>
+							<a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3"> Fresh </a>
 						</li>
 					</ul>
 				</div>
@@ -155,7 +155,7 @@
 				<div id="tab-1" class="tab-pane fade show p-0 active">
 					<div class="row g-4">
 						<div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
-							th:each="product:${list1}">
+							th:each="product:${list1}" th:if="${product.quantity != 0}">
 							<div class="product-item">
 								<div class="position-relative bg-light overflow-hidden">
 									<img class="img-fluid w-100" th:src="${product.image}" alt="">
@@ -190,7 +190,7 @@
 				</div>
 				<div id="tab-2" class="tab-pane fade show p-0">
 					<div class="row g-4">
-						<div class="col-xl-3 col-lg-4 col-md-6" th:each="product:${list2}">
+						<div class="col-xl-3 col-lg-4 col-md-6" th:each="product:${list2}" th:if="${product.quantity != 0}">
 							<div class="product-item">
 								<div class="position-relative bg-light overflow-hidden">
 									<img class="img-fluid w-100" th:src="${product.image}" alt="">
@@ -225,7 +225,7 @@
 				</div>
 				<div id="tab-3" class="tab-pane fade show p-0">
 					<div class="row g-4">
-						<div class="col-xl-3 col-lg-4 col-md-6" th:each="product:${list3}">
+						<div class="col-xl-3 col-lg-4 col-md-6" th:each="product:${list3}" th:if="${product.quantity != 0}">
 							<div class="product-item">
 								<div class="position-relative bg-light overflow-hidden">
 									<img class="img-fluid w-100" th:src="${product.image}" alt="">
