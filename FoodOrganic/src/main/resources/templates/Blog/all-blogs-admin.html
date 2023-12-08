@@ -222,7 +222,7 @@
 					</div>
 
 					<div class="row">
-						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 mt-4" th:each="b : ${listB}">
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 mt-4" th:each="b : ${listB.content}">
 
 							<div class="card blog blog-primary border-0 shadow rounded overflow-hidden"
 								style="height: 470px;" onmouseover="showIcon(this)" onmouseout="hideIcon(this)">
@@ -276,13 +276,16 @@
 					<div class="row">
 						<div class="col-12 mt-4">
 							<ul class="pagination justify-content-end mb-0 list-unstyled">
-								<li class="page-item"><a class="page-link" href="javascript:void(0)"
-										aria-label="Previous">Prev</a></li>
-								<li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-								<li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-								<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-								<li class="page-item"><a class="page-link" href="javascript:void(0)"
-										aria-label="Next">Next</a></li>
+								<li class="page-item"><a class="page-link"  href="/admin/blogs/all-blogs?page=0" aria-label="Previous">First</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listB.number != 0}" th:href="'/admin/blogs/all-blogs?page= '+${listB.number - 1}" aria-label="Previous">Prev</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listB.number == 0}" th:href="'/admin/blogs/all-blogs?page= '+${listB.number }" aria-label="Previous">Prev</a></li>
+									<li  th:each="p : ${#numbers.sequence(listB.number-1, listB.number + 1)}" th:class="${p == listB.number} ? 'page-item active' : 'page-item' " >
+										<th:block th:if="${p >= 0 && p <= listB.totalPages -1}">
+										<a class="page-link " th:href="'/admin/blogs/all-blogs?page= '+${p}"  th:text="${p}"></a>
+									     </th:block>
+									     </li>
+									<li class="page-item"><a class="page-link" th:href="'/admin/blogs/all-blogs?page= '+${listB.number + 1}" aria-label="Next">Next</a></li>
+									<li class="page-item"><a class="page-link" th:href="'/admin/blogs/all-blogs?page= '+${listB.totalPages -1}" aria-label="Next">Last</a></li>
 							</ul><!--end pagination-->
 						</div><!--end col-->
 					</div><!--end row-->

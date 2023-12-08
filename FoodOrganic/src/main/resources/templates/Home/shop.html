@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Cart</title>
+	<title>Fruitables - Vegetable Website Template</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="" name="keywords">
 	<meta content="" name="description">
@@ -72,17 +72,18 @@
 						<div class="nav-item dropdown">
 							<a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
 							<div class="dropdown-menu m-0 bg-secondary rounded-0">
-								 <a href="/user/blogs" class="dropdown-item">Blog</a>
-                                    <a href="/review" class="dropdown-item">Reviews</a>
+								<a href="/user/blogs" class="dropdown-item">Blog</a>
+								<a href="/review" class="dropdown-item">Reviews</a>
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="d-flex m-3 me-0">
 						<button
 							class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
 							data-bs-toggle="modal" data-bs-target="#searchModal"><i
 								class="fas fa-search text-primary"></i></button>
+
 						<div class="nav-item dropdown me-4 my-auto" style="margin-top: 5px;">
 							<a class="my-auto">
 								<i class="fas fa-user fa-2x"></i>
@@ -137,149 +138,220 @@
 
 	<!-- Single Page Header start -->
 	<div class="container-fluid page-header py-5">
-		<h1 class="text-center text-white display-6">Cart</h1>
+		<h1 class="text-center text-white display-6">Shop</h1>
 		<ol class="breadcrumb justify-content-center mb-0">
 			<li class="breadcrumb-item"><a href="#">Home</a></li>
-	
-			<li class="breadcrumb-item active text-white" >Cart</li>
+
+			<li class="breadcrumb-item active text-white">Shop</li>
 		</ol>
 	</div>
 	<!-- Single Page Header End -->
 
 
-	<!-- Cart Page Start -->
-	<div class="container-fluid py-5">
-		<form method="post" th:action="@{/cart/checkout}">
-			<div class="container py-5">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col"><input type="checkbox"  id="selectAll"  name="allProduct"></th>
-								<th scope="col">Products</th>
-								<th scope="col">Name</th>
-								<th scope="col">Price</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Total</th>
-								<th scope="col">Handle</th>
-							</tr>
-						</thead>
-						<tbody id="productTable">
-							<tr th:each="p:${listP}" class="content">
-								<td th:if="${p.product.quantity == 0}" >
-									<p class="btn border border-danger rounded-pill mb-0 mt-4 text-danger"
-										style="background-color: rgb(255, 255, 255);">
-										Đã hết hàng</p>
+	<!-- Fruits Shop Start-->
+	<div class="container-fluid fruite py-5">
+		<div class="container py-5">
+			<!-- <h1 class="mb-4">Fresh fruits shop </h1> -->
+			<div class="row g-4">
+				<div class="col-lg-12">
+					<div class="row g-4">
+						<div class="col-xl-3">
+							<div class="input-group w-100 mx-auto d-flex">
+								<input type="search" class="form-control p-3" placeholder="keywords"
+									aria-describedby="search-icon-1">
+								<span id="search-icon-1" class="input-group-text p-3"><i
+										class="fa fa-search"></i></span>
+							</div>
+						</div>
+						<div class="col-6"></div>
+						<div class="col-xl-3">
+							<div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+								<label for="fruits">Sorting:</label>
+								<select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3"
+									form="fruitform">
+									<option value="volvo">Nothing</option>
+									<option value="saab">Popularity</option>
+									<option value="opel">Organic</option>
+									<option value="audi">Fantastic</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row g-4">
+						<div class="col-lg-3">
+							<div class="row g-4">
+								<div class="col-lg-12">
+									<div class="mb-3">
+										<h4>Categories</h4>
+										<ul class="list-unstyled fruite-categorie">
+											<li>
+												<div class="d-flex justify-content-between fruite-name">
+													<a href="/product?category=All" th:text=" ' All product' "
+														style="font-size: 22px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+													</a>
+												</div>
+											</li>
+											<li th:each="c : ${listCate}">
+												<div class="d-flex justify-content-between fruite-name">
 
-								</td>
-								<td th:if="${p.product.quantity != 0}">
-									<p th:if="${p.product.quantity < p.quantity}" class="btn border border-danger rounded-pill mb-0 mt-4 text-danger"
-										style="background-color: rgb(255, 255, 255);">
-										Không đủ số lượng</p>
+													<a th:href="'/product/' + ${c.id} +'?category='+ ${c.name}"
+														th:text=" ' '+${c.name} "
+														style="font-size: 22px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+													</a>
+													
 
-									<input th:if="${p.product.quantity >= p.quantity}" type="checkbox" class="product mb-0 mt-3" name="productSelect"
-										th:value="${p.getProduct().getProduct_id()}">
-								</td>
-								<th scope="row">
-									<div class="d-flex align-items-center">
-										<img th:src="${p.image}" class="img-fluid me-5 rounded-circle"
-											style="width: 80px; height: 80px;" alt="">
-									</div>
-								</th>
-								<td>
-									<a id="name" th:href="'/detail/' + ${p.getProduct().getProduct_id()}">
-										<p th:text="${p.getProduct().name}" class="mb-0 mt-4"></p>
-									</a>
-								</td>
-
-								<td>
-
-									<p class="mb-0 mt-4"><span class="price mb-0 mt-4"
-											th:data-product-id="${p.getProduct().getProduct_id()}"
-											th:text="${p.price}"></span></p>
-								</td>
+												</div>
+											</li>
 
 
-								<td class="cart_quantity">
-
-									<div class="input-group mb-0 mt-4" style="width: 100px;background-color: white;">
-										<div class="input-group-btn">
-											<button
-												class="cart_quantity_down btn btn-sm btn-minus rounded-circle bg-light border"
-												th:value="${p.getProduct().getProduct_id()}" type="button"> <i
-													class="fa fa-minus"></i>
-											</button>
-										</div>
-										<input readonly
-											class="cart_quantity_input form-control form-control-sm text-center border-0"
-											type="text" name="quantity" th:value="${p.quantity}" min="1"
-											th:data-product-id="${p.getProduct().getProduct_id()}"
-											th:data-quantity="${p.product.quantity}" style="background-color: white;">
-										<div class="input-group-btn">
-											<button
-												class="cart_quantity_up btn btn-sm btn-plus rounded-circle bg-light border"
-												th:value="${p.getProduct().getProduct_id()}" type="button"> <i
-													class="fa fa-plus"></i>
-											</button>
-										</div>
-									</div>
-
-								</td>
-								<td class="cart_total">
-									<p class="mb-0 mt-4"><span class="total"
-											th:data-product-id="${p.getProduct().getProduct_id()}"
-											th:text="${p.price * p.quantity}"></span></p>
-
-								</td>
-								<td>
-									<a th:href="'/cart/delete/' + ${p.getProduct().getProduct_id()}"
-										class="btn btn-md rounded-circle bg-light border mt-3">
-										<i class="fa fa-times text-danger"></i>
-									</a>
-								</td>
-
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-				<div class="mt-5">
-					<input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-					<button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply
-						Coupon</button>
-				</div>
-				<div class="row g-4 justify-content-end">
-					<div class="col-8"></div>
-					<div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-						<div class="bg-light rounded">
-							<div class="p-4">
-								<h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-								<div class="d-flex justify-content-between mb-4">
-									<h5 class="mb-0 me-4">Subtotal:</h5>
-									<p class="mb-0" id="subtotal">0 $</p>
-								</div>
-								<div class="d-flex justify-content-between">
-									<h5 class="mb-0 me-4">Shipping</h5>
-									<div class="">
-										<p class="mb-0">FreeShip</p>
+										</ul>
 									</div>
 								</div>
+								<div class="col-lg-12">
+									<div class="mb-3">
+										<h4 class="mb-2">Price</h4>
+										<input type="range" class="form-range w-100" id="rangeInput" name="rangeInput"
+											min="0" max="1500" value="0" oninput="amount.value=rangeInput.value">
+										<output id="amount" name="amount" min-velue="0" max-value="1500"
+											for="rangeInput">0</output>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<h4 class="mb-3">Featured products</h4>
+									<div class="d-flex align-items-center justify-content-start">
+										<div class="rounded me-4" style="width: 100px; height: 100px;">
+											<img th:src="@{/static/demo/img/featur-1.jpg}" class="img-fluid rounded"
+												alt="">
+										</div>
+										<div>
+											<h6 class="mb-2">Big Banana</h6>
+											<div class="d-flex mb-2">
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star"></i>
+											</div>
+											<div class="d-flex mb-2">
+												<h5 class="fw-bold me-2">2.99 $</h5>
+												<h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center justify-content-start">
+										<div class="rounded me-4" style="width: 100px; height: 100px;">
+											<img th:src="@{/static/demo/img/featur-2.jpg}" class="img-fluid rounded"
+												alt="">
+										</div>
+										<div>
+											<h6 class="mb-2">Big Banana</h6>
+											<div class="d-flex mb-2">
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star"></i>
+											</div>
+											<div class="d-flex mb-2">
+												<h5 class="fw-bold me-2">2.99 $</h5>
+												<h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center justify-content-start">
+										<div class="rounded me-4" style="width: 100px; height: 100px;">
+											<img th:src="@{/static/demo/img/featur-3.jpg}" class="img-fluid rounded"
+												alt="">
+										</div>
+										<div>
+											<h6 class="mb-2">Big Banana</h6>
+											<div class="d-flex mb-2">
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star text-secondary"></i>
+												<i class="fa fa-star"></i>
+											</div>
+											<div class="d-flex mb-2">
+												<h5 class="fw-bold me-2">2.99 $</h5>
+												<h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex justify-content-center my-4">
+										<a href="#"
+											class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew
+											More</a>
+									</div>
+								</div>
 
+								<div class="col-lg-12">
+									<div class="position-relative">
+										<img th:src="@{/static/demo/img/banner-fruits.jpg}"
+											class="img-fluid w-100 rounded" alt="">
+										<div class="position-absolute"
+											style="top: 50%; right: 10px; transform: translateY(-50%);">
+											<h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-								<h5 class="mb-0 ps-4 me-4">Total</h5>
-								<p class="mb-0 pe-4" id="totalPrice">0 $</p>
+						</div>
+						<div class="col-lg-9">
+							<div class="row g-4 align-content-center">
+								<div class="col-md-6 col-lg-6 col-xl-4" th:each="p : ${listP}" th:if="${p.quantity != 0}">
+									<div class="rounded position-relative fruite-item">
+										<div class="fruite-img">
+											<img th:src="${p.image}" class="img-fluid w-100 rounded-top" alt="">
+										</div>
+										<div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+											style="top: 10px; left: 10px;" th:text="${p.category.name}">Fruits</div>
+										<div class="p-4 border border-secondary border-top-0 rounded-bottom">
+											
+
+											<div class="d-flex justify-content-between flex-lg-wrap">
+												<a class="d-block h5 mb-2" th:href="'/detail/' + ${p.product_id}"><span
+													th:text="${p.name}"></span>
+											</a>
+												<span th:if="${p.category.id == 2}" class="d-block h6 mb-3"
+												th:text="'Số lượng còn: ' +${p.quantity} + ' Bó'"></span>
+											   <span th:if="${p.category.id != 2}" class="d-block h6 mb-3"
+												th:text="'Số lượng còn: ' +${p.quantity} + ' Kg'"></span>
+
+												<p class="d-block h6 mb-2" th:if="${p.category.id == 2}">Giá : <span
+														class="mb-3" th:text="${p.price}"></span> $/bó</p>
+												<p class="d-block h6 mb-2" th:if="${p.category.id != 2}">Giá : <span
+														class="mb-3" th:text="${p.price}"></span> $/kg</p>
+												<a th:href="'/cart/' + ${p.product_id}"
+													class="btn border border-secondary rounded-pill px-3 text-primary"><i
+														class="fa fa-shopping-bag me-2 text-primary"></i> Add to
+													cart</a>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<button
-								class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-								type="submit">Proceed Checkout</button>
+
+							<div class="col-12">
+								<div class="pagination d-flex justify-content-center mt-5">
+									<a href="#" class="rounded">&laquo;</a>
+									<a href="#" class="active rounded">1</a>
+									<a href="#" class="rounded">2</a>
+									<a href="#" class="rounded">3</a>
+									<a href="#" class="rounded">4</a>
+									<a href="#" class="rounded">5</a>
+									<a href="#" class="rounded">6</a>
+									<a href="#" class="rounded">&raquo;</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
-	<!-- Cart Page End -->
+	</div>
+	<!-- Fruits Shop End-->
 
 
 	<!-- Footer Start -->
@@ -354,7 +426,7 @@
 						<p>Email: Example@gmail.com</p>
 						<p>Phone: +0123 4567 8910</p>
 						<p>Payment Accepted</p>
-						<img th:src="@{/static/demo/img/payment.png}" class="img-fluid" alt="">
+						<img src="img/payment.png" class="img-fluid" alt="">
 					</div>
 				</div>
 			</div>
@@ -387,149 +459,7 @@
 	<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
 			class="fa fa-arrow-up"></i></a>
 
-	<script>
-		var checkboxs = document.querySelectorAll('input[type="checkbox"]');
-		checkboxs.forEach(function (checkbox) {
-			checkbox.addEventListener('change', function () {
 
-				calculateTotal();
-			});
-		});
-
-		function calculateTotal() {
-			var productTable = document.querySelector('#productTable');
-			var total = 0;
-
-			// Lặp qua mỗi hàng trong bảng
-			for (var i = 0; i < productTable.rows.length; i++) {
-				var row = productTable.rows[i];
-				var checkbox = row.querySelector('input[type="checkbox"]');
-				var quantityElement = row.querySelector('.cart_quantity_input');
-				var price = parseInt(row.cells[3].textContent); // Lấy giá từ chuỗi văn bản
-				var quantity = parseInt(quantityElement.value);// Lấy số lượng từ chuỗi văn bản
-
-
-
-				// Nếu checkbox được chọn, thêm giá sản phẩm vào tổng
-				if (checkbox.checked) {
-					total += price * quantity;
-				}
-			}
-
-			// Hiển thị tổng giá tiền
-			document.getElementById("subtotal").textContent = total + " $";
-			document.getElementById("totalPrice").textContent = total + " $";
-
-		}
-	</script>
-
-	<script>
-		
-		document.getElementById('selectAll').addEventListener('change', function () {
-			var productCheckboxes = document.querySelectorAll('.product');
-			for (var i = 0; i < productCheckboxes.length; i++) {
-				productCheckboxes[i].checked = this.checked;
-			}
-			calculateTotal();
-		});
-		function calculateTotal() {
-			var productTable = document.querySelector('#productTable');
-			var total = 0;
-
-			// Lặp qua mỗi hàng trong bảng
-			for (var i = 0; i < productTable.rows.length; i++) {
-				var row = productTable.rows[i];
-				var checkbox = row.querySelector('input[type="checkbox"]');
-				// Nếu checkbox được chọn, thêm giá sản phẩm vào tổng
-				if (checkbox != null) {
-					var quantityElement = row.querySelector('.cart_quantity_input');
-					var price = parseInt(row.cells[3].textContent); // Lấy giá từ chuỗi văn bản
-					var quantity = parseInt(quantityElement.value);// Lấy số lượng từ chuỗi văn bản
-					if (checkbox.checked) {
-						total += price * quantity;
-
-					}
-
-
-				}
-
-			}
-
-
-			// Hiển thị tổng giá tiền
-			document.getElementById("subtotal").textContent = total + " $";
-			document.getElementById("totalPrice").textContent = total + " $";
-
-		}
-	</script>
-
-
-	<script>
-		document.querySelectorAll('.cart_quantity_up').forEach(button => {
-			button.addEventListener('click', () => {
-
-				const productId = button.value;
-				const quantityElement = document.querySelector(`.cart_quantity_input[data-product-id="${productId}"]`);
-				var quantityProduct = quantityElement.getAttribute('data-quantity');
-				const totalElement = document.querySelector(`.total[data-product-id="${productId}"]`);
-				const priceElement = document.querySelector(`.price[data-product-id="${productId}"]`);
-				let quantity = parseInt(quantityElement.value);
-				let price = parseFloat(priceElement.textContent)
-				let quantityPro = parseInt(quantityProduct);
-
-
-				if (!isNaN(quantity)) {
-					if (quantity < quantityPro) {
-						quantity += 1;
-						quantityElement.value = quantity;
-						totalElement.textContent = (quantity * price).toFixed(1);
-						updateQuantityInDatabase(productId, quantity);
-					}
-
-
-				} else {
-					console.log('productId không hợp lệ');
-				}
-			});
-		});
-
-		document.querySelectorAll('.cart_quantity_down').forEach(button => {
-			button.addEventListener('click', () => {
-				const productId = button.value;
-				const quantityElement = document.querySelector(`.cart_quantity_input[data-product-id="${productId}"]`);
-				const totalElement = document.querySelector(`.total[data-product-id="${productId}"]`);
-				const priceElement = document.querySelector(`.price[data-product-id="${productId}"]`);
-				let quantity = parseInt(quantityElement.value);
-				let price = parseFloat(priceElement.textContent)
-
-				if (quantity > 1) {
-					quantity -= 1;
-					quantityElement.value = quantity;
-					totalElement.textContent = (quantity * price).toFixed(1);
-					updateQuantityInDatabase(productId, quantity);
-				}
-			});
-		});
-
-
-		function updateQuantityInDatabase(productId, quantity) {
-			fetch('/api/updateQuantity', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-				body: `id=${productId}&quantity=${quantity}`,
-			})
-				.then(response => {
-					if (!response.ok) {
-						throw new Error('Lỗi mạng');
-					}
-				})
-				.catch(error => {
-					console.error('Lỗi: ' + error);
-				});
-		}
-	</script>
 	<!-- JavaScript Libraries -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

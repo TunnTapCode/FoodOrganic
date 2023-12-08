@@ -1,12 +1,11 @@
 package com.Project.FoodOrganic.Controller.Amin;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.Project.FoodOrganic.Entity.Category;
-
 import com.Project.FoodOrganic.Entity.Product;
 import com.Project.FoodOrganic.Entity.StatusProduct;
 import com.Project.FoodOrganic.Entity.User;
@@ -84,18 +81,23 @@ public class ProductManagerController {
 
 	}
 
+
+	
 	@GetMapping("/all-product")
-	public String All_Product(Model model,Authentication auth) {
+	public String paging(Model model,@RequestParam("page") Optional<Integer> p,Authentication auth) {
 		User user = userService.findByUsername(auth.getName());
 		model.addAttribute("user", user);
-		List<Product> listP = productService.getAllProduct();
 		List<Category> listC = categoryService.getAll();
 		List<StatusProduct> listS = service.findAll();
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 5);
+		Page<Product> page = productService.findAll(pageable);
 		model.addAttribute("listS", listS);
 		model.addAttribute("listC", listC);
-		model.addAttribute("listP", listP);
-
+		model.addAttribute("listP", page);
+		
+		
 		return "ManagerProduct/all-product";
+		
 	}
 
 	@PostMapping("/update")

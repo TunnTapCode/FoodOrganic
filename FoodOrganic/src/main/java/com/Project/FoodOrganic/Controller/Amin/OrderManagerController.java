@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Project.FoodOrganic.Entity.OrderDetail;
 import com.Project.FoodOrganic.Entity.Orders;
+
 import com.Project.FoodOrganic.Entity.User;
 import com.Project.FoodOrganic.Service.BlogsService;
 import com.Project.FoodOrganic.Service.CategoryService;
@@ -42,42 +45,50 @@ public class OrderManagerController {
 	UserService userService;
 	
 	@GetMapping("/order-processing")
-	public String processing(Model model,Authentication auth) {
+	public String processing(Model model,Authentication auth,@RequestParam("page") Optional<Integer> p) {
 		User user = userService.findByUsername(auth.getName());
 		model.addAttribute("user", user);
-		List<Orders> listO = orderService.findAllOrderByStatus("processing");
-		model.addAttribute("listO", listO);
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 10);
+		Page<Orders> page = orderService.findAll(pageable,"processing");
+		
+		model.addAttribute("listO", page);
 
 		return "ManagerOrder/order-processing";
 	}
 
 	@GetMapping("/order-transported")
-	public String transported(Model model,Authentication auth) {
+	public String transported(Model model,Authentication auth,@RequestParam("page") Optional<Integer> p) {
 		User user = userService.findByUsername(auth.getName());
 		model.addAttribute("user", user);
-		List<Orders> listO = orderService.findAllOrderByStatus("transported");
-		model.addAttribute("listO", listO);
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 10);
+		Page<Orders> page = orderService.findAll(pageable,"transported");
+		
+		model.addAttribute("listO", page);
+
 
 		return "ManagerOrder/order-transported";
 	}
 
 	@GetMapping("/order-canceled")
-	public String canceled(Model model,Authentication auth) {
+	public String canceled(Model model,Authentication auth,@RequestParam("page") Optional<Integer> p) {
 		User user = userService.findByUsername(auth.getName());
 		model.addAttribute("user", user);
-		List<Orders> listO = orderService.findAllOrderByStatus("canceled");
-		model.addAttribute("listO", listO);
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 10);
+		Page<Orders> page = orderService.findAll(pageable,"canceled");
+		
+		model.addAttribute("listO", page);
 
 		return "ManagerOrder/order-canceled";
 	}
 
 	@GetMapping("/order-completed")
-	public String completed(Model model,Authentication auth) {
+	public String completed(Model model,Authentication auth,@RequestParam("page") Optional<Integer> p) {
 		User user = userService.findByUsername(auth.getName());
 		model.addAttribute("user", user);
-		List<Orders> listO = orderService.findAllOrderByStatus("completed");
-		model.addAttribute("listO", listO);
-
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 10);
+		Page<Orders> page = orderService.findAll(pageable,"completed");
+		
+		model.addAttribute("listO", page);
 		return "ManagerOrder/order-completed";
 	}
 

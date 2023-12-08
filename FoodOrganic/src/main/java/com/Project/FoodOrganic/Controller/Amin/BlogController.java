@@ -3,10 +3,12 @@ package com.Project.FoodOrganic.Controller.Amin;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Project.FoodOrganic.Entity.Blogs;
+
 import com.Project.FoodOrganic.Entity.User;
 import com.Project.FoodOrganic.Service.BlogsService;
 import com.Project.FoodOrganic.Service.CategoryService;
@@ -46,14 +49,16 @@ public class BlogController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping()
-	public String all_blog(Model model,Authentication auth) {
+	@GetMapping("/all-blogs")
+	public String all_blog(Model model,Authentication auth,@RequestParam("p") Optional<Integer> p) {
 		User user = userService.findByUsername(auth.getName());
 		model.addAttribute("user", user);
-		List<Blogs> listB = blogsService.findAll();
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 12);
+		Page<Blogs> page = blogsService.findAll(pageable);
+		
 		Blogs blogs = new Blogs();
 		model.addAttribute("blogs", blogs);
-		model.addAttribute("listB", listB);
+		model.addAttribute("listB", page);
 		return "Blog/all-blogs-admin";
 	}
 
@@ -71,7 +76,7 @@ public class BlogController {
 		blogs.getTags();
 		blogs.setTitle(title.toUpperCase());
 		blogsService.save(blogs);
-		return "redirect:/admin/blogs";
+		return "redirect:/admin/blogs/all-blogs";
 	}
 
 	@GetMapping("/blogs-detail/{id}")
@@ -87,9 +92,9 @@ public class BlogController {
 		 Optional<Blogs> blogs = blogsService.findById(id);
 		 if(blogs.get() != null) {
 			 blogsService.delete(blogs.get());
-			 return "redirect:/admin/blogs";
+			 return "redirect:/admin/blogs/all-blogs";
 		 }else {
-			 return "redirect:/admin/blogs";
+			 return "redirect:/admin/blogs/all-blogs";
 		}
 		
 	}
@@ -108,10 +113,10 @@ public class BlogController {
 		blogs.get().getTags();
 		blogs.get().setTitle(title.toUpperCase());
 		blogsService.save(blogs.get());
-		return "redirect:/admin/blogs";
+		return "redirect:/admin/blogs/all-blogs";
 		}
 		
-		return "redirect:/admin/blogs";
+		return "redirect:/admin/blogs/all-blogs";
 	}
 	
 	private String saveImage(MultipartFile file) throws IOException {

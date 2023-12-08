@@ -125,16 +125,13 @@
     <!-- Blog Start -->
     <div class="container-xxl py-6">
         <div class="container">
-            <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1 class="display-5 mb-3">Latest Blog</h1>
-                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-            </div>
+           
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6 mx-auto " th:each = "b : ${listB}">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 " th:each = "b : ${listB}">
                     <img class="img-fluid" th:src="@{${b.image}}" alt="" style="width: 100%;height: 300px;">
                     <div class="bg-light p-4">
                         <a class="d-block h5 lh-base mb-4" th:text="${b.title}" 
-                        th:href="@{'/user/blogs/blogs-detail/' + ${b.id} + '?title = ' +${b.title}  }"></a>
+                        th:href="@{'/user/blogs/blogs-detail/' + ${b.id} + '?title='+${b.title.toLowerCase()}  }"></a>
                         <div class="text-muted border-top pt-4">
                             <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small>
                            <i class="fa fa-calendar text-primary me-2" > </i><small class="me-3" th:utext="${#dates.format(b.createdDate, 'dd-MM-yyyy')}"></small>
@@ -142,9 +139,22 @@
                     </div> 
                 </div>
                
-                <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="btn btn-primary rounded-pill py-3 px-5" href="">Load More</a>
-                </div>
+                <div class="row">
+						<div class="col-12 mt-4">
+							<ul class="pagination justify-content-end mb-0 list-unstyled">
+								<li class="page-item"><a class="page-link"  href="/user/blogs?page=0" aria-label="Previous">First</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listB.number != 0}" th:href="'/user/blogs?page= '+${listB.number - 1}" aria-label="Previous">Prev</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listB.number == 0}" th:href="'/user/blogs?page= '+${listB.number }" aria-label="Previous">Prev</a></li>
+									<li  th:each="p : ${#numbers.sequence(listB.number-1, listB.number + 1)}" th:class="${p == listB.number} ? 'page-item active' : 'page-item' " >
+										<th:block th:if="${p >= 0 && p <= listB.totalPages -1}">
+										<a class="page-link " th:href="'/user/blogs?page= '+${p}"  th:text="${p}"></a>
+									     </th:block>
+									     </li>
+									<li class="page-item"><a class="page-link" th:href="'/user/blogs?page= '+${listB.number + 1}" aria-label="Next">Next</a></li>
+									<li class="page-item"><a class="page-link" th:href="'/user/blogs?page= '+${listB.totalPages -1}" aria-label="Next">Last</a></li>
+							</ul><!--end pagination-->
+						</div><!--end col-->
+					</div><!--end row-->
             </div>
         </div>
     </div>

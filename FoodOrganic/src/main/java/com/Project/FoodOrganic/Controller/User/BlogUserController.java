@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +41,7 @@ public class BlogUserController {
 	@Autowired
 	BlogCommentService blogCommentService;
 	@GetMapping()
-	public String getAllBlog(Authentication auth ,Model model) {
+	public String getAllBlog(Authentication auth ,Model model,@RequestParam("p") Optional<Integer> p) {
 		if(auth != null) {
 			User u = userService.findByUsername(auth.getName());
 			Cart cart = cartService.getByUser(u);
@@ -47,8 +49,9 @@ public class BlogUserController {
 			model.addAttribute("count", count);
 			model.addAttribute("auth", auth);
 		}
-		List<Blogs> listB = blogsService.findTop9Blog() ;
-		model.addAttribute("listB", listB);
+		org.springframework.data.domain.Pageable pageable = PageRequest.of(p.orElse(0), 12);
+		Page<Blogs> page = blogsService.findAll(pageable);
+		model.addAttribute("listB", page);
 		return "Blog/blog-user";
 	}
 	@GetMapping("/blogs-detail/{id}")

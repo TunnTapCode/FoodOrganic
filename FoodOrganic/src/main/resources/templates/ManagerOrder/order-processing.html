@@ -101,8 +101,7 @@
 						<a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
 						<div class="sidebar-submenu">
 							<ul>
-								<li><a href="blogs.html">Blogs</a></li>
-								<li><a href="blog-detail.html">Blog Detail</a></li>
+									<li><a href="/admin/blogs/all-blogs">Blogs</a></li>
 							</ul>
 						</div>
 					</li>
@@ -186,25 +185,7 @@
 					</div>
 
 					<ul class="list-unstyled mb-0">
-						<li class="list-inline-item mb-0">
-							<div class="dropdown dropdown-primary">
-								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
-									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										th:src="@{/static/assets/images/language/american.png}"
-										class="avatar avatar-ex-small rounded-circle p-2" alt=""></button>
-								<div class="dropdown-menu dd-menu drop-ups dropdown-menu-end bg-white shadow border-0 mt-3 p-2"
-									data-simplebar style="height: 175px;">
-									<a href="javascript:void(0)" class="d-flex align-items-center">
-										<img th:src="@{/static/assets/images/language/chinese.png}"
-											class="avatar avatar-client rounded-circle shadow" alt="">
-										<div class="flex-1 text-left ms-2 overflow-hidden">
-											<small class="text-dark mb-0">Chinese</small>
-										</div>
-									</a>
 
-								</div>
-							</div>
-						</li>
 
 						<li class="list-inline-item mb-0 ms-1">
 							<a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
@@ -304,13 +285,13 @@
 							<div class="dropdown dropdown-primary">
 								<button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
 									data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-										th:src="${user.image_Avt.url}" 
-										class="avatar avatar-ex-small rounded-circle" alt=""></button>
+										th:src="${user.image_Avt.url}" class="avatar avatar-ex-small rounded-circle"
+										alt=""></button>
 								<div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
 									style="min-width: 200px;">
 									<a class="dropdown-item d-flex align-items-center text-dark"
 										href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-										<img th:src="${user.image_Avt.url}" 
+										<img th:src="${user.image_Avt.url}"
 											class="avatar avatar-md-sm rounded-circle border shadow" alt="">
 										<div class="flex-1 ms-2">
 											<span class="d-block mb-1" th:text="${user.username}"></span>
@@ -343,7 +324,7 @@
 							<ul class="breadcrumb bg-transparent rounded mb-0 p-0">
 								<li class="breadcrumb-item">Order Manager</li>
 								<li class="breadcrumb-item active" aria-current="page">Order Processing</li>
-								
+
 							</ul>
 						</nav>
 					</div>
@@ -371,40 +352,41 @@
 
 											</td>
 											<td class="p-3" th:text="${o.total_amount}"></td>
-											
+
 											<td class="p-3">
-												<a href="#"><span class="badge bg-soft-warning" th:if="${o.status == 'processing'}"
-														th:text="${o.status}">
+												<a href="#"><span class="badge bg-soft-warning"
+														th:if="${o.status == 'processing'}" th:text="${o.status}">
 													</span>
 												</a>
-												<a href="#"><span class="badge bg-soft-success" th:if="${o.status == 'completed'}"
-														th:text="${o.status}">
+												<a href="#"><span class="badge bg-soft-success"
+														th:if="${o.status == 'completed'}" th:text="${o.status}">
 													</span>
 												</a>
-												<a href="#"><span class="badge bg-soft-danger" th:if="${o.status == 'canceled'}"
-														th:text="${o.status}">
+												<a href="#"><span class="badge bg-soft-danger"
+														th:if="${o.status == 'canceled'}" th:text="${o.status}">
 													</span>
 												</a>
-												<a href="#"><span class="badge bg-soft-primary" th:if="${o.status == 'transported'}"
-														th:text="${o.status}">
+												<a href="#"><span class="badge bg-soft-primary"
+														th:if="${o.status == 'transported'}" th:text="${o.status}">
 													</span>
 												</a>
-												
-												
+
+
 											</td>
 
 
 
 											<td class="text-end p-3">
-												<a th:href="'/admin/order/detail-order/' + ${o.order_id} " class="btn btn-icon btn-pills btn-soft-primary">	
+												<a th:href="'/admin/order/detail-order/' + ${o.order_id} "
+													class="btn btn-icon btn-pills btn-soft-primary">
 													<i class="uil uil-eye"></i>
 												</a>
 
 												<a class="btn btn-icon btn-pills btn-soft-success"
-													th:href="'/admin/order/update-status/' + ${o.order_id} + '?statusO=1' " ><i
+													th:href="'/admin/order/update-status/' + ${o.order_id} + '?statusO=1' "><i
 														class="uil uil-check"></i></a>
 												<a class="btn btn-icon btn-pills btn-soft-danger"
-												th:href="'/admin/order/update-status/' +${o.order_id} + '?statusO=2' " ><i
+													th:href="'/admin/order/update-status/' +${o.order_id} + '?statusO=2' "><i
 														class="uil uil-times"></i></a>
 											</td>
 										</tr>
@@ -418,19 +400,29 @@
 					</div><!--end row-->
 
 					<div class="row text-center">
-						<!-- PAGINATION START -->
+						<!-- PAGINATION START-->
 						<div class="col-12 mt-4">
 							<div class="d-md-flex align-items-center text-center justify-content-between">
-								<span class="text-muted me-3">Showing 1 - 10 out of 50</span>
+								<span class="text-muted me-3" th:text="'Showing 10 of ' + ${listO.totalElements}">Showing 1 - 10 out of 50</span>
 								<ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-									<li class="page-item"><a class="page-link" href="javascript:void(0)"
-											aria-label="Previous">Prev</a></li>
-									<li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+									<li class="page-item"><a class="page-link"
+											href="/admin/order/order-processing?page=0" aria-label="Previous">First</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)"
-											aria-label="Next">Next</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listO.number != 0}"
+											th:href="'/admin/order/order-processing?page= '+${listO.number - 1}"
+											aria-label="Previous">Prev</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listO.number == 0}"
+											th:href="'/admin/order/order-processing?page= '+${listO.number }"
+											aria-label="Previous">Prev</a></li>
+									<li th:each="p : ${#numbers.sequence(listO.number-1, listO.number + 1)}"
+										th:class="${p == listO.number} ? 'page-item active' : 'page-item' ">
+										<th:block th:if="${p >= 0 && p <= listO.totalPages -1}">
+											<a class="page-link " th:href="'/admin/order/order-processing?page= '+${p}"
+												th:text="${p}"></a>
+										</th:block>
+									</li>
+									<li class="page-item"><a class="page-link" th:href="'/admin/order/order-processing?page= '+${listO.number + 1}" aria-label="Next">Next</a></li>
+									<li class="page-item"><a class="page-link" th:href="'/admin/order/order-processing?page= '+${listO.totalPages -1}" aria-label="Next">Last</a></li>
 								</ul>
 							</div>
 						</div><!--end col-->

@@ -59,7 +59,7 @@ public class CartAPI {
 				}
 
 				
-				return ResponseEntity.ok("Số lượng đã được cập nhật.");
+				//return ResponseEntity.ok("Số lượng đã được cập nhật.");
 			}
 
 			return ResponseEntity.notFound().build();

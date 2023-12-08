@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.Project.FoodOrganic.Entity.Blogs;
 import com.Project.FoodOrganic.Repository.BlogsRepo;
 
@@ -30,6 +31,10 @@ public class BlogsService {
 
 	public List<Blogs> findTop9Blog () {
 		return blogsRepo.findTop9NewestBlog();
+	}
+	
+	public Page<Blogs> findAll(Pageable pageable){
+		return (Page<Blogs>) blogsRepo.findAll(pageable);
 	}
 
 }
