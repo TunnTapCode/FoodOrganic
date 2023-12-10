@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+
 
 import com.Project.FoodOrganic.Entity.Category;
 import com.Project.FoodOrganic.Entity.Product;
-@Repository
+
 public interface ProductRepo extends JpaRepository<Product, Long>{
 	
 	List<Product> findAllByCategory_id(Long Category_id) ;
@@ -25,7 +25,8 @@ public interface ProductRepo extends JpaRepository<Product, Long>{
     
      List<Product> findByCategory(Category category);
      
-     long countByCategory(Category category);
+     @Query(value = "SELECT * FROM products p WHERE p.category_id = :category_id", nativeQuery = true)
+     Page<Product> findProductByCate(Pageable pageable,@Param("category_id") Long cid) ;
     	
    
 }

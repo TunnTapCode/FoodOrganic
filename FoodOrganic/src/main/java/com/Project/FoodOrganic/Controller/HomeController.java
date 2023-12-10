@@ -38,12 +38,10 @@ public class HomeController {
 			Long count = cartDetailService.coutByCart(cart);
 			model.addAttribute("count", count);
 		}
-		List<Product> list1 = productService.findTop7ByCategoryOrderByProduct_id(1L);
-		List<Product> list2 = productService.findTop7ByCategoryOrderByProduct_id(2L);
-		List<Product> list3 = productService.findTop7ByCategoryOrderByProduct_id(3L);
+		List<Product> list1 = productService.getAllProduct();
+		
 		model.addAttribute("list1", list1);
-		model.addAttribute("list2", list2);
-		model.addAttribute("list3", list3);
+		
 		model.addAttribute("auth", auth);
 		return "Home/home";
 	}

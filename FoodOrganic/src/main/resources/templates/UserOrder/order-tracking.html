@@ -118,31 +118,43 @@
 				<h6 th:text="'Order ID: ' + ${id}"></h6>
 				<article class="card">
 					<div class="card-body row">
-						<div class="col"> <strong>Estimated Delivery time:</strong> <br>29 nov 2019 </div>
-
 						<div class="col">
-							<strong>Status:<br>
-								<p th:text="${status}"></p>
+						<strong>Ngày đặt hàng </strong><p  th:text="${order.orderDate}"> </p>
+						</div>
+						<div class="col">
+							<strong th:text="${order.status.toUpperCase() }" ></strong>
+						</div>
+						<div class="col">
+							<strong th:text=" 'Địa chỉ nhận'" >
 							</strong>
+							<br>
+							<br>
+							<p th:text="${infor.fullname} "></p>
+							<p th:text="${infor.phone}  " ></p>
+							<p th:text="${infor.xa} + ',' + ${infor.huyen} +',' + ${infor.tinh} " ></p>
+							
+							
+							
+							
 						</div>
 
 					</div>
 				</article>
-				<div th:if="${status != 'canceled'}" class="track">
+				<div th:if="${order.status != 'canceled'}" class="track">
 					<div class="step active"> <span class="icon"> <i class="fas fa-check"></i> </span> <span
 							class="text">Xác nhận đặt hàng</span> </div>
 					<div
-						th:class="${ status == 'processing' || status == 'transported' || status == 'completed' } ? 'step active' : 'step'">
+						th:class="${ order.status == 'processing' || order.status == 'transported' || order.status == 'completed' } ? 'step active' : 'step'">
 						<span class="icon"> <i class="fas fa-user"></i> </span> <span class="text">
 							Chờ xử lý</span> </div>
-					<div th:class="${status == 'transported' || status == 'completed'} ? 'step active' : 'step'"> <span
+					<div th:class="${order.status == 'transported' || order.status == 'completed'} ? 'step active' : 'step'"> <span
 							class="icon"> <i class="fas fa-truck"></i> </span> <span class="text">
 							Đang vận chuyển </span> </div>
-					<div th:class="${status == 'completed'} ? 'step active' : 'step'"> <span class="icon"> <i
+					<div th:class="${order.status == 'completed'} ? 'step active' : 'step'"> <span class="icon"> <i
 								class="fas fa-box"></i> </span> <span class="text">
 							Hoàn thành</span> </div>
 				</div>
-				<div th:if="${status == 'canceled'}" class="track">
+				<div th:if="${order.status == 'canceled'}" class="track">
 					<div class="step active"> <span class="icon"><i class="fas fa-check"></i> </span> <span
 							class="text">Xác nhận đặt hàng</span> </div>
 					<div class="step active"> </span> <span class="text">

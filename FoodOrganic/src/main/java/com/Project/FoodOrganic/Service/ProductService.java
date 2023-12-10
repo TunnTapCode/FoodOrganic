@@ -25,6 +25,9 @@ public class ProductService {
 	public Page<Product> findAll(Pageable pageable){
 		return (Page<Product>) repo.findAll(pageable);
 	}
+	public Page<Product> findProductByCate(Pageable pageable,Long cid){
+		return (Page<Product>) repo.findProductByCate(pageable,cid);
+	}
 	public List<Product> getAllProductByCategoryId( Long CategoryId){
 		return repo.findAllByCategory_id(CategoryId);
 	}

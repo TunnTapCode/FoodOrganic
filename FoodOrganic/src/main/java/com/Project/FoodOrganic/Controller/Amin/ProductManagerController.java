@@ -60,8 +60,10 @@ public class ProductManagerController {
 
 	@PostMapping("/add-product")
 
-	public String Add(@ModelAttribute Product product, @RequestParam("category") Long id, Model model) {
+	public String Add(@ModelAttribute Product product, @RequestParam("category") Long id, Model model,Authentication auth) {
 		try {
+			User user = userService.findByUsername(auth.getName());
+			model.addAttribute("user", user);
 			Optional<Category> c = categoryService.findById(id);
 			Optional<StatusProduct> s = service.getById(1);
 

@@ -144,7 +144,7 @@
 							<ul class="pagination justify-content-end mb-0 list-unstyled">
 								<li class="page-item"><a class="page-link"  href="/user/blogs?page=0" aria-label="Previous">First</a></li>
 									<li class="page-item"><a class="page-link" th:if="${listB.number != 0}" th:href="'/user/blogs?page= '+${listB.number - 1}" aria-label="Previous">Prev</a></li>
-									<li class="page-item"><a class="page-link" th:if="${listB.number == 0}" th:href="'/user/blogs?page= '+${listB.number }" aria-label="Previous">Prev</a></li>
+									<li class="page-item"><a class="page-link" th:if="${listB.number == 0}" th:href="'/user/blogs?page= '+${listB.number}" aria-label="Previous">Prev</a></li>
 									<li  th:each="p : ${#numbers.sequence(listB.number-1, listB.number + 1)}" th:class="${p == listB.number} ? 'page-item active' : 'page-item' " >
 										<th:block th:if="${p >= 0 && p <= listB.totalPages -1}">
 										<a class="page-link " th:href="'/user/blogs?page= '+${p}"  th:text="${p}"></a>

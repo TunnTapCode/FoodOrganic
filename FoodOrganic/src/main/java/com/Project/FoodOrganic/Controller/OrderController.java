@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.Project.FoodOrganic.Entity.OdersInfor;
 import com.Project.FoodOrganic.Entity.OrderDetail;
 import com.Project.FoodOrganic.Entity.Orders;
 import com.Project.FoodOrganic.Entity.User;
 import com.Project.FoodOrganic.Service.OrderDetailService;
+import com.Project.FoodOrganic.Service.OrderInforService;
 import com.Project.FoodOrganic.Service.OrderService;
 import com.Project.FoodOrganic.Service.UserService;
 
@@ -26,14 +28,18 @@ public class OrderController {
 	UserService userService ;
 	@Autowired 
 	OrderDetailService orderDetailService ;
+	@Autowired
+	OrderInforService orderInforService ;
 	
 
 	@GetMapping("/tracking/{id}")
 	public String tracking(Model model,@PathVariable Long id ) {
 	    Optional<Orders> o = orderService.findById(id);
 		List<OrderDetail> list = orderDetailService.findByOrder(o.get());
+		List<OdersInfor> liInfors = orderInforService.findByOrder(o.get());
 		model.addAttribute("id", id) ;
-		model.addAttribute("status", o.get().getStatus()) ;
+		model.addAttribute("order", o.get()) ;
+		model.addAttribute("infor", liInfors.get(0)) ;
 		model.addAttribute("listO", list) ;
 		return "UserOrder/order-tracking";
 	}

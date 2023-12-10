@@ -158,7 +158,7 @@
                                   <h4 class="fw-bold mb-3" th:if="${p.get().category.id == 2}">Giá : <span class="mb-3" th:text="${p.get().price}" ></span> $/bó</h4>
                                  <br>
                                 <h4 class="fw-bold mb-3" th:if="${p.get().category.id != 2}">Giá : <span class="mb-3" th:text="${p.get().price}" ></span> $/kg</h4>
-                                
+                                <br>
                                  <h4 th:if="${p.get().category.id != 2}">Số Lượng Còn : <span class=" mb-3" th:text="${p.get().quantity}" ></span> kg</h4>
                                 
                                  <h4 th:if="${p.get().category.id == 2}">Số Lượng Còn : <span class=" mb-3" th:text="${p.get().quantity}" ></span> bó</h4>
@@ -200,12 +200,24 @@
                                 <div class="mb-4">
                                     <h4>Categories</h4>
                                     <ul class="list-unstyled fruite-categorie">
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name" th:each="c:${listC}">
-                                                <a href="#" th:text =${c.name}><i class="fas fa-apple-alt me-2" ></i>Apples</a>
-                                                <span>(3)</span>
-                                            </div>
-                                        </li>
+										<li>
+												<div class="d-flex justify-content-between fruite-name">
+													<a href="/product?category=All" th:text=" ' All product' "
+														style="font-size: 22px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+													</a>
+												</div>
+										</li>
+                                        <li th:each="c : ${listC}">
+												<div class="d-flex justify-content-between fruite-name">
+
+													<a th:href="'/product/' + ${c.id} +'?category='+ ${c.name}"
+														th:text=" ' '+${c.name} "
+														style="font-size: 22px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+													</a>
+													
+
+												</div>
+											</li>
                                         
                                     </ul>
                                 </div>
@@ -226,7 +238,8 @@
                             </div>
                             <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;" th:text="${p.category.name}"></div>
                             <div class="p-4 pb-0 rounded-bottom">
-                                <a th:href="'/detail/' + ${p.product_id}" ><h4 th:text="${p.name}"></h4></a>
+                               <a class="d-block h5 mb-2" th:href="'/product/detail/' + ${p.product_id}">
+								   <span th:text="${p.name}"></span></a>
                                 
                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                     <h5 class="text-dark fs-6 fw-bold"><span class="text-dark fs-5 fw-bold" th:text="${p.price}" ></span> $/ kg </h5>

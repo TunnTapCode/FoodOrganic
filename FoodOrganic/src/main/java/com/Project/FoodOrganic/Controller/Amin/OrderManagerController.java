@@ -110,15 +110,15 @@ public class OrderManagerController {
 			if (status == 1) {
 				o.get().setStatus("transported");
 				orderService.save(o.get());
-				return "redirect:/admin/order-transported";
+				return "redirect:/admin/order/order-transported";
 			} else if (status == 2) {
 				o.get().setStatus("canceled");
 				orderService.save(o.get());
-				return "redirect:/admin/order-canceled";
+				return "redirect:/admin/order/order-canceled";
 			} else {
 				o.get().setStatus("completed");
 				orderService.save(o.get());
-				return "redirect:/admin/order-completed";
+				return "redirect:/admin/order/order-completed";
 			}
 		}
 
