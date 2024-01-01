@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Project.FoodOrganic.Entity.Cart;
@@ -38,22 +39,7 @@ public class ProductController {
 	CategoryService cService ;
 	
 
-//	@GetMapping("/shop")
-//	public String product(Model model ,Authentication auth) {
-//		if (auth != null) {
-//			User u = userService.findByUsername(auth.getName());
-//			Cart cart = cartService.getByUser(u);
-//			Long count = cartDetailService.coutByCart(cart);
-//			model.addAttribute("count", count);
-//		}
-//		List<Product> list1 = service.findTop7ByCategoryOrderByProduct_id(1L);
-//		List<Product> list2 = service.findTop7ByCategoryOrderByProduct_id(2L);
-//		List<Product> list3 = service.findTop7ByCategoryOrderByProduct_id(3L);
-//		model.addAttribute("list1", list1);
-//		model.addAttribute("list2", list2);
-//		model.addAttribute("list3", list3);
-//		return "Home/product" ;
-//	}
+
 	@GetMapping("/product")
 	public String Shop_Product(Model model ,Authentication auth,@RequestParam("page") Optional<Integer> p) {
 		if (auth != null) {
@@ -65,6 +51,8 @@ public class ProductController {
 		Pageable pageable = PageRequest.of(p.orElse(0), 9);
 		Page<Product> page =  productService.findAll(pageable);
 		List<Category> listCate = cService.getAll();
+		List<Product> listTop5 = productService.getTop5Product();
+		model.addAttribute("listTop5", listTop5);
 		model.addAttribute("listCate", listCate);
 		model.addAttribute("listP", page);
 		return "Home/shop" ;
@@ -77,10 +65,11 @@ public class ProductController {
 			Long count = cartDetailService.coutByCart(cart);
 			model.addAttribute("count", count);
 		}
+		List<Product> listTop5 = productService.getTop5Product();
 		Pageable pageable = PageRequest.of(p.orElse(0), 9);
 		Page<Product> page =  productService.findProductByCate(pageable,Cid);
 		List<Category> listCate = cService.getAll();
-		System.out.println(page.getTotalElements());
+		model.addAttribute("listTop5", listTop5);
 		model.addAttribute("listCate", listCate);
 		model.addAttribute("id", Cid);
 		model.addAttribute("listP", page);
@@ -117,4 +106,26 @@ public class ProductController {
 		
 
 	}
+
+	@PostMapping("/product/sort_range")
+	public String sort_range(@RequestParam("rangeInput") Integer range, Authentication auth, Model model,
+			@RequestParam("page") Optional<Integer> p) {
+		if (auth != null) {
+			User u = userService.findByUsername(auth.getName());
+			Cart cart = cartService.getByUser(u);
+			Long count = cartDetailService.coutByCart(cart);
+			model.addAttribute("count", count);
+		}
+		Pageable pageable = PageRequest.of(p.orElse(0), 9);
+		Page<Product> page = productService.sortRangePrice(pageable, range);
+		List<Category> listCate = cService.getAll();
+		List<Product> listTop5 = productService.getTop5Product();
+		model.addAttribute("listTop5", listTop5);
+		model.addAttribute("listCate", listCate);
+		model.addAttribute("listP", page);
+		model.addAttribute("range", range);
+		return "Home/shop";
+
+	}
+
 }

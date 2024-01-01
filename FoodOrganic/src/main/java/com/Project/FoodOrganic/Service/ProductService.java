@@ -19,14 +19,22 @@ public class ProductService {
 	ProductRepo repo ;
 	
 	public List<Product> getAllProduct(){
-		return (List<Product>) repo.findAll();
+		return repo.findAll();
 	}
 	
+	public List<Product> getTop5Product() {
+		return repo.findTop5NewProduct();
+	}
+
 	public Page<Product> findAll(Pageable pageable){
-		return (Page<Product>) repo.findAll(pageable);
+		return repo.findAll(pageable);
+	}
+
+	public Page<Product> sortRangePrice(Pageable pageable, Integer range) {
+		return repo.sortByRangePrice(pageable, range);
 	}
 	public Page<Product> findProductByCate(Pageable pageable,Long cid){
-		return (Page<Product>) repo.findProductByCate(pageable,cid);
+		return repo.findProductByCate(pageable,cid);
 	}
 	public List<Product> getAllProductByCategoryId( Long CategoryId){
 		return repo.findAllByCategory_id(CategoryId);
